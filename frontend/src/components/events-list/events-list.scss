@@ -1,0 +1,9 @@
+.events-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: inherit;
+
+  & > .event {
+    margin: 10px 10px;
+  }
+}

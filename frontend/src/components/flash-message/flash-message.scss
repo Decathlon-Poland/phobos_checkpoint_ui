@@ -1,0 +1,39 @@
+.flash-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2000;
+  height: 64px;
+  color: #fff;
+  font-family: 'Roboto';
+  font-size: 20px;
+
+  .close {
+    transition: all ease-in-out 200ms;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-weight: lighter;
+    padding: 4px 12px;
+    border-radius: 50%;
+
+    &:hover {
+      color: black;
+      background-color: white;
+    }
+  }
+
+  &.success {
+    background-color: #5bbd66;
+  }
+
+  &.error {
+    background-color: #ff5f5f;
+  }
+}

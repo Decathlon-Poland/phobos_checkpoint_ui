@@ -1,0 +1,28 @@
+.event-overview {
+  .detail {
+    margin-bottom: 20px;
+
+    &:first-child {
+      margin-top: 20px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    label {
+      font-weight: lighter;
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-weight: bold;
+    }
+  }
+
+  .json-pretty {
+    margin-top: 0;
+    padding: 10px;
+    white-space: pre-wrap;
+  }
+}
