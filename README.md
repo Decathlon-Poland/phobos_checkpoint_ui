@@ -1,8 +1,6 @@
-# PhobosCheckpointUi
+# Phobos Checkpoint UI
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/phobos_checkpoint_ui`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Phobos Checkpoint UI is a GUI for phobos checkpoint API. It is compatible with [Phobos DB Checkpoint](https://github.com/klarna/phobos_db_checkpoint)
 
 ## Installation
 
@@ -22,20 +20,57 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1) Add `require 'phobos_checkpoint_ui/tasks'` to your __Rakefile__
+
+2) Run `rake phobos_checkpoint_ui:copy_assets`, this will copy the precompile assets to `./public`
+
+3) In `config.ru` add:
+
+```ruby
+require 'phobos_checkpoint_ui'
+
+# ...
+# < keep the previous configurations >
+# ...
+
+# run PhobosDBCheckpoint::EventsAPI
+run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI)
+```
+
+It is possible to configure some aspects of the app, `App.new` accepts a hash with options to be delivered to the front-end. The fron-end is prepared to receive the following options:
+
+* `logo` - Path of image to be used as a logo (can be something inside `/public`)
+* `title` - App title
+* `env_label` - Special label display the environment
+
+Example:
+
+```ruby
+run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI, {
+  logo: '/assets/logo.png',
+  title: 'Checkpoint',
+  env_label: 'production'
+})
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+The front-end is written with `React` and `Redux`, ensure that you have `nodejs` version >= 6.3 installed.
+
+```sh
+cd frontend
+npm install
+npm test:unit
+```
+
+Run `rake spec` to run the ruby tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/phobos_checkpoint_ui.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/klarna/phobos_checkpoint_ui.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

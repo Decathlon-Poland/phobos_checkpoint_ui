@@ -1,8 +1,12 @@
 {
   "name": "phobos_checkpoint_ui",
   "version": "1.0.0",
-  "description": "",
+  "description": "Phobos Checkpoint UI is a GUI for phobos checkpoint API",
   "main": "index.js",
+  "private": true,
+  "engines": {
+    "node": ">= 6.3.x"
+  },
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "build": "sagui build",
