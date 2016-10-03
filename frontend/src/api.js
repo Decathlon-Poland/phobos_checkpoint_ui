@@ -26,16 +26,19 @@ export function parseResponseError (response) {
 }
 
 export default Mappersmith.forge({
-  host: '/api/v1',
+  host: false,
   resources: {
+    Config: {
+      load: '/configs'
+    },
     Event: {
-      findById: '/events/{id}',
+      findById: '/api/v1/events/{id}',
       retry: {
-        path: '/events/{id}/retry',
+        path: '/api/v1/events/{id}/retry',
         method: 'POST'
       },
       search: {
-        path: '/events',
+        path: '/api/v1/events',
         params: { limit: EVENTS_SEARCH_LIMIT }
       }
     }

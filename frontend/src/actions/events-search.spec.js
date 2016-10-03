@@ -37,7 +37,7 @@ describe('actions/event-search', () => {
         event = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
-          .matching({ url: `/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
+          .matching({ url: `/api/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
           .response([event])
       })
 
@@ -63,7 +63,7 @@ describe('actions/event-search', () => {
         event = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
-          .matching({ url: `/v1/events?limit=${EVENTS_SEARCH_LIMIT}&event_type=new&offset=0` })
+          .matching({ url: `/api/v1/events?limit=${EVENTS_SEARCH_LIMIT}&event_type=new&offset=0` })
           .response([event])
       })
 
@@ -89,7 +89,7 @@ describe('actions/event-search', () => {
         event = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
-          .matching({ url: `/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=4` })
+          .matching({ url: `/api/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=4` })
           .response([event])
       })
 
@@ -112,7 +112,7 @@ describe('actions/event-search', () => {
         event = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
-          .matching({ url: `/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
+          .matching({ url: `/api/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
           .failure()
           .response({
             responseText: JSON.stringify({
@@ -152,7 +152,7 @@ describe('actions/event-search', () => {
       event = { id: 1 }
       Mappersmith.Env.Fixture
         .define('get')
-        .matching({ url: `/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
+        .matching({ url: `/api/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
         .response([event])
     })
 
@@ -179,7 +179,7 @@ describe('actions/event-search', () => {
       event = { id: 1 }
       Mappersmith.Env.Fixture
         .define('get')
-        .matching({ url: `/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=4` })
+        .matching({ url: `/api/v1/events?limit=${EVENTS_SEARCH_LIMIT}&offset=4` })
         .response([event])
     })
 

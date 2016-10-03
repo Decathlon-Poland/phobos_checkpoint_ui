@@ -28,7 +28,7 @@ describe('actions/event-details', () => {
         store = mockStore({})
         Mappersmith.Env.Fixture
           .define('get')
-          .matching({ url: `/v1/events/${event.id}` })
+          .matching({ url: `/api/v1/events/${event.id}` })
           .response(event)
       })
 
@@ -49,7 +49,7 @@ describe('actions/event-details', () => {
         const store = mockStore({})
         Mappersmith.Env.Fixture
           .define('get')
-          .matching({ url: `/v1/events/${event.id}` })
+          .matching({ url: `/api/v1/events/${event.id}` })
           .failure()
           .response({
             responseText: JSON.stringify({

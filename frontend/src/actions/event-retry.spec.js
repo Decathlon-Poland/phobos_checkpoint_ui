@@ -51,7 +51,7 @@ describe('actions/event-retry', () => {
         store = mockStore({})
         Mappersmith.Env.Fixture
           .define('post')
-          .matching({ url: `/v1/events/${event.id}/retry` })
+          .matching({ url: `/api/v1/events/${event.id}/retry` })
           .response({ acknowledged: true })
       })
 
@@ -95,7 +95,7 @@ describe('actions/event-retry', () => {
         const store = mockStore({})
         Mappersmith.Env.Fixture
           .define('post')
-          .matching({ url: `/v1/events/${event.id}/retry` })
+          .matching({ url: `/api/v1/events/${event.id}/retry` })
           .failure()
           .response({
             responseText: JSON.stringify({

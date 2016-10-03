@@ -3,6 +3,10 @@
  * see: http://sagui.js.org/
  */
 const { join } = require('path')
+const env = process.env.NODE_ENV
+const output = (env === 'production')
+  ? { publicPath: '/assets/', path: join(__dirname, '../assets') }
+  : { publicPath: '/' }
 
 module.exports = {
   pages: ['index'],
@@ -12,10 +16,7 @@ module.exports = {
   },
 
   webpack: {
-    output: {
-      publicPath: '/assets/',
-      path: join(__dirname, '../assets')
-    },
+    output: output,
     module: {
       preLoaders: [
         {
@@ -34,7 +35,15 @@ module.exports = {
 
   develop: {
     proxy: {
-      '/v1/*': {
+      '/api/v1/*': {
+        target: 'http://localhost:9292',
+        secure: false
+      },
+      '/configs': {
+        target: 'http://localhost:9292',
+        secure: false
+      },
+      '/assets/*': {
         target: 'http://localhost:9292',
         secure: false
       }
