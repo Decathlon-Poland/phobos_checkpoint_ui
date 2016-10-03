@@ -1,7 +1,7 @@
 import React from 'react'
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount } from 'enzyme'
-import { Event } from 'components/event'
+import { Event, formattedEventTime } from 'components/event'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
@@ -51,7 +51,7 @@ describe('<Event />', () => {
   })
 
   it('displays event_time formatted', () => {
-    expect(component.text()).toMatch('September 23rd 2016, 11:00:40 pm')
+    expect(component.text()).toMatch(formattedEventTime(props.event.event_time))
   })
 
   it('displays topic', () => {

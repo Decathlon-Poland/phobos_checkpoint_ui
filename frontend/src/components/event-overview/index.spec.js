@@ -4,6 +4,7 @@ import { mount } from 'enzyme'
 import EventOverview from 'components/event-overview'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { formattedEventTime } from 'components/event'
 
 const mountComponent = (props) => mount(
   <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -45,7 +46,7 @@ describe('<EventOverview />', () => {
   })
 
   it('displays event_time formatted', () => {
-    expect(component.text()).toMatch('September 23rd 2016, 11:00:40 pm')
+    expect(component.text()).toMatch(formattedEventTime(props.event_time))
   })
 
   it('displays event_type', () => {
