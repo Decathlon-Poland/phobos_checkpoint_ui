@@ -2,6 +2,8 @@
  * Sagui configuration object
  * see: http://sagui.js.org/
  */
+const { join } = require('path')
+
 module.exports = {
   pages: ['index'],
 
@@ -11,7 +13,8 @@ module.exports = {
 
   webpack: {
     output: {
-      publicPath: '/'
+      publicPath: '/assets/',
+      path: join(__dirname, '../assets')
     },
     module: {
       preLoaders: [
