@@ -1,3 +1,3 @@
-module PhobosCheckpointUi
-  VERSION = "0.1.0"
+module PhobosCheckpointUI
+  VERSION = '0.1.0'
 end
