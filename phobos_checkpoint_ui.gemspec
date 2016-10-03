@@ -46,6 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rack-test'
+  spec.add_development_dependency 'rspec_junit_formatter', '0.2.2'
 
   spec.add_dependency 'rake'
   spec.add_dependency 'sinatra'

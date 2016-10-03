@@ -1,0 +1,29 @@
+machine:
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
+  environment:
+    LOG_LEVEL: DEBUG
+    CI: true
+  ruby:
+    version: 2.3.1
+  node:
+    version: 6.3.0
+
+# Ignores circle ci default database setup
+database:
+  override:
+    - echo "overrides circle CI commands"
+
+dependencies:
+  pre:
+    - docker -v
+    - gem install bundler -v 1.9.5
+    - bundle install
+    - cd frontend; npm install
+
+test:
+  override:
+    - bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/unit.xml
+    - cd fronend; npm run test:unit
