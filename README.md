@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/klarna/phobos_checkpoint_ui.svg?style=shield)](https://circleci.com/gh/klarna/phobos_checkpoint_ui)
+
 # Phobos Checkpoint UI
 
 Phobos Checkpoint UI is a GUI for phobos checkpoint API. It is compatible with [Phobos DB Checkpoint](https://github.com/klarna/phobos_db_checkpoint)
