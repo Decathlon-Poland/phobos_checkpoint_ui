@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'phobos_checkpoint_ui/tasks'
 
 RSpec.describe PhobosCheckpointUI::StaticApp do
   include Rack::Test::Methods
@@ -8,12 +7,13 @@ RSpec.describe PhobosCheckpointUI::StaticApp do
     PhobosCheckpointUI::StaticApp
   end
 
-  before(:context) do
+  before do
+    Rake.application['phobos_checkpoint_ui:copy_assets'].reenable
     Rake.application['phobos_checkpoint_ui:copy_assets'].invoke
     expect(Dir.exists?('public')).to eql true
   end
 
-  after(:context) do
+  after do
     FileUtils.rm_rf('public')
   end
 
