@@ -1,8 +1,9 @@
 module PhobosCheckpointUI
   module App
-    def self.new(api_app)
+    def self.new(api_app, configs = {})
+      StaticApp.configs = configs
       Rack::URLMap.new(
-        '/' => PhobosCheckpointUI::StaticApp,
+        '/' => StaticApp,
         '/api' => api_app
       )
     end

@@ -8,7 +8,7 @@ RSpec.describe PhobosCheckpointUI::App do
   end
 
   def app
-    PhobosCheckpointUI::App.new(TestAPIApp)
+    PhobosCheckpointUI::App.new(TestAPIApp, configs)
   end
 
   before do
@@ -21,8 +21,16 @@ RSpec.describe PhobosCheckpointUI::App do
     FileUtils.rm_rf('public')
   end
 
+  let(:configs) { Hash(key: 'value') }
+
   let(:public_dir) do
     File.expand_path(File.join(File.dirname(__FILE__), '../../public'))
+  end
+
+  it 'configures StaticApp' do
+    PhobosCheckpointUI::StaticApp.configs = nil
+    PhobosCheckpointUI::App.new(TestAPIApp, configs)
+    expect(PhobosCheckpointUI::StaticApp.configs).to eql configs
   end
 
   describe '/' do

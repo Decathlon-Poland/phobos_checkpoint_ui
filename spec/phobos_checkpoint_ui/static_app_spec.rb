@@ -8,6 +8,8 @@ RSpec.describe PhobosCheckpointUI::StaticApp do
   end
 
   before do
+    PhobosCheckpointUI::StaticApp.configs = configs
+
     Rake.application['phobos_checkpoint_ui:copy_assets'].reenable
     Rake.application['phobos_checkpoint_ui:copy_assets'].invoke
     expect(Dir.exists?('public')).to eql true
@@ -16,6 +18,8 @@ RSpec.describe PhobosCheckpointUI::StaticApp do
   after do
     FileUtils.rm_rf('public')
   end
+
+  let(:configs) { Hash(key: 'value') }
 
   let(:public_dir) do
     File.expand_path(File.join(File.dirname(__FILE__), '../../public'))
@@ -45,6 +49,13 @@ RSpec.describe PhobosCheckpointUI::StaticApp do
         get "/assets/#{filename}"
         expect(last_response.ok?).to eql true
       end
+    end
+  end
+
+  describe 'GET /configs' do
+    it 'returns configs' do
+      get '/configs'
+      expect(last_response.body).to eql configs.to_json
     end
   end
 end
