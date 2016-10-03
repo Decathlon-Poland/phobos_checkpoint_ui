@@ -26,4 +26,4 @@ dependencies:
 test:
   override:
     - bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/unit.xml
-    - cd fronend; npm run test:unit
+    - cd frontend; npm run test:unit
