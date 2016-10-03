@@ -2,6 +2,7 @@
   .dialog-title {
     text-decoration: none;
 
+    &:active,
     &:visited {
       color: inherit;
     }

@@ -1,0 +1,28 @@
+.header {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+
+  max-height: 64px;
+  box-sizing: border-box;
+
+  &:active,
+  &:visited,
+  &:hover {
+    color: white;
+  }
+
+  img {
+    height: 64px;
+    min-width: 54px;
+    margin: 5px 10px 5px 0;
+  }
+
+  .title {
+    transition: all ease-in-out 150ms;
+
+    &:hover {
+      color: #999;
+    }
+  }
+}
