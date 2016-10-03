@@ -2,6 +2,9 @@
 
 Phobos Checkpoint UI is a GUI for phobos checkpoint API. It is compatible with [Phobos DB Checkpoint](https://github.com/klarna/phobos_db_checkpoint)
 
+![Events list](https://github.com/klarna/phobos_checkpoint_ui/raw/master/screenshot1.png)
+![Event overview](https://github.com/klarna/phobos_checkpoint_ui/raw/master/screenshot2.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
