@@ -23,7 +23,7 @@ class OverviewDialog extends Component {
         event_time: PropTypes.string,
         event_version: PropTypes.string,
         checksum: PropTypes.string,
-        payload: PropTypes.string,
+        payload: PropTypes.object,
 
         overviewVisible: PropTypes.bool
       })

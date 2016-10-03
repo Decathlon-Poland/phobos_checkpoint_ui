@@ -43,7 +43,7 @@ describe('<Event />', () => {
         event_type: 'order-placed',
         event_version: 'v1',
         checksum: '188773471ec0f898fd81d272760a027f',
-        payload: '{ "data": { "name": "phobos" } }'
+        payload: { data: { name: 'phobos' } }
       }
     }
 

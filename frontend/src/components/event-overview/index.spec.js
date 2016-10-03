@@ -26,7 +26,7 @@ describe('<EventOverview />', () => {
       event_type: 'order-placed',
       event_version: 'v1',
       checksum: '188773471ec0f898fd81d272760a027f',
-      payload: '{ "data": { "name": "phobos" } }'
+      payload: { data: { name: 'phobos' } }
     }
 
     component = mountComponent(props)
@@ -61,8 +61,7 @@ describe('<EventOverview />', () => {
   })
 
   it('displays payload', () => {
-    const payloadJSON = JSON.parse(props.payload)
-    const payloadFormatted = JSON.stringify(payloadJSON, null, '  ')
+    const payloadFormatted = JSON.stringify(props.payload, null, '  ')
     expect(component.text()).toMatch(payloadFormatted)
   })
 })

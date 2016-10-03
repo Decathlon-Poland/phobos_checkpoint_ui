@@ -16,7 +16,7 @@ export default class extends Component {
       event_time: PropTypes.string,
       event_version: PropTypes.string,
       checksum: PropTypes.string,
-      payload: PropTypes.string
+      payload: PropTypes.object
     }
   }
 
@@ -31,9 +31,7 @@ export default class extends Component {
         <Attribute label='Event Version' value={this.props.event_version} />
         <Attribute label='Checksum' value={this.props.checksum} />
         <Attribute label='Payload'>
-          <JSONPretty
-            className='json-pretty'
-            json={this.props.payload} />
+          <JSONPretty className='json-pretty' json={this.props.payload} />
         </Attribute>
       </div>
     )
