@@ -1,5 +1,7 @@
-require "phobos_checkpoint_ui/version"
+require 'rack'
+require 'sinatra'
 
-module PhobosCheckpointUi
-  # Your code goes here...
+require 'phobos_checkpoint_ui/version'
+require 'phobos_checkpoint_ui/static_app'
+module PhobosCheckpointUI
 end
