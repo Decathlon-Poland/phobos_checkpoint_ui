@@ -9,10 +9,10 @@ import {Card, CardHeader, CardTitle} from 'material-ui/Card'
 import EventOverviewDialog from 'components/event-overview-dialog'
 import EventRetryDialog from 'components/event-retry-dialog'
 
-const EVENT_TIME_FORMAT = 'MMMM Do YYYY, h:mm:ss a'
+const EVENT_TIME_FORMAT = 'h:mm:ss a'
 const EMPTY_EVENT_TYPE = '<no type>'
 
-export function formattedEventTime (eventTime) {
+export function formatEventTime (eventTime) {
   if (!eventTime) return null
   const eventTimeDate = new Date(eventTime)
   return moment(eventTimeDate).format(EVENT_TIME_FORMAT)
@@ -52,7 +52,7 @@ export class Event extends Component {
           className='event-header'
           titleStyle={style.cardHeader.title}
           subtitleStyle={style.cardHeader.subtitle}
-          title={formattedEventTime(this.props.event.event_time)}
+          title={formatEventTime(this.props.event.event_time)}
           subtitle={this.props.event.topic}/>
         <CardTitle
           titleStyle={style.cardTitle}
