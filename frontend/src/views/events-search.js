@@ -40,7 +40,7 @@ export class EventsSearch extends Component {
     return (
       <div className='events-search'>
         <SearchInput filterType={type} filterValue={value}/>
-        <div className='timeline'>
+        <div>
           <EventsList events={events} />
           <LoadMore {...this.props} />
           <EmptyEvent
@@ -77,7 +77,7 @@ class LoadMore extends Component {
         <RaisedButton
           label='Load more'
           onClick={() => this.props.loadMoreSearchResults()}
-          style={{width: '100%', margin: '0 10px'}}/>
+          style={{margin: '10px'}}/>
     )
   }
 }

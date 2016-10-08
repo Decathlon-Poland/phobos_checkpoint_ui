@@ -1,9 +1,49 @@
 .events-list {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   align-items: inherit;
+  position: relative;
 
-  & > .event {
-    margin: 10px 10px;
+  .timeline {
+    padding-left: 40px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 15px;
+      display: block;
+      width: 2px;
+      background-color: #cdcdcd;
+    }
+
+    .dot {
+      border: 2px solid #868686;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      margin: 0 10px 0 9px;
+      background-color: #e4e4e4;
+      z-index: 1;
+    }
+
+    .day-header {
+      display: inline-flex;
+      align-items: center;
+      color: #333;
+      font-family: Roboto;
+      margin: 10px 0 10px -40px;
+
+      &:first-child {
+        margin-top: 20px;
+      }
+    }
+
+    & > .event {
+      margin: 10px 10px;
+    }
   }
 }
