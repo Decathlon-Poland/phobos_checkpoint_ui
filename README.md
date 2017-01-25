@@ -2,7 +2,7 @@
 
 # Phobos Checkpoint UI
 
-Phobos Checkpoint UI is a GUI for phobos checkpoint API. It is compatible with [Phobos DB Checkpoint](https://github.com/klarna/phobos_db_checkpoint)
+Phobos Checkpoint UI is a GUI for phobos checkpoint API. It is compatible with [Phobos DB Checkpoint](https://github.com/klarna/phobos_db_checkpoint) >= v0.3.0
 
 ![Events list](https://github.com/klarna/phobos_checkpoint_ui/raw/master/screenshot1.png)
 ![Event overview](https://github.com/klarna/phobos_checkpoint_ui/raw/master/screenshot2.png)
@@ -29,10 +29,12 @@ Or install it yourself as:
 
 2) Run `rake phobos_checkpoint_ui:copy_assets`, this will copy the precompile assets to `./public`
 
-3) In `config.ru` add:
+3) Create/update `config.ru` and add:
 
 ```ruby
 require 'phobos_checkpoint_ui'
+require 'phobos_db_checkpoint'
+require 'phobos_db_checkpoint/events_api'
 
 # ...
 # < keep the previous configurations >
