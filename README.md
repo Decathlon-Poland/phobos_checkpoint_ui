@@ -29,7 +29,7 @@ Or install it yourself as:
 
 2) Run `rake phobos_checkpoint_ui:copy_assets`, this will copy the precompile assets to `./public`
 
-3) In `config.ru` add:
+3) Create/update `config.ru` and add:
 
 ```ruby
 require 'phobos_checkpoint_ui'
