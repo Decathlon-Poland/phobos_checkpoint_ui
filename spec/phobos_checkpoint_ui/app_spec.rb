@@ -33,7 +33,7 @@ RSpec.describe PhobosCheckpointUI::App do
     expect(PhobosCheckpointUI::StaticApp.configs).to eql configs
   end
 
-  describe '/' do
+  describe 'GET /' do
     it 'points to static app' do
       get '/'
       expect(last_response.body).to eql File.read(File.join(public_dir, 'index.html'))
@@ -43,7 +43,15 @@ RSpec.describe PhobosCheckpointUI::App do
     end
   end
 
-  describe '/api' do
+  describe 'GET /ping' do
+    it 'responds with 200 PONG' do
+      get '/ping'
+      expect(last_response.status).to eql 200
+      expect(last_response.body).to eql('PONG')
+    end
+  end
+
+  describe 'GET /api' do
     it 'points to the configured API app' do
       get '/api/v1/events'
       expect(last_response.body).to eql 'api_app'
