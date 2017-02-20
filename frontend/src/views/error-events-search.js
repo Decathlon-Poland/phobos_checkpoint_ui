@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-class Dashboard extends Component {
+class ErrorEventsSearch extends Component {
   render () {
     return (
       <div className='dashboard'>
-        <h1>Dashboard!</h1>
+        <h1>Error events!</h1>
       </div>
     )
   }
@@ -14,4 +14,4 @@ class Dashboard extends Component {
 export default connect(
   (state) => state, {
   }
-)(Dashboard)
+)(ErrorEventsSearch)

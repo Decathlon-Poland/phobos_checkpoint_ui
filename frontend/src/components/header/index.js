@@ -44,8 +44,8 @@ export class Header extends Component {
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
             <MenuItem primaryText='Dashboard' leftIcon={<RemoveRedEye />} onTouchTap={() => this.props.navigateTo('/dashboard')}/>
-            <MenuItem primaryText='Events' leftIcon={<ContentSend />} />
-            <MenuItem primaryText='Errors' leftIcon={<ActionAssignment />} />
+            <MenuItem primaryText='Events' leftIcon={<ContentSend />} onTouchTap={() => this.props.navigateTo('/events')} />
+            <MenuItem primaryText='Errors' leftIcon={<ActionAssignment />} onTouchTap={() => this.props.navigateTo('/errors')} />
           </IconMenu>
         }
       />

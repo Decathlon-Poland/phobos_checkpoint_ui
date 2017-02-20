@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { push } from 'react-router-redux'
 
-import { navigateTo } from 'app/actions/navigation'
+import { navigateTo } from 'actions/navigation'
 
 const mockStore = configureMockStore([thunk])
 
