@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import configs from 'configs'
 import AppBar from 'material-ui/AppBar'
 import Chip from 'material-ui/Chip'
@@ -11,6 +12,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye'
 import ContentSend from 'material-ui/svg-icons/content/send'
 import ActionAssignment from 'material-ui/svg-icons/action/assignment'
+import { navigateTo } from 'actions/navigation'
 
 const DEFAULT_TITLE = 'Phobos Checkpoint'
 
@@ -28,7 +30,7 @@ const style = {
   }
 }
 
-export default class extends Component {
+export class Header extends Component {
   render () {
     return (
       <AppBar
@@ -41,7 +43,7 @@ export default class extends Component {
             iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-            <MenuItem primaryText='Dashboard' leftIcon={<RemoveRedEye />} />
+            <MenuItem primaryText='Dashboard' leftIcon={<RemoveRedEye />} onTouchTap={() => this.props.navigateTo('/dashboard')}/>
             <MenuItem primaryText='Events' leftIcon={<ContentSend />} />
             <MenuItem primaryText='Errors' leftIcon={<ActionAssignment />} />
           </IconMenu>
@@ -61,3 +63,18 @@ export default class extends Component {
     )
   }
 }
+
+export const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state
+  }
+}
+
+const actionsToConnect = {
+  navigateTo
+}
+
+export default connect(
+  mapStateToProps,
+  actionsToConnect
+)(Header)

@@ -6,6 +6,7 @@ import store from 'store'
 import Layout from 'views/layout'
 import EventsSearch from 'views/events-search'
 import EventDetails from 'views/event-details'
+import Dashboard from 'views/dashboard'
 
 export const history = syncHistoryWithStore(browserHistory, store)
 
@@ -15,6 +16,7 @@ export default (
       <IndexRedirect to='/events' />
       <Route path='/events' component={EventsSearch} />
       <Route path='/events/:id' component={EventDetails} />
+      <Route path='/dashboard' component={Dashboard} />
     </Route>
   </Router>
 )
