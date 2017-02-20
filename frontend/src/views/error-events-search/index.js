@@ -5,7 +5,7 @@ class ErrorEventsSearch extends Component {
   render () {
     return (
       <div className='dashboard'>
-        <h1>Error events!</h1>
+        <h1>Error events FOLDER!</h1>
       </div>
     )
   }
