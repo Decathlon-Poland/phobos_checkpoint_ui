@@ -1,7 +1,7 @@
 import {
   EVENT_SHOW_OVERVIEW,
   EVENT_HIDE_OVERVIEW,
-  RECEIVE_SEARCH_RESULTS,
+  RECEIVE_EVENTS_SEARCH_RESULTS,
   EVENT_SHOW_RETRY,
   EVENT_HIDE_RETRY,
   RECEIVE_EVENT_RETRY,
@@ -29,11 +29,11 @@ describe('reducers/events', () => {
     })
   })
 
-  describe('for RECEIVE_SEARCH_RESULTS', () => {
+  describe('for RECEIVE_EVENTS_SEARCH_RESULTS', () => {
     describe('when offset less or equal to 0', () => {
       it('overrides events with action events', () => {
         const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
-        const action = { type: RECEIVE_SEARCH_RESULTS, offset: 0, events: [{ id: 4 }] }
+        const action = { type: RECEIVE_EVENTS_SEARCH_RESULTS, offset: 0, events: [{ id: 4 }] }
         const expectedState = [{ id: 4 }]
         expect(reducer(currentState, action)).toEqual(expectedState)
       })
@@ -42,7 +42,7 @@ describe('reducers/events', () => {
     describe('when offset is greater than 0', () => {
       it('add the new events to state', () => {
         const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
-        const action = { type: RECEIVE_SEARCH_RESULTS, offset: 1, events: [{ id: 4 }] }
+        const action = { type: RECEIVE_EVENTS_SEARCH_RESULTS, offset: 1, events: [{ id: 4 }] }
         const expectedState = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
         expect(reducer(currentState, action)).toEqual(expectedState)
       })

@@ -1,12 +1,16 @@
 import React from 'react'
 import jasmineEnzyme from 'jasmine-enzyme'
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import { EventsSearch } from 'views/events-search'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+
+import SearchInput from 'components/search-input'
+import EventsList from 'components/events-list'
+import EmptyEvent from 'components/empty-event'
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
@@ -20,7 +24,7 @@ const mountComponent = (store, props) => mount(
 )
 
 describe('view <EventsSearch />', () => {
-  let props, component, store
+  let props, store, wrapper
 
   beforeEach(() => {
     jasmineEnzyme()
@@ -39,35 +43,41 @@ describe('view <EventsSearch />', () => {
 
       xhrStatus: { isFetchingEvents: false, lastEventsLoadSize: 0 },
       location: { query: {} },
-      eventsFilters: {},
+      eventsFilters: {
+        type: 'foo',
+        value: 'bar'
+      },
       events: [{ id: 1 }, { id: 2 }]
     }
 
-    component = mountComponent(store, props)
+    wrapper = shallow(<EventsSearch {...props} />)
   })
 
   it('renders <SearchInput />', () => {
-    expect(component.find('.search-input').length).toEqual(1)
+    expect(wrapper.contains(<SearchInput filterType={props.eventsFilters.type} filterValue={props.eventsFilters.value} />)).toEqual(true)
   })
 
   it('renders <EventsList />', () => {
-    expect(component.find('.events-list').length).toEqual(1)
+    expect(wrapper.contains(<EventsList events={props.events} />)).toEqual(true)
   })
 
-  it('does not render <EventsSearch.EmptyEvent />', () => {
-    expect(component.find('.empty-event').length).toEqual(0)
+  it('renders <EmptyEvent />', () => {
+    expect(wrapper.contains(<EmptyEvent events={props.events} isFetchingEvents={props.xhrStatus.isFetchingEvents} />)).toEqual(true)
   })
 
   describe('when it initializes with filter type and value', () => {
     beforeEach(() => {
-      Object.assign(props, {
-        location: { query: {
-          type: 'entity_id',
-          value: '12345'
-        }}
-      })
+      props = {
+        ...props,
+        location: {
+          query: {
+            type: 'entity_id',
+            value: '12345'
+          }
+        }
+      }
 
-      component = mountComponent(store, props)
+      mountComponent(store, props)
     })
 
     it('calls changeSearchInputFilterType with type', () => {
@@ -79,18 +89,14 @@ describe('view <EventsSearch />', () => {
     })
   })
 
-  describe('when events is empty', () => {
+  describe('when events are empty', () => {
     beforeEach(() => {
-      Object.assign(props, { events: [] })
-      component = mountComponent(store, props)
+      props = {...props, events: []}
+      mountComponent(store, props)
     })
 
     it('calls fetchSearchResults with offset 0', () => {
       expect(props.fetchSearchResults).toHaveBeenCalledWith({ offset: 0 })
-    })
-
-    it('renders <EventsSearch.EmptyEvent />', () => {
-      expect(component.find('.empty-event').length).toEqual(1)
     })
   })
 })

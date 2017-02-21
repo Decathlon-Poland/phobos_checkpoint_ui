@@ -40,6 +40,10 @@ export default Mappersmith.forge({
       search: {
         path: '/api/v1/events',
         params: { limit: EVENTS_SEARCH_LIMIT }
+      },
+      findErrors: {
+        path: '/api/v1/error_events',
+        params: { limit: EVENTS_SEARCH_LIMIT }
       }
     }
   }

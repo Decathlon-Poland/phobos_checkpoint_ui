@@ -7,18 +7,28 @@ import EventsList from 'components/events-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
 
-import { fetchSearchResults } from 'actions/error-events-search'
+import { fetchSearchResults, loadMoreSearchResults } from 'actions/error-events-search'
+import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
 import { showEventOverview } from 'actions/event-overview'
 
-class ErrorEventsSearch extends Component {
+export class ErrorEventsSearch extends Component {
   static get propTypes () {
     return {
       fetchSearchResults: PropTypes.func.isRequired,
+      loadMoreSearchResults: PropTypes.func.isRequired,
+      changeSearchInputFilterType: PropTypes.func.isRequired,
+      changeSearchInputFilterValue: PropTypes.func.isRequired,
       showEventOverview: PropTypes.func.isRequired
     }
   }
 
   componentDidMount () {
+    const { type, value } = this.props.location.query
+    if (type && value) {
+      this.props.changeSearchInputFilterType(type)
+      this.props.changeSearchInputFilterValue(value)
+    }
+
     this.props.events.length === 0 &&
       this.props.fetchSearchResults({ offset: 0 })
   }
@@ -56,6 +66,9 @@ class ErrorEventsSearch extends Component {
 export default connect(
   (state) => state, {
     fetchSearchResults,
+    loadMoreSearchResults,
+    changeSearchInputFilterType,
+    changeSearchInputFilterValue,
     showEventOverview
   }
 )(ErrorEventsSearch)
