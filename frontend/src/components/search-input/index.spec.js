@@ -27,11 +27,11 @@ describe('<SearchInput />', () => {
     store = mockStore({})
 
     props = {
-      onSearch: jasmine.createSpy('onSearch'),
       onChangeFilterType: jasmine.createSpy('onChangeFilterType'),
       onChangeFilterValue: jasmine.createSpy('onChangeFilterValue'),
-      isFetchingEvents: false,
+      triggerSearch: jasmine.createSpy('triggerSearch'),
 
+      isFetchingEvents: false,
       filterType: 'entity_id',
       filterValue: '12345'
     }
@@ -44,13 +44,13 @@ describe('<SearchInput />', () => {
     expect(props.onChangeFilterValue).toHaveBeenCalledWith('new-value')
   })
 
-  it('calls onSearch when ENTER is pressed in the textfield', () => {
+  it('calls triggerSearch when ENTER is pressed in the textfield', () => {
     component.find('input').simulate('keyDown', { keyCode: ENTER_KEY })
-    expect(props.onSearch).toHaveBeenCalled()
+    expect(props.triggerSearch).toHaveBeenCalled()
   })
 
-  it('calls onSearch when the search button is pressed', () => {
+  it('calls triggerSearch when the search button is pressed', () => {
     component.find('button').simulate('click')
-    expect(props.onSearch).toHaveBeenCalled()
+    expect(props.triggerSearch).toHaveBeenCalled()
   })
 })

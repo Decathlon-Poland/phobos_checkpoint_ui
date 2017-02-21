@@ -37,12 +37,13 @@ describe('view <EventsSearch />', () => {
     props = {
       fetchSearchResults: jasmine.createSpy('fetchSearchResults'),
       loadMoreSearchResults: jasmine.createSpy('loadMoreSearchResults'),
+      triggerSearch: jasmine.createSpy('triggerSearch'),
       changeSearchInputFilterType: jasmine.createSpy('changeSearchInputFilterType'),
       changeSearchInputFilterValue: jasmine.createSpy('changeSearchInputFilterValue'),
       showEventOverview: jasmine.createSpy('showEventOverview'),
 
       xhrStatus: { isFetchingEvents: false, lastEventsLoadSize: 0 },
-      location: { query: {} },
+      location: { pathname: '', query: {} },
       eventsFilters: {
         type: 'foo',
         value: 'bar'
@@ -54,7 +55,9 @@ describe('view <EventsSearch />', () => {
   })
 
   it('renders <SearchInput />', () => {
-    expect(wrapper.contains(<SearchInput filterType={props.eventsFilters.type} filterValue={props.eventsFilters.value} />)).toEqual(true)
+    expect(wrapper.contains(
+      <SearchInput triggerSearch={props.triggerSearch} filterType={props.eventsFilters.type} filterValue={props.eventsFilters.value} />
+    )).toEqual(true)
   })
 
   it('renders <EventsList />', () => {
@@ -70,6 +73,7 @@ describe('view <EventsSearch />', () => {
       props = {
         ...props,
         location: {
+          pathname: '/events',
           query: {
             type: 'entity_id',
             value: '12345'

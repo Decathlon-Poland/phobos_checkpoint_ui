@@ -132,7 +132,7 @@ describe('actions/error-events-search', () => {
           })
           expect(actions[2]).toEqual({
             type: ADD_FLASH_MESSAGE,
-            message: { id: jasmine.any(String), type: 'error', text: 'Events search failed. "some error"' }
+            message: { id: jasmine.any(String), type: 'error', text: 'Error events search failed. "some error"' }
           })
           done()
         })
