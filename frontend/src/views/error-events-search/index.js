@@ -18,7 +18,36 @@ export class ErrorEventsSearch extends Component {
       loadMoreSearchResults: PropTypes.func.isRequired,
       changeSearchInputFilterType: PropTypes.func.isRequired,
       changeSearchInputFilterValue: PropTypes.func.isRequired,
-      showEventOverview: PropTypes.func.isRequired
+      showEventOverview: PropTypes.func.isRequired,
+
+      xhrStatus: PropTypes.shape({
+        type: PropTypes.string,
+        value: PropTypes.string,
+        isFetchingEvents: PropTypes.bool
+      }),
+      eventsFilters: PropTypes.shape({
+        type: PropTypes.string,
+        value: PropTypes.string
+      }),
+      events: PropTypes.arrayOf(
+        PropTypes.shape({
+          onShowOverview: PropTypes.func,
+          event: PropTypes.shape({
+            id: PropTypes.number,
+            group_id: PropTypes.string,
+            topic: PropTypes.string,
+            entity_id: PropTypes.string,
+            event_type: PropTypes.string,
+            event_time: PropTypes.string,
+            event_version: PropTypes.string,
+            checksum: PropTypes.string,
+            payload: PropTypes.object
+          })
+        })
+      ),
+      location: PropTypes.shape({
+        query: PropTypes.object
+      })
     }
   }
 
