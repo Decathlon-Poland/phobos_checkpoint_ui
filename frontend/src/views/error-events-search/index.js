@@ -7,7 +7,7 @@ import EventsList from 'components/events-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
 
-import { fetchSearchResults, loadMoreSearchResults } from 'actions/error-events-search'
+import { fetchSearchResults, loadMoreSearchResults, triggerSearch } from 'actions/error-events-search'
 import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
 import { showEventOverview } from 'actions/event-overview'
 
@@ -16,6 +16,7 @@ export class ErrorEventsSearch extends Component {
     return {
       fetchSearchResults: PropTypes.func.isRequired,
       loadMoreSearchResults: PropTypes.func.isRequired,
+      triggerSearch: PropTypes.func.isRequired,
       changeSearchInputFilterType: PropTypes.func.isRequired,
       changeSearchInputFilterValue: PropTypes.func.isRequired,
       showEventOverview: PropTypes.func.isRequired,
@@ -68,7 +69,7 @@ export class ErrorEventsSearch extends Component {
 
     return (
       <div className='events-search'>
-        <SearchInput filterType={type} filterValue={value}/>
+        <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
           <EventsList events={events} />
           <LoadMore {...this.props} />
@@ -96,6 +97,7 @@ export default connect(
   (state) => state, {
     fetchSearchResults,
     loadMoreSearchResults,
+    triggerSearch,
     changeSearchInputFilterType,
     changeSearchInputFilterValue,
     showEventOverview

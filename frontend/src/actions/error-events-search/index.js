@@ -14,7 +14,7 @@ export const triggerSearch = () => (dispatch, getState) => {
   const filters = getState().eventsFilters
   return Promise
     .resolve()
-    .then(() => history.push({ query: filters.value ? filters : {} }))
+    .then(() => history.push({ pathname: window.location.pathname, query: filters.value ? filters : {} }))
     .then(() => dispatch({ type: TRIGGER_ERROR_EVENTS_SEARCH }))
     .then(() => dispatch(fetchSearchResults()))
 }
@@ -58,7 +58,7 @@ export const fetchSearchResults = () => (dispatch, getState) => {
         .then(() => dispatch(requestSearchResultsFailed(query, error.message)))
         .then(() => dispatch(addFlashMessage({
           type: 'error',
-          text: `Events search failed. "${error.message}"`
+          text: `Error events search failed. "${error.message}"`
         })))
     })
 }

@@ -14,7 +14,7 @@ export const triggerSearch = () => (dispatch, getState) => {
   const filters = getState().eventsFilters
   return Promise
     .resolve()
-    .then(() => history.push({ query: filters.value ? filters : {} }))
+    .then(() => history.push({ pathname: window.location.pathname, query: filters.value ? filters : {} }))
     .then(() => dispatch({ type: TRIGGER_EVENTS_SEARCH }))
     .then(() => dispatch(fetchSearchResults()))
 }
