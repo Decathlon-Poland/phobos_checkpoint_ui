@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { EVENTS_SEARCH_LIMIT } from 'api'
 
+import LoadMore from 'components/load-more'
+import EmptyEvent from 'components/empty-event'
 import EventsList from 'components/events-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
-import RaisedButton from 'material-ui/RaisedButton'
 
 import { fetchSearchResults, loadMoreSearchResults } from 'actions/events-search'
 import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
@@ -60,44 +60,6 @@ export class EventsSearch extends Component {
   isFetchingFirstPage () {
     return this.props.xhrStatus.isFetchingEvents &&
       this.props.events.length === 0
-  }
-}
-
-class LoadMore extends Component {
-  static get propTypes () {
-    return {
-      loadMoreSearchResults: PropTypes.func.isRequired,
-      xhrStatus: PropTypes.shape({ lastEventsLoadSize: PropTypes.number }).isRequired
-    }
-  }
-
-  render () {
-    return (
-      this.props.xhrStatus.lastEventsLoadSize === EVENTS_SEARCH_LIMIT &&
-        <RaisedButton
-          label='Load more'
-          onClick={() => this.props.loadMoreSearchResults()}
-          style={{margin: '10px'}}/>
-    )
-  }
-}
-
-class EmptyEvent extends Component {
-  static get propTypes () {
-    return {
-      events: PropTypes.array.isRequired,
-      isFetchingEvents: PropTypes.bool.isRequired
-    }
-  }
-
-  render () {
-    return (
-      this.props.events.length === 0 &&
-        !this.props.isFetchingEvents &&
-        <div className='empty-event'>
-          No events found
-        </div>
-    )
   }
 }
 
