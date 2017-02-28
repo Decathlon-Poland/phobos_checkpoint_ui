@@ -26,10 +26,12 @@ export class FailuresSearch extends Component {
         value: PropTypes.string,
         isFetchingEvents: PropTypes.bool
       }),
+
       eventsFilters: PropTypes.shape({
         type: PropTypes.string,
         value: PropTypes.string
       }),
+
       failures: PropTypes.arrayOf(
         PropTypes.shape({
           onShowOverview: PropTypes.func,
@@ -51,6 +53,7 @@ export class FailuresSearch extends Component {
           })
         })
       ),
+
       location: PropTypes.shape({
         query: PropTypes.object
       })
