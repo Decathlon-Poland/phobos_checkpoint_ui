@@ -46,8 +46,8 @@ export const fetchSearchResults = () => (dispatch, getState) => {
 
   Object.assign(query, { offset: currentOffset })
 
-  return API.Event
-    .findErrors(query)
+  return API.Failure
+    .search(query)
     .then((response) => {
       dispatch(receiveSearchResults(response.data, currentOffset))
     })
