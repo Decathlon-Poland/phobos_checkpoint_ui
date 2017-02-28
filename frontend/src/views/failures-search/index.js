@@ -45,9 +45,9 @@ export class FailuresSearch extends Component {
             checksum: PropTypes.string,
             payload: PropTypes.object,
             metadata: PropTypes.object,
-            error_class: PropTypes.object,
-            error_message: PropTypes.object,
-            error_backtrace: PropTypes.object
+            error_class: PropTypes.string,
+            error_message: PropTypes.string,
+            error_backtrace: PropTypes.array
           })
         })
       ),

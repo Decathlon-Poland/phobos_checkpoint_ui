@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
-import Event from 'components/event'
+import Failure from 'components/failure'
 
 const SECTION_DATE_FORMAT = 'MMM DD, YYYY'
 const EVENT_TIME_FORMAT = 'YYYY-MM-DD'
@@ -34,7 +34,7 @@ export default class extends Component {
       }
 
       timeline.push(
-        <Event key={`event-${failure.id}`} event={failure}/>
+        <Failure key={`failure-${failure.id}`} failure={failure}/>
       )
     })
 
