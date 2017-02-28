@@ -1,7 +1,7 @@
 import React from 'react'
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount, shallow } from 'enzyme'
-import { FailuresSearch } from 'views/failures-search'
+import { FailuresSearch } from 'views/failures/search'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'

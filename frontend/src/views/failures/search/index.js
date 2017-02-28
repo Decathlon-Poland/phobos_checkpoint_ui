@@ -76,13 +76,13 @@ export class FailuresSearch extends Component {
     const { type, value } = this.props.eventsFilters
 
     return (
-      <div className='events-search'>
+      <div className='failures-search'>
         <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
-          <FailuresList failures={failures || []} />
+          <FailuresList failures={failures} />
           <LoadMore {...this.props} />
           <EmptyEvent
-            events={failures || []}
+            events={failures}
             isFetchingEvents={this.props.xhrStatus.isFetchingEvents}/>
         </div>
         {

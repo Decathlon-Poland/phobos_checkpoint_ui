@@ -7,7 +7,7 @@ import Layout from 'views/layout'
 import EventsSearch from 'views/events-search'
 import EventDetails from 'views/event-details'
 import Dashboard from 'views/dashboard'
-import FailuresSearch from 'views/failures-search'
+import FailuresSearch from 'views/failures/search'
 import FailureDetails from 'views/failures/details'
 
 export const history = syncHistoryWithStore(browserHistory, store)
