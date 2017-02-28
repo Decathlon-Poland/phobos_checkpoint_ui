@@ -1,7 +1,7 @@
 import React from 'react'
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount, shallow } from 'enzyme'
-import { ErrorEventsSearch } from 'views/error-events-search'
+import { FailuresSearch } from 'views/failures-search'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
@@ -18,12 +18,12 @@ const mockStore = configureMockStore(middlewares)
 const mountComponent = (store, props) => mount(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ErrorEventsSearch {...props} />
+      <FailuresSearch {...props} />
     </MuiThemeProvider>
   </Provider>
 )
 
-describe('view <ErrorEventsSearch />', () => {
+describe('view <FailuresSearch />', () => {
   let props, store, wrapper
 
   beforeEach(() => {
@@ -51,7 +51,7 @@ describe('view <ErrorEventsSearch />', () => {
       events: [{ id: 1 }, { id: 2 }]
     }
 
-    wrapper = shallow(<ErrorEventsSearch {...props} />)
+    wrapper = shallow(<FailuresSearch {...props} />)
   })
 
   it('renders <SearchInput />', () => {
@@ -73,7 +73,7 @@ describe('view <ErrorEventsSearch />', () => {
       props = {
         ...props,
         location: {
-          pathname: '/errors',
+          pathname: '/failures',
           query: {
             type: 'entity_id',
             value: '12345'

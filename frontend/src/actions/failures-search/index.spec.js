@@ -9,25 +9,25 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 import {
-  TRIGGER_ERROR_EVENTS_SEARCH,
-  REQUEST_ERROR_EVENTS_SEARCH_RESULTS,
-  RECEIVE_ERROR_EVENTS_SEARCH_RESULTS,
-  REQUEST_ERROR_EVENTS_SEARCH_RESULTS_FAILED,
+  TRIGGER_FAILURES_SEARCH,
+  REQUEST_FAILURES_SEARCH_RESULTS,
+  RECEIVE_FAILURES_SEARCH_RESULTS,
+  REQUEST_FAILURES_SEARCH_RESULTS_FAILED,
   ADD_FLASH_MESSAGE,
-  LOAD_MORE_ERROR_EVENTS_SEARCH_RESULTS
+  LOAD_MORE_FAILURES_SEARCH_RESULTS
 } from 'actions'
 
 import {
   triggerSearch,
   fetchSearchResults,
   loadMoreSearchResults
-} from 'actions/error-events-search'
+} from 'actions/failures-search'
 
 beforeEach(() => {
   Mappersmith.Env.Fixture.clear()
 })
 
-describe('actions/error-events-search', () => {
+describe('actions/failures-search', () => {
   describe('#fetchSearchResults', () => {
     describe('without filters', () => {
       let event, initialState, store
@@ -44,8 +44,8 @@ describe('actions/error-events-search', () => {
       it('creates REQUEST and RECEIVE actions', (done) => {
         store.dispatch(fetchSearchResults(event)).then(() => {
           const actions = store.getActions()
-          expect(actions[0]).toEqual({ type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS })
-          expect(actions[1]).toEqual({ type: RECEIVE_ERROR_EVENTS_SEARCH_RESULTS, events: [event], offset: 0 })
+          expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
+          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 0 })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -70,8 +70,8 @@ describe('actions/error-events-search', () => {
       it('creates REQUEST and RECEIVE actions using the filters', (done) => {
         store.dispatch(fetchSearchResults(event)).then(() => {
           const actions = store.getActions()
-          expect(actions[0]).toEqual({ type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS })
-          expect(actions[1]).toEqual({ type: RECEIVE_ERROR_EVENTS_SEARCH_RESULTS, events: [event], offset: 0 })
+          expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
+          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 0 })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -96,8 +96,8 @@ describe('actions/error-events-search', () => {
       it('creates REQUEST and RECEIVE actions pointing to the correct offset', (done) => {
         store.dispatch(fetchSearchResults(event)).then(() => {
           const actions = store.getActions()
-          expect(actions[0]).toEqual({ type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS })
-          expect(actions[1]).toEqual({ type: RECEIVE_ERROR_EVENTS_SEARCH_RESULTS, events: [event], offset: 4 })
+          expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
+          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 4 })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -125,9 +125,9 @@ describe('actions/error-events-search', () => {
       it('creates REQUEST and RECEIVE actions pointing to the correct offset', (done) => {
         store.dispatch(fetchSearchResults(event)).then(() => {
           const actions = store.getActions()
-          expect(actions[0]).toEqual({ type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS })
+          expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
           expect(actions[1]).toEqual({
-            type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS_FAILED,
+            type: REQUEST_FAILURES_SEARCH_RESULTS_FAILED,
             query: { offset: 0 }, error: 'some error'
           })
           expect(actions[2]).toEqual({
@@ -156,12 +156,12 @@ describe('actions/error-events-search', () => {
         .response([event])
     })
 
-    it('creates TRIGGER_ERROR_EVENTS_SEARCH and REQUEST actions', (done) => {
+    it('creates TRIGGER_FAILURES_SEARCH and REQUEST actions', (done) => {
       store.dispatch(triggerSearch()).then(() => {
         const actions = store.getActions()
-        expect(actions[0]).toEqual({ type: TRIGGER_ERROR_EVENTS_SEARCH })
-        expect(actions[1]).toEqual({ type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS })
-        expect(actions[2]).toEqual({ type: RECEIVE_ERROR_EVENTS_SEARCH_RESULTS, events: [event], offset: 0 })
+        expect(actions[0]).toEqual({ type: TRIGGER_FAILURES_SEARCH })
+        expect(actions[1]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
+        expect(actions[2]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 0 })
         done()
       })
       .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -183,12 +183,12 @@ describe('actions/error-events-search', () => {
         .response([event])
     })
 
-    it('creates LOAD_MORE_ERROR_EVENTS_SEARCH_RESULTS and REQUEST actions', (done) => {
+    it('creates LOAD_MORE_FAILURES_SEARCH_RESULTS and REQUEST actions', (done) => {
       store.dispatch(loadMoreSearchResults()).then(() => {
         const actions = store.getActions()
-        expect(actions[0]).toEqual({ type: LOAD_MORE_ERROR_EVENTS_SEARCH_RESULTS, offset: 4 + EVENTS_SEARCH_LIMIT })
-        expect(actions[1]).toEqual({ type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS })
-        expect(actions[2]).toEqual({ type: RECEIVE_ERROR_EVENTS_SEARCH_RESULTS, events: [event], offset: 4 })
+        expect(actions[0]).toEqual({ type: LOAD_MORE_FAILURES_SEARCH_RESULTS, offset: 4 + EVENTS_SEARCH_LIMIT })
+        expect(actions[1]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
+        expect(actions[2]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 4 })
         done()
       })
       .catch((e) => done.fail(`test failed with promise error: ${e.message}`))

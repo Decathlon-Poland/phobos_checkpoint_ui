@@ -1,13 +1,14 @@
+
 import API, { EVENTS_SEARCH_LIMIT, parseResponseError } from 'api'
 import { addFlashMessage } from 'actions/flash-messages'
 import { history } from 'routes'
 
 import {
-  TRIGGER_ERROR_EVENTS_SEARCH,
-  REQUEST_ERROR_EVENTS_SEARCH_RESULTS,
-  RECEIVE_ERROR_EVENTS_SEARCH_RESULTS,
-  REQUEST_ERROR_EVENTS_SEARCH_RESULTS_FAILED,
-  LOAD_MORE_ERROR_EVENTS_SEARCH_RESULTS
+  TRIGGER_FAILURES_SEARCH,
+  REQUEST_FAILURES_SEARCH_RESULTS,
+  RECEIVE_FAILURES_SEARCH_RESULTS,
+  REQUEST_FAILURES_SEARCH_RESULTS_FAILED,
+  LOAD_MORE_FAILURES_SEARCH_RESULTS
 } from 'actions'
 
 export const triggerSearch = () => (dispatch, getState) => {
@@ -15,22 +16,22 @@ export const triggerSearch = () => (dispatch, getState) => {
   return Promise
     .resolve()
     .then(() => history.push({ pathname: window.location.pathname, query: filters.value ? filters : {} }))
-    .then(() => dispatch({ type: TRIGGER_ERROR_EVENTS_SEARCH }))
+    .then(() => dispatch({ type: TRIGGER_FAILURES_SEARCH }))
     .then(() => dispatch(fetchSearchResults()))
 }
 
 const requestSearchResults = () => ({
-  type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS
+  type: REQUEST_FAILURES_SEARCH_RESULTS
 })
 
 const receiveSearchResults = (data, offset) => ({
-  type: RECEIVE_ERROR_EVENTS_SEARCH_RESULTS,
+  type: RECEIVE_FAILURES_SEARCH_RESULTS,
   events: data,
   offset
 })
 
 const requestSearchResultsFailed = (query, error) => ({
-  type: REQUEST_ERROR_EVENTS_SEARCH_RESULTS_FAILED,
+  type: REQUEST_FAILURES_SEARCH_RESULTS_FAILED,
   query,
   error
 })
@@ -68,7 +69,7 @@ export const loadMoreSearchResults = () => (dispatch, getState) => {
   return Promise
     .resolve()
     .then(() => dispatch({
-      type: LOAD_MORE_ERROR_EVENTS_SEARCH_RESULTS,
+      type: LOAD_MORE_FAILURES_SEARCH_RESULTS,
       offset: currentOffset + EVENTS_SEARCH_LIMIT
     }))
     .then(() => dispatch(fetchSearchResults()))
