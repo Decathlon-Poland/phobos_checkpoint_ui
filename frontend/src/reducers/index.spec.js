@@ -14,6 +14,7 @@ describe('reducers', () => {
       eventsFilters: { type: 'entity_id' },
       eventDetails: {},
       events: [],
+      failures: [],
       routing: { locationBeforeTransitions: null }
     })
   })

@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import SearchInput from 'components/search-input'
-import EventsList from 'components/events-list'
+import FailuresList from 'components/failures-list'
 import EmptyEvent from 'components/empty-event'
 
 const middlewares = [ thunk ]
@@ -48,7 +48,7 @@ describe('view <FailuresSearch />', () => {
         type: 'foo',
         value: 'bar'
       },
-      events: [{ id: 1 }, { id: 2 }]
+      failures: [{ id: 1 }, { id: 2 }]
     }
 
     wrapper = shallow(<FailuresSearch {...props} />)
@@ -60,12 +60,12 @@ describe('view <FailuresSearch />', () => {
     ).toEqual(true)
   })
 
-  it('renders <EventsList />', () => {
-    expect(wrapper.contains(<EventsList events={props.events} />)).toEqual(true)
+  it('renders <FailuresList />', () => {
+    expect(wrapper.contains(<FailuresList failures={props.failures} />)).toEqual(true)
   })
 
   it('renders <EmptyEvent />', () => {
-    expect(wrapper.contains(<EmptyEvent events={props.events} isFetchingEvents={props.xhrStatus.isFetchingEvents} />)).toEqual(true)
+    expect(wrapper.contains(<EmptyEvent events={props.failures} isFetchingEvents={props.xhrStatus.isFetchingEvents} />)).toEqual(true)
   })
 
   describe('when it initializes with filter type and value', () => {
@@ -95,7 +95,7 @@ describe('view <FailuresSearch />', () => {
 
   describe('when events are empty', () => {
     beforeEach(() => {
-      props = {...props, events: []}
+      props = {...props, failures: []}
       mountComponent(store, props)
     })
 

@@ -40,6 +40,11 @@ export default (state = initialState, action) => {
       })
 
     case RECEIVE_FAILURES_SEARCH_RESULTS:
+      return Object.assign({}, state, {
+        isFetchingEvents: false,
+        lastEventsLoadSize: action.failures.length
+      })
+
     case RECEIVE_EVENTS_SEARCH_RESULTS:
       return Object.assign({}, state, {
         isFetchingEvents: false,

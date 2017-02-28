@@ -65,7 +65,7 @@ describe('reducers/xhr-status', () => {
   describe('for RECEIVE_FAILURES_SEARCH_RESULTS', () => {
     it('disables isFetchingEvents and keep the load size', () => {
       const currentState = { isFetchingEvents: true }
-      const action = { type: RECEIVE_FAILURES_SEARCH_RESULTS, events: ['A', 'B', 'C'] }
+      const action = { type: RECEIVE_FAILURES_SEARCH_RESULTS, failures: ['A', 'B', 'C'] }
       const expectedState = { isFetchingEvents: false, lastEventsLoadSize: 3 }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })

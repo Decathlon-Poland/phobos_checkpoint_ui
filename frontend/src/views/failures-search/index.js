@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import LoadMore from 'components/load-more'
 import EmptyEvent from 'components/empty-event'
-import EventsList from 'components/events-list'
+import FailuresList from 'components/failures-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
 
@@ -30,11 +30,12 @@ export class FailuresSearch extends Component {
         type: PropTypes.string,
         value: PropTypes.string
       }),
-      events: PropTypes.arrayOf(
+      failures: PropTypes.arrayOf(
         PropTypes.shape({
           onShowOverview: PropTypes.func,
-          event: PropTypes.shape({
+          failure: PropTypes.shape({
             id: PropTypes.number,
+            created_at: PropTypes.string,
             group_id: PropTypes.string,
             topic: PropTypes.string,
             entity_id: PropTypes.string,
@@ -42,7 +43,11 @@ export class FailuresSearch extends Component {
             event_time: PropTypes.string,
             event_version: PropTypes.string,
             checksum: PropTypes.string,
-            payload: PropTypes.object
+            payload: PropTypes.object,
+            metadata: PropTypes.object,
+            error_class: PropTypes.object,
+            error_message: PropTypes.object,
+            error_backtrace: PropTypes.object
           })
         })
       ),
@@ -59,22 +64,22 @@ export class FailuresSearch extends Component {
       this.props.changeSearchInputFilterValue(value)
     }
 
-    this.props.events.length === 0 &&
+    this.props.failures.length === 0 &&
       this.props.fetchSearchResults({ offset: 0 })
   }
 
   render () {
-    const { events } = this.props
+    const { failures } = this.props
     const { type, value } = this.props.eventsFilters
 
     return (
       <div className='events-search'>
         <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
-          <EventsList events={events} />
+          <FailuresList failures={failures || []} />
           <LoadMore {...this.props} />
           <EmptyEvent
-            events={events}
+            events={failures || []}
             isFetchingEvents={this.props.xhrStatus.isFetchingEvents}/>
         </div>
         {
@@ -88,8 +93,8 @@ export class FailuresSearch extends Component {
   }
 
   isFetchingFirstPage () {
-    return this.props.xhrStatus.isFetchingEvents &&
-      this.props.events.length === 0
+    this.props.xhrStatus.isFetchingEvents &&
+      this.props.failures.length === 0
   }
 }
 

@@ -30,22 +30,22 @@ beforeEach(() => {
 describe('actions/failures-search', () => {
   describe('#fetchSearchResults', () => {
     describe('without filters', () => {
-      let event, initialState, store
+      let failure, initialState, store
       beforeEach(() => {
         initialState = { eventsFilters: {}, xhrStatus: { currentEventsOffset: 0 } }
         store = mockStore(initialState)
-        event = { id: 1 }
+        failure = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
           .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
-          .response([event])
+          .response([failure])
       })
 
       it('creates REQUEST and RECEIVE actions', (done) => {
-        store.dispatch(fetchSearchResults(event)).then(() => {
+        store.dispatch(fetchSearchResults(failure)).then(() => {
           const actions = store.getActions()
           expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
-          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 0 })
+          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, failures: [failure], offset: 0 })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -53,25 +53,25 @@ describe('actions/failures-search', () => {
     })
 
     describe('with specific filters', () => {
-      let event, initialState, store
+      let failure, initialState, store
       beforeEach(() => {
         initialState = {
           eventsFilters: { type: 'event_type', value: 'new' },
           xhrStatus: { currentEventsOffset: 0 }
         }
         store = mockStore(initialState)
-        event = { id: 1 }
+        failure = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
           .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&event_type=new&offset=0` })
-          .response([event])
+          .response([failure])
       })
 
       it('creates REQUEST and RECEIVE actions using the filters', (done) => {
-        store.dispatch(fetchSearchResults(event)).then(() => {
+        store.dispatch(fetchSearchResults(failure)).then(() => {
           const actions = store.getActions()
           expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
-          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 0 })
+          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, failures: [failure], offset: 0 })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -79,25 +79,25 @@ describe('actions/failures-search', () => {
     })
 
     describe('with a different offset', () => {
-      let event, initialState, store
+      let failure, initialState, store
       beforeEach(() => {
         initialState = {
           eventsFilters: { },
           xhrStatus: { currentEventsOffset: 4 }
         }
         store = mockStore(initialState)
-        event = { id: 1 }
+        failure = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
           .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&offset=4` })
-          .response([event])
+          .response([failure])
       })
 
       it('creates REQUEST and RECEIVE actions pointing to the correct offset', (done) => {
-        store.dispatch(fetchSearchResults(event)).then(() => {
+        store.dispatch(fetchSearchResults(failure)).then(() => {
           const actions = store.getActions()
           expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
-          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 4 })
+          expect(actions[1]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, failures: [failure], offset: 4 })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -105,11 +105,11 @@ describe('actions/failures-search', () => {
     })
 
     describe('when it fails', () => {
-      let event, initialState, store
+      let failure, initialState, store
       beforeEach(() => {
         initialState = { eventsFilters: {}, xhrStatus: { currentEventsOffset: 0 } }
         store = mockStore(initialState)
-        event = { id: 1 }
+        failure = { id: 1 }
         Mappersmith.Env.Fixture
           .define('get')
           .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
@@ -123,7 +123,7 @@ describe('actions/failures-search', () => {
       })
 
       it('creates REQUEST and RECEIVE actions pointing to the correct offset', (done) => {
-        store.dispatch(fetchSearchResults(event)).then(() => {
+        store.dispatch(fetchSearchResults(failure)).then(() => {
           const actions = store.getActions()
           expect(actions[0]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
           expect(actions[1]).toEqual({
@@ -132,7 +132,7 @@ describe('actions/failures-search', () => {
           })
           expect(actions[2]).toEqual({
             type: ADD_FLASH_MESSAGE,
-            message: { id: jasmine.any(String), type: 'error', text: 'Error events search failed. "some error"' }
+            message: { id: jasmine.any(String), type: 'error', text: 'Failures search failed. "some error"' }
           })
           done()
         })
@@ -142,18 +142,18 @@ describe('actions/failures-search', () => {
   })
 
   describe('#triggerSearch', () => {
-    let event, initialState, store
+    let failure, initialState, store
     beforeEach(() => {
       initialState = {
         eventsFilters: {},
         xhrStatus: { currentEventsOffset: 0 }
       }
       store = mockStore(initialState)
-      event = { id: 1 }
+      failure = { id: 1 }
       Mappersmith.Env.Fixture
         .define('get')
         .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
-        .response([event])
+        .response([failure])
     })
 
     it('creates TRIGGER_FAILURES_SEARCH and REQUEST actions', (done) => {
@@ -161,7 +161,7 @@ describe('actions/failures-search', () => {
         const actions = store.getActions()
         expect(actions[0]).toEqual({ type: TRIGGER_FAILURES_SEARCH })
         expect(actions[1]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
-        expect(actions[2]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 0 })
+        expect(actions[2]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, failures: [failure], offset: 0 })
         done()
       })
       .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
@@ -169,18 +169,18 @@ describe('actions/failures-search', () => {
   })
 
   describe('#loadMoreSearchResults', () => {
-    let event, initialState, store
+    let failure, initialState, store
     beforeEach(() => {
       initialState = {
         eventsFilters: {},
         xhrStatus: { currentEventsOffset: 4 }
       }
       store = mockStore(initialState)
-      event = { id: 1 }
+      failure = { id: 1 }
       Mappersmith.Env.Fixture
         .define('get')
         .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&offset=4` })
-        .response([event])
+        .response([failure])
     })
 
     it('creates LOAD_MORE_FAILURES_SEARCH_RESULTS and REQUEST actions', (done) => {
@@ -188,7 +188,7 @@ describe('actions/failures-search', () => {
         const actions = store.getActions()
         expect(actions[0]).toEqual({ type: LOAD_MORE_FAILURES_SEARCH_RESULTS, offset: 4 + EVENTS_SEARCH_LIMIT })
         expect(actions[1]).toEqual({ type: REQUEST_FAILURES_SEARCH_RESULTS })
-        expect(actions[2]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, events: [event], offset: 4 })
+        expect(actions[2]).toEqual({ type: RECEIVE_FAILURES_SEARCH_RESULTS, failures: [failure], offset: 4 })
         done()
       })
       .catch((e) => done.fail(`test failed with promise error: ${e.message}`))

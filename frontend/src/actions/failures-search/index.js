@@ -26,7 +26,7 @@ const requestSearchResults = () => ({
 
 const receiveSearchResults = (data, offset) => ({
   type: RECEIVE_FAILURES_SEARCH_RESULTS,
-  events: data,
+  failures: data,
   offset
 })
 
@@ -59,7 +59,7 @@ export const fetchSearchResults = () => (dispatch, getState) => {
         .then(() => dispatch(requestSearchResultsFailed(query, error.message)))
         .then(() => dispatch(addFlashMessage({
           type: 'error',
-          text: `Error events search failed. "${error.message}"`
+          text: `Failures search failed. "${error.message}"`
         })))
     })
 }

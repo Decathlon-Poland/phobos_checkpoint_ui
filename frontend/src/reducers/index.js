@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
 import events from 'reducers/events'
+import failures from 'reducers/failures'
 import eventDetails from 'reducers/event-details'
 import eventsFilters from 'reducers/events-filters'
 import xhrStatus from 'reducers/xhr-status'
@@ -13,6 +14,6 @@ export default combineReducers({
   eventsFilters,
   eventDetails,
   events,
-
+  failures,
   routing: routerReducer
 })

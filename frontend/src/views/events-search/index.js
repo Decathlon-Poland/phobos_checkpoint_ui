@@ -88,7 +88,7 @@ export class EventsSearch extends Component {
   }
 
   isFetchingFirstPage () {
-    return this.props.xhrStatus.isFetchingEvents &&
+    this.props.xhrStatus.isFetchingEvents &&
       this.props.events.length === 0
   }
 }
