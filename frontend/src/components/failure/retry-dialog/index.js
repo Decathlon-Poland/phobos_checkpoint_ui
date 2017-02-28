@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import ErrorMessage from 'components/event/error-message'
 import Loading from 'components/event/loading'
 
-import { hideEventRetry, performEventRetry } from 'actions/event-retry'
+import { hideFailureRetry, performFailureRetry } from 'actions/failures/retry'
 
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -18,7 +18,7 @@ class FailureRetryDialog extends Component {
       failure: PropTypes.shape({
         id: PropTypes.number,
         retryVisible: PropTypes.bool
-      })
+      }).isRequired
     }
   }
 
@@ -33,7 +33,7 @@ class FailureRetryDialog extends Component {
       <Dialog
         modal={!!this.props.isRetryingEvent}
         title='Are you sure?'
-        open={!!this.props.event.retryVisible}
+        open={!!this.props.failure.retryVisible}
         bodyStyle={{maxWidth: '300px'}}
         contentStyle={{maxWidth: '300px'}}
         onRequestClose={() => this.hide()}
@@ -45,18 +45,18 @@ class FailureRetryDialog extends Component {
         ]}>
         <div style={{textAlign: 'center'}}>
           <Loading visible={this.props.isRetryingEvent}/>
-          <ErrorMessage message={this.props.event.error}/>
+          <ErrorMessage message={this.props.failure.error}/>
         </div>
       </Dialog>
     )
   }
 
   hide () {
-    this.props.onHideRetry(this.props.event)
+    this.props.onHideRetry(this.props.failure)
   }
 
   performRetry () {
-    this.props.onPerformRetry(this.props.event)
+    this.props.onPerformRetry(this.props.failure)
   }
 }
 
@@ -67,6 +67,6 @@ const mapStateToProps = (state, ownProps) => (
 )
 
 export default connect(mapStateToProps, {
-  onHideRetry: hideEventRetry,
-  onPerformRetry: performEventRetry
+  onHideRetry: hideFailureRetry,
+  onPerformRetry: performFailureRetry
 })(FailureRetryDialog)

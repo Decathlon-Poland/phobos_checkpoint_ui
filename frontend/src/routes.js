@@ -8,6 +8,7 @@ import EventsSearch from 'views/events-search'
 import EventDetails from 'views/event-details'
 import Dashboard from 'views/dashboard'
 import FailuresSearch from 'views/failures-search'
+import FailureShow from 'views/failures/show'
 
 export const history = syncHistoryWithStore(browserHistory, store)
 
@@ -19,6 +20,7 @@ export default (
       <Route path='/events/:id' component={EventDetails} />
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/failures' component={FailuresSearch} />
+      <Route path='/failures/:id' component={FailureShow} />
     </Route>
   </Router>
 )

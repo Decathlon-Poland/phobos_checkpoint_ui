@@ -18,7 +18,7 @@ class RetryDialog extends Component {
       event: PropTypes.shape({
         id: PropTypes.number,
         retryVisible: PropTypes.bool
-      })
+      }).isRequired
     }
   }
 

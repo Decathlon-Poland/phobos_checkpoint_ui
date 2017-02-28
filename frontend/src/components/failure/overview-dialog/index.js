@@ -74,7 +74,7 @@ class OverviewDialog extends Component {
   dialogTitle () {
     return (
       <h3>
-        <Link className='dialog-title' to={`/events/${this.props.failure.id}`}>
+        <Link className='dialog-title' to={`/failures/${this.props.failure.id}`}>
           {`#${this.props.failure.id}`}
         </Link>
       </h3>
