@@ -7,7 +7,7 @@ import FailuresList from 'components/failures-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
 
-import { fetchSearchResults, loadMoreSearchResults, triggerSearch } from 'actions/failures-search'
+import { fetchSearchResults, loadMoreSearchResults, triggerSearch } from 'actions/failures/search'
 import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
 import { showEventOverview } from 'actions/event-overview'
 

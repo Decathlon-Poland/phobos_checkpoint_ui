@@ -21,13 +21,13 @@ import {
   triggerSearch,
   fetchSearchResults,
   loadMoreSearchResults
-} from 'actions/failures-search'
+} from 'actions/failures/search'
 
 beforeEach(() => {
   Mappersmith.Env.Fixture.clear()
 })
 
-describe('actions/failures-search', () => {
+describe('actions/failures/search', () => {
   describe('#fetchSearchResults', () => {
     describe('without filters', () => {
       let failure, initialState, store
