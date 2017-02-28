@@ -5,9 +5,9 @@ import {
   RECEIVE_FAILURE_DETAILS
 } from 'actions'
 
-import reducer from 'reducers/failure/details'
+import reducer from 'reducers/failures/details'
 
-describe('reducers/failure/details', () => {
+describe('reducers/failures/details', () => {
   describe('for FAILURE_SHOW_RETRY', () => {
     it('sets retryVisible to true', () => {
       const currentState = { id: 1 }
