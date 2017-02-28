@@ -17,20 +17,25 @@ export default class extends Component {
   static get propTypes () {
     return {
       id: PropTypes.number,
-      group_id: PropTypes.string,
+      created_at: PropTypes.string,
       topic: PropTypes.string,
+      group_id: PropTypes.string,
       entity_id: PropTypes.string,
-      event_type: PropTypes.string,
       event_time: PropTypes.string,
+      event_type: PropTypes.string,
       event_version: PropTypes.string,
       checksum: PropTypes.string,
-      payload: PropTypes.object
+      payload: PropTypes.object,
+      metadata: PropTypes.object,
+      error_class: PropTypes.string,
+      error_message: PropTypes.string,
+      error_backtrace: PropTypes.array
     }
   }
 
   render () {
     return (
-      <div className='event-overview'>
+      <div className='failure-overview'>
         <Attribute label='Group ID' value={this.props.group_id} />
         <Attribute label='Topic' value={this.props.topic} />
         <Attribute label='Entity ID' value={this.props.entity_id} />
@@ -40,6 +45,14 @@ export default class extends Component {
         <Attribute label='Checksum' value={this.props.checksum} />
         <Attribute label='Payload'>
           <JSONPretty className='json-pretty' json={this.props.payload} />
+        </Attribute>
+        <Attribute label='Metadata'>
+          <JSONPretty className='json-pretty' json={this.props.metadata} />
+        </Attribute>
+        <Attribute label='Error Class' value={this.props.error_class} />
+        <Attribute label='Error Message' value={this.props.error_class} />
+        <Attribute label='Backtrace'>
+          <JSONPretty className='json-pretty' json={this.props.error_backtrace} />
         </Attribute>
       </div>
     )

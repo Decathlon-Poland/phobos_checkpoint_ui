@@ -6,7 +6,7 @@ import { showFailureOverview } from 'actions/failures/overview'
 import style from 'components/event/style'
 
 import { Card, CardHeader, CardTitle } from 'material-ui/Card'
-// import EventOverviewDialog from 'components/event-overview-dialog'
+import FailureOverviewDialog from 'components/failure/overview-dialog'
 // import EventRetryDialog from 'components/event-retry-dialog'
 
 const TIME_FORMAT = 'h:mm:ss a'
@@ -62,8 +62,8 @@ export class Failure extends Component {
         <CardTitle
           titleStyle={style.cardTitle}
           title={this.formattedEventType()}/>
-        {/* <EventOverviewDialog event={this.props.failure} />
-        <EventRetryDialog event={this.props.failure} /> */}
+        <FailureOverviewDialog event={this.props.failure} />
+        {/* <EventRetryDialog event={this.props.failure} /> */}
       </Card>
     )
   }
