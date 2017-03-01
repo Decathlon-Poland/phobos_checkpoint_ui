@@ -8,7 +8,7 @@ import { Link } from 'react-router'
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import ContentSend from 'material-ui/svg-icons/content/send'
 import ActionAssignment from 'material-ui/svg-icons/action/assignment'
 import { navigateTo } from 'actions/navigation'
@@ -39,7 +39,7 @@ export class Header extends Component {
         titleStyle={style.title}
         iconElementRight={
           <IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            iconButtonElement={<IconButton><MenuIcon /></IconButton>}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
             <MenuItem primaryText='Events' leftIcon={<ContentSend />} onTouchTap={() => this.props.navigateTo('/events')} />
