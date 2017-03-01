@@ -145,14 +145,14 @@ describe('actions/failures/search', () => {
     let failure, initialState, store
     beforeEach(() => {
       initialState = {
-        eventsFilters: {},
+        eventsFilters: { type: 'event_type', value: 'new' },
         xhrStatus: { currentEventsOffset: 0 }
       }
       store = mockStore(initialState)
       failure = { id: 1 }
       Mappersmith.Env.Fixture
         .define('get')
-        .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&offset=0` })
+        .matching({ url: `/api/v1/failures?limit=${EVENTS_SEARCH_LIMIT}&event_type=new&offset=0` })
         .response([failure])
     })
 
