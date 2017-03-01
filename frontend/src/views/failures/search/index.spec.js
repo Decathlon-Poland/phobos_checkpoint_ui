@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 
 import SearchInput from 'components/search-input'
 import FailuresList from 'components/failures-list'
-import EmptyEvent from 'components/empty-event'
+import FailureEvent from 'components/failure/empty'
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
@@ -64,8 +64,8 @@ describe('view <FailuresSearch />', () => {
     expect(wrapper.contains(<FailuresList failures={props.failures} />)).toEqual(true)
   })
 
-  it('renders <EmptyEvent />', () => {
-    expect(wrapper.contains(<EmptyEvent events={props.failures} isFetchingEvents={props.xhrStatus.isFetchingEvents} />)).toEqual(true)
+  it('renders <FailureEvent />', () => {
+    expect(wrapper.contains(<FailureEvent failures={props.failures} isFetchingEvents={props.xhrStatus.isFetchingEvents} />)).toEqual(true)
   })
 
   describe('when it initializes with filter type and value', () => {

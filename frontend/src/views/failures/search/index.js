@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import LoadMore from 'components/load-more'
-import EmptyEvent from 'components/empty-event'
+import EmptyFailure from 'components/failure/empty'
 import FailuresList from 'components/failures-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
@@ -81,8 +81,8 @@ export class FailuresSearch extends Component {
         <div>
           <FailuresList failures={failures} />
           <LoadMore {...this.props} />
-          <EmptyEvent
-            events={failures}
+          <EmptyFailure
+            failures={failures}
             isFetchingEvents={this.props.xhrStatus.isFetchingEvents} />
         </div>
         {

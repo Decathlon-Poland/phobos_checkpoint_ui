@@ -10,7 +10,7 @@ export default class extends Component {
 
   render () {
     return this.props.message ? (
-      <div className='event-error-message'>
+      <div className='failure-error-message'>
         <ErrorSVG style={{marginRight: '10px'}}/>
         <span>{this.props.message}</span>
       </div>
