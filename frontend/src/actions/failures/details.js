@@ -31,12 +31,10 @@ export const fetchFailureDetails = (failure) => (dispatch, getState) => {
     .then((response) => dispatch(receiveFailureDetails(response.data)))
     .catch((response) => {
       const error = parseResponseError(response)
-      return Promise
-        .resolve()
-        .then(() => dispatch(requestFailureDetailsFailed(failure, error.message)))
-        .then(() => dispatch(addFlashMessage({
-          type: 'error',
-          text: error.message
-        })))
+      dispatch(requestFailureDetailsFailed(failure, error.message))
+      dispatch(addFlashMessage({
+        type: 'error',
+        text: error.message
+      }))
     })
 }

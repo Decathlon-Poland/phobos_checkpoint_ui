@@ -54,13 +54,11 @@ export const fetchSearchResults = () => (dispatch, getState) => {
     })
     .catch((response) => {
       const error = parseResponseError(response)
-      return Promise
-        .resolve()
-        .then(() => dispatch(requestSearchResultsFailed(query, error.message)))
-        .then(() => dispatch(addFlashMessage({
-          type: 'error',
-          text: `Failures search failed. "${error.message}"`
-        })))
+      dispatch(requestSearchResultsFailed(query, error.message))
+      dispatch(addFlashMessage({
+        type: 'error',
+        text: `Failures search failed. "${error.message}"`
+      }))
     })
 }
 
