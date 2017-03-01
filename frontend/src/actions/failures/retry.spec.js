@@ -13,7 +13,9 @@ import {
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
   ADD_FLASH_MESSAGE,
-  REQUEST_FAILURE_RETRY_FAILED
+  REQUEST_FAILURE_RETRY_FAILED,
+  FAILURE_HIDE_OVERVIEW,
+  DELETE_FAILURE
 } from 'actions'
 
 import {
@@ -83,6 +85,24 @@ describe('actions/failures/retry', () => {
             text: 'Failure retried with success. Acknowledged: true',
             autoClose: true
           }})
+          done()
+        })
+        .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
+      })
+
+      it('creates an action to hide the failure overview', (done) => {
+        store.dispatch(performFailureRetry(failure)).then(() => {
+          const actions = store.getActions()
+          expect(actions[4]).toEqual({ type: FAILURE_HIDE_OVERVIEW, failure: failure })
+          done()
+        })
+        .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
+      })
+
+      it('creates an action to delete the failure from state', (done) => {
+        store.dispatch(performFailureRetry(failure)).then(() => {
+          const actions = store.getActions()
+          expect(actions[5]).toEqual({ type: DELETE_FAILURE, failure: failure })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))

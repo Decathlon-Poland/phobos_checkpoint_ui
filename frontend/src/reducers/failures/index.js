@@ -5,7 +5,8 @@ import {
   FAILURE_SHOW_RETRY,
   FAILURE_HIDE_RETRY,
   RECEIVE_FAILURE_RETRY,
-  REQUEST_FAILURE_RETRY_FAILED
+  REQUEST_FAILURE_RETRY_FAILED,
+  DELETE_FAILURE
 } from 'actions'
 
 function patchFailure (state, action, params) {
@@ -41,6 +42,11 @@ export default (state = [], action) => {
 
     case REQUEST_FAILURE_RETRY_FAILED:
       return patchFailure(state, action, { error: action.error })
+
+    case DELETE_FAILURE:
+      return state.filter((failure) => {
+        return failure.id !== action.failure.id
+      })
 
     default:
       return state

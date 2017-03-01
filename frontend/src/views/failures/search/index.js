@@ -83,7 +83,7 @@ export class FailuresSearch extends Component {
           <LoadMore {...this.props} />
           <EmptyEvent
             events={failures}
-            isFetchingEvents={this.props.xhrStatus.isFetchingEvents}/>
+            isFetchingEvents={this.props.xhrStatus.isFetchingEvents} />
         </div>
         {
           this.isFetchingFirstPage() &&
