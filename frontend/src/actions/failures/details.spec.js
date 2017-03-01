@@ -19,7 +19,7 @@ beforeEach(() => {
   Mappersmith.Env.Fixture.clear()
 })
 
-describe('actions/failure-details', () => {
+describe('actions/failures/details', () => {
   describe('#fetchFailureDetails', () => {
     describe('when it succeeds', () => {
       let failure, store
