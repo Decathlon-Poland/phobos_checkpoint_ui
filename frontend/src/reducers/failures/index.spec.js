@@ -5,7 +5,6 @@ import {
   FAILURE_SHOW_RETRY,
   FAILURE_HIDE_RETRY,
   RECEIVE_FAILURE_RETRY,
-  REQUEST_FAILURE_RETRY_FAILED,
   DELETE_FAILURE
 } from 'actions'
 
@@ -73,15 +72,6 @@ describe('reducers/failures', () => {
       const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
       const action = { type: RECEIVE_FAILURE_RETRY, failure: { id: 2 }, acknowledged: true }
       const expectedState = [{ id: 1 }, { id: 2, acknowledged: true, error: null }, { id: 3 }]
-      expect(reducer(currentState, action)).toEqual(expectedState)
-    })
-  })
-
-  describe('for REQUEST_FAILURE_RETRY_FAILED', () => {
-    it('sets error for a specific', () => {
-      const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
-      const action = { type: REQUEST_FAILURE_RETRY_FAILED, failure: { id: 2 }, error: 'some error' }
-      const expectedState = [{ id: 1 }, { id: 2, error: 'some error' }, { id: 3 }]
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })

@@ -13,7 +13,6 @@ import {
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
   ADD_FLASH_MESSAGE,
-  REQUEST_FAILURE_RETRY_FAILED,
   FAILURE_HIDE_OVERVIEW,
   DELETE_FAILURE
 } from 'actions'
@@ -110,9 +109,11 @@ describe('actions/failures/retry', () => {
     })
 
     describe('when it fails', () => {
-      it('creates REQUEST and REQUEST_FAILED actions', (done) => {
-        const failure = { id: 1 }
-        const store = mockStore({})
+      let store, failure
+
+      beforeEach(() => {
+        failure = { id: 1 }
+        store = mockStore({})
         Mappersmith.Env.Fixture
           .define('post')
           .matching({ url: `/api/v1/failures/${failure.id}/retry` })
@@ -123,11 +124,27 @@ describe('actions/failures/retry', () => {
               message: 'some error'
             })
           })
+      })
 
+      it('creates REQUEST and REQUEST_FAILED actions', (done) => {
         store.dispatch(performFailureRetry(failure)).then(() => {
           const actions = store.getActions()
           expect(actions[0]).toEqual({ type: REQUEST_FAILURE_RETRY, failure })
-          expect(actions[1]).toEqual({ type: REQUEST_FAILURE_RETRY_FAILED, failure, error: 'some error' })
+          expect(actions[1]).toEqual({ type: FAILURE_HIDE_RETRY, failure })
+          done()
+        })
+        .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
+      })
+
+      it('create an action to add an error flash message', (done) => {
+        store.dispatch(performFailureRetry(failure)).then(() => {
+          const actions = store.getActions()
+          expect(actions[2]).toEqual({ type: ADD_FLASH_MESSAGE, message: {
+            id: jasmine.any(String),
+            type: 'error',
+            text: `Failure retried with error: some error`,
+            autoClose: false
+          }})
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))

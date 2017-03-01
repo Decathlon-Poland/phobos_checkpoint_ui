@@ -6,7 +6,6 @@ import {
   FAILURE_HIDE_RETRY,
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
-  REQUEST_FAILURE_RETRY_FAILED,
   FAILURE_HIDE_OVERVIEW,
   DELETE_FAILURE
 } from 'actions'
@@ -32,12 +31,6 @@ const receiveFailureRetry = (failure, data) => ({
   acknowledged: data.acknowledged
 })
 
-const requestFailureRetryFailed = (failure, error) => ({
-  type: REQUEST_FAILURE_RETRY_FAILED,
-  failure: failure,
-  error
-})
-
 const hideFailureOverview = (failure) => ({
   type: FAILURE_HIDE_OVERVIEW,
   failure: failure
@@ -53,20 +46,23 @@ export const performFailureRetry = (failure) => (dispatch, getState) => {
   return API.Failure
     .retry({id: failure.id})
     .then((response) => {
-      return Promise
-        .resolve()
-        .then(() => dispatch(receiveFailureRetry(failure, response.data)))
-        .then(() => dispatch(hideFailureRetry(failure)))
-        .then(() => dispatch(addFlashMessage({
-          type: 'success',
-          text: `Failure retried with success. Acknowledged: ${response.data.acknowledged}`,
-          autoClose: true
-        })))
-        .then(() => dispatch(hideFailureOverview(failure)))
-        .then(() => dispatch(deleteFailure(failure)))
+      dispatch(receiveFailureRetry(failure, response.data))
+      dispatch(hideFailureRetry(failure))
+      dispatch(addFlashMessage({
+        type: 'success',
+        text: `Failure retried with success. Acknowledged: ${response.data.acknowledged}`,
+        autoClose: true
+      }))
+      dispatch(hideFailureOverview(failure))
+      dispatch(deleteFailure(failure))
     })
     .catch((response) => {
       const error = parseResponseError(response)
-      dispatch(requestFailureRetryFailed(failure, error.message))
+      dispatch(hideFailureRetry(failure))
+      dispatch(addFlashMessage({
+        type: 'error',
+        text: `Failure retried with error: ${error.message}`,
+        autoClose: false
+      }))
     })
 }
