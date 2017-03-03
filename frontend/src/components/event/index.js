@@ -6,8 +6,10 @@ import { showEventOverview } from 'actions/event-overview'
 import style from 'components/event/style'
 
 import {Card, CardHeader, CardTitle} from 'material-ui/Card'
+import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import EventOverviewDialog from 'components/event-overview-dialog'
 import EventRetryDialog from 'components/event-retry-dialog'
+import { green200 } from 'material-ui/styles/colors'
 
 const EVENT_TIME_FORMAT = 'h:mm:ss a'
 const EMPTY_EVENT_TYPE = '<no type>'
@@ -50,6 +52,7 @@ export class Event extends Component {
         onClick={() => this.showOverview()}>
         <CardHeader
           className='event-header'
+          avatar={<EventsIcon className='event-icon' color={green200} />}
           titleStyle={style.cardHeader.title}
           subtitleStyle={style.cardHeader.subtitle}
           title={formatEventTime(this.props.event.event_time)}
