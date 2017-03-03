@@ -9,9 +9,10 @@ import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
-import ContentSend from 'material-ui/svg-icons/content/send'
-import ActionAssignment from 'material-ui/svg-icons/action/assignment'
+import EventsIcon from 'material-ui/svg-icons/communication/call-received'
+import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import { navigateTo } from 'actions/navigation'
+import { red500, green200 } from 'material-ui/styles/colors'
 
 const DEFAULT_TITLE = 'Phobos Checkpoint'
 
@@ -42,8 +43,16 @@ export class Header extends Component {
             iconButtonElement={<IconButton><MenuIcon /></IconButton>}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-            <MenuItem primaryText='Events' leftIcon={<ContentSend />} onTouchTap={() => this.props.navigateTo('/events')} />
-            <MenuItem primaryText='Failures' leftIcon={<ActionAssignment />} onTouchTap={() => this.props.navigateTo('/failures')} />
+            <MenuItem
+              primaryText='Events'
+              leftIcon={<EventsIcon color={green200} />}
+              onTouchTap={() => this.props.navigateTo('/events')}
+            />
+            <MenuItem
+              primaryText='Failures'
+              leftIcon={<FailuresIcon color={red500} />}
+              onTouchTap={() => this.props.navigateTo('/failures')}
+            />
           </IconMenu>
         }
       />

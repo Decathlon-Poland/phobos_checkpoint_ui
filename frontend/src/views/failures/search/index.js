@@ -6,10 +6,25 @@ import EmptyFailure from 'components/failure/empty'
 import FailuresList from 'components/failures-list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
+import NavigationCloseIcon from 'material-ui/svg-icons/navigation/close'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
 
 import { fetchSearchResults, loadMoreSearchResults, triggerSearch } from 'actions/failures/search'
 import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
 import { showEventOverview } from 'actions/event-overview'
+
+const style = {
+  subBar: {
+    backgroundColor: '#ff4081'
+  },
+  subTitle: {
+    color: '#fff',
+    fontFamily: 'Roboto',
+    fontWeight: 'lighter',
+    fontSize: '20px'
+  }
+}
 
 export class FailuresSearch extends Component {
   static get propTypes () {
@@ -76,21 +91,31 @@ export class FailuresSearch extends Component {
     const { type, value } = this.props.eventsFilters
 
     return (
-      <div className='failures-search'>
-        <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
-        <div>
-          <FailuresList failures={failures} />
-          <LoadMore {...this.props} />
-          <EmptyFailure
-            failures={failures}
-            isFetchingEvents={this.props.xhrStatus.isFetchingEvents} />
+      <div className='failures-search-subheader'>
+        <AppBar
+          title='Failures'
+          showMenuIconButton={false}
+          style={style.subBar}
+          titleStyle={style.subTitle}
+          iconElementLeft={<IconButton><NavigationCloseIcon /></IconButton>}
+        />
+
+        <div className='failures-search'>
+          <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
+          <div>
+            <FailuresList failures={failures} />
+            <LoadMore {...this.props} />
+            <EmptyFailure
+              failures={failures}
+              isFetchingEvents={this.props.xhrStatus.isFetchingEvents} />
+          </div>
+          {
+            this.isFetchingFirstPage() &&
+              <div className='page-loader'>
+                <CircularProgress />
+              </div>
+          }
         </div>
-        {
-          this.isFetchingFirstPage() &&
-            <div className='page-loader'>
-              <CircularProgress />
-            </div>
-        }
       </div>
     )
   }
