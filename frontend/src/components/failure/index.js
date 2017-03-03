@@ -6,8 +6,10 @@ import { showFailureOverview } from 'actions/failures/overview'
 import style from 'components/event/style'
 
 import { Card, CardHeader, CardTitle } from 'material-ui/Card'
+import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import FailureOverviewDialog from 'components/failure/overview-dialog'
 import FailureRetryDialog from 'components/failure/retry-dialog'
+import { red500 } from 'material-ui/styles/colors'
 
 const TIME_FORMAT = 'h:mm:ss a'
 const EMPTY_TYPE = '<no type>'
@@ -55,6 +57,7 @@ export class Failure extends Component {
         onClick={() => this.showOverview()}>
         <CardHeader
           className='failure-header'
+          avatar={<FailuresIcon className='failure-icon' color={red500} />}
           titleStyle={style.cardHeader.title}
           subtitleStyle={style.cardHeader.subtitle}
           title={formatTime(this.props.failure.event_time)}

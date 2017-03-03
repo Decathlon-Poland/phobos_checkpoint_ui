@@ -6,7 +6,7 @@ import { fetchFailureDetails } from 'actions/failures/details'
 import FailureOverviewDialog from 'components/failure/overview-dialog'
 import FailureRetryDialog from 'components/failure/retry-dialog'
 
-class FailureShow extends Component {
+class FailureDetails extends Component {
   static get propTypes () {
     return {
       fetchFailureDetails: PropTypes.func.isRequired
@@ -47,4 +47,4 @@ export default connect(
   (state) => state, {
     fetchFailureDetails
   }
-)(FailureShow)
+)(FailureDetails)

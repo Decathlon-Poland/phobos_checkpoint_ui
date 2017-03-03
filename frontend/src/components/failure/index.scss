@@ -1,3 +1,15 @@
 .failure {
   cursor: pointer;
+
+  .failure-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .failure-icon {
+    order: 2;
+    width: 35px !important;
+    height: 35px !important;
+    margin-right: 0 !important;
+  }
 }
