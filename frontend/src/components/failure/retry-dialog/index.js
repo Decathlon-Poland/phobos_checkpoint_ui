@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import ErrorMessage from 'components/event/error-message'
 import Loading from 'components/event/loading'
 
 import { hideFailureRetry, performFailureRetry } from 'actions/failures/retry'
@@ -24,7 +23,7 @@ class FailureRetryDialog extends Component {
 
   static get defaultProps () {
     return {
-      event: {}
+      failure: {}
     }
   }
 
@@ -45,7 +44,6 @@ class FailureRetryDialog extends Component {
         ]}>
         <div style={{textAlign: 'center'}}>
           <Loading visible={this.props.isRetryingEvent}/>
-          <ErrorMessage message={this.props.failure.error}/>
         </div>
       </Dialog>
     )
@@ -60,11 +58,10 @@ class FailureRetryDialog extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => (
-  Object.assign({
-    isRetryingEvent: state.xhrStatus.isRetryingEvent
-  }, ownProps)
-)
+const mapStateToProps = (state, ownProps) => ({
+  ...ownProps,
+  isRetryingEvent: state.xhrStatus.isRetryingEvent
+})
 
 export default connect(mapStateToProps, {
   onHideRetry: hideFailureRetry,

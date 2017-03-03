@@ -11,7 +11,7 @@ import {
 function patchFailure (state, action, params) {
   return state.map((failure) => {
     if (failure.id === action.failure.id) {
-      return Object.assign({}, failure, params)
+      return { ...failure, ...params }
     }
     return failure
   })

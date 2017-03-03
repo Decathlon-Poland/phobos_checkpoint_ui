@@ -7,7 +7,7 @@ import {
 
 function patchFailure (state, action, params) {
   if (state.id === action.failure.id) {
-    return Object.assign(state, params)
+    return { ...state, ...params }
   }
   return state
 }
