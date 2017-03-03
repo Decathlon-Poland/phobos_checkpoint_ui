@@ -1,7 +1,7 @@
 import React from 'react'
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount } from 'enzyme'
-import { Event, formatEventTime } from 'components/event'
+import { Failure, formatTime } from 'components/failure'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
@@ -14,12 +14,12 @@ const mockStore = configureMockStore(middlewares)
 const mountComponent = (store, props) => mount(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Event {...props} />
+      <Failure {...props} />
     </MuiThemeProvider>
   </Provider>
 )
 
-describe('<Event />', () => {
+describe('<Failure />', () => {
   let props, component, store, onShowOverview
 
   beforeEach(() => {
@@ -34,7 +34,7 @@ describe('<Event />', () => {
 
     props = {
       onShowOverview: onShowOverview,
-      event: {
+      failure: {
         id: 1,
         topic: 'phobos.test',
         group_id: 'phobos-checkpoint-consumer',
@@ -43,7 +43,11 @@ describe('<Event />', () => {
         event_type: 'order-placed',
         event_version: 'v1',
         checksum: '188773471ec0f898fd81d272760a027f',
-        payload: { data: { name: 'phobos' } }
+        payload: { data: { name: 'phobos' } },
+        metadata: { meta: { version: 'foo' } },
+        error_class: 'FooError',
+        error_message: 'Expected "foo" to equal "bar"',
+        error_backtrace: ['Line 1: foo', 'Line 2: baz']
       }
     }
 
@@ -51,7 +55,7 @@ describe('<Event />', () => {
   })
 
   it('displays event_time formatted', () => {
-    expect(component.text()).toMatch(formatEventTime(props.event.event_time))
+    expect(component.text()).toMatch(formatTime(props.failure.event_time))
   })
 
   it('displays topic', () => {
@@ -63,27 +67,27 @@ describe('<Event />', () => {
   })
 
   describe('when clicked', () => {
-    it('calls onShowOverview with the event', () => {
-      component.find('.event').simulate('click')
-      expect(onShowOverview).toHaveBeenCalledWith(props.event)
+    it('calls onShowOverview with the failure', () => {
+      component.find('.failure').simulate('click')
+      expect(onShowOverview).toHaveBeenCalledWith(props.failure)
     })
   })
 
-  describe('when event has overviewVisible=true', () => {
+  describe('when failure has overviewVisible=true', () => {
     let dialog
     beforeEach(() => {
-      Object.assign(props.event, { overviewVisible: true })
+      Object.assign(props.failure, { overviewVisible: true })
       component = mountComponent(store, props)
-      const dialogs = document.getElementsByClassName('event-overview-dialog')
+      const dialogs = document.getElementsByClassName('failure-overview-dialog')
       dialog = dialogs[dialogs.length - 1]
     })
 
-    it('opens the event overview dialog', () => {
+    it('opens the failure overview dialog', () => {
       expect(dialog).not.toBe(null)
     })
 
     it('displays event_id', () => {
-      expect(dialog.innerText).toMatch(`#${props.event.id}`)
+      expect(dialog.innerText).toMatch(`#${props.failure.id}`)
     })
   })
 })

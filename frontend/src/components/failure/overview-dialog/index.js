@@ -9,7 +9,7 @@ import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
 import FailureOverview from 'components/failure/overview'
 
-class OverviewDialog extends Component {
+class FailureOverviewDialog extends Component {
   static get propTypes () {
     return {
       onHideOverview: PropTypes.func,
@@ -46,7 +46,7 @@ class OverviewDialog extends Component {
       <Dialog
         modal={false}
         autoScrollBodyContent
-        className='failures/overview-dialog'
+        className='failure-overview-dialog'
         title={this.dialogTitle()}
         open={!!this.props.failure.overviewVisible}
         onRequestClose={() => this.hideOverview()}
@@ -87,4 +87,4 @@ export default connect(
     onHideOverview: hideFailureOverview,
     onShowRetry: showFailureRetry
   }
-)(OverviewDialog)
+)(FailureOverviewDialog)

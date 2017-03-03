@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import SearchInput from 'components/search-input'
-import FailuresList from 'components/failures-list'
+import FailuresList from 'components/failure/list'
 import FailureEvent from 'components/failure/empty'
 
 const middlewares = [ thunk ]

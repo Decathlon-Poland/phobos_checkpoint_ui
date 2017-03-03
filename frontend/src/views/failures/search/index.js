@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import LoadMore from 'components/load-more'
 import EmptyFailure from 'components/failure/empty'
-import FailuresList from 'components/failures-list'
+import FailuresList from 'components/failure/list'
 import SearchInput from 'components/search-input'
 import CircularProgress from 'material-ui/CircularProgress'
 import NavigationCloseIcon from 'material-ui/svg-icons/navigation/close'
