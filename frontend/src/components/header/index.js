@@ -78,6 +78,7 @@ export class Header extends Component {
             <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
           </Link>
           <Menu
+            disableAutoFocus={!false}
             value={this.props.routing.locationBeforeTransitions.pathname}
             listStyle={style.menuInner}>
             <MenuItem
