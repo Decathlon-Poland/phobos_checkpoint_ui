@@ -10,13 +10,13 @@ import MenuItem from 'material-ui/MenuItem'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import { navigateTo } from 'actions/navigation'
-import { red500, green200, grey800 } from 'material-ui/styles/colors'
+import { red500, green200, blueGrey600 } from 'material-ui/styles/colors'
 
 const DEFAULT_TITLE = 'Phobos Checkpoint'
 
 const style = {
   bar: {
-    backgroundColor: grey800
+    backgroundColor: blueGrey600
   },
   title: {
     color: '#fff',
