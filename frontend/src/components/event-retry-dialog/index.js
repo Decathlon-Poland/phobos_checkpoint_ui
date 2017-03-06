@@ -41,6 +41,7 @@ class RetryDialog extends Component {
           <RaisedButton
             primary
             label='Retry'
+            disabled={this.props.isRetryingEvent}
             onClick={() => this.performRetry()}/>
         ]}>
         <div style={{textAlign: 'center'}}>
