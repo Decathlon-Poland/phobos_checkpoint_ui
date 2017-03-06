@@ -6,6 +6,7 @@ import {
   FAILURE_HIDE_RETRY,
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
+  REQUEST_FAILURE_RETRY_FAILED,
   FAILURE_HIDE_OVERVIEW,
   DELETE_FAILURE
 } from 'actions'
@@ -22,23 +23,28 @@ export const hideFailureRetry = (failure) => ({
 
 const requestFailureRetry = (failure) => ({
   type: REQUEST_FAILURE_RETRY,
-  failure: failure
+  failure
 })
 
 const receiveFailureRetry = (failure, data) => ({
   type: RECEIVE_FAILURE_RETRY,
-  failure: failure,
-  acknowledged: data.acknowledged
+  acknowledged: data.acknowledged,
+  failure
 })
 
 const hideFailureOverview = (failure) => ({
   type: FAILURE_HIDE_OVERVIEW,
-  failure: failure
+  failure
 })
 
 const deleteFailure = (failure) => ({
   type: DELETE_FAILURE,
-  failure: failure
+  failure
+})
+
+const requestFailureRetryFailed = (failure) => ({
+  type: REQUEST_FAILURE_RETRY_FAILED,
+  failure
 })
 
 export const performFailureRetry = (failure) => (dispatch, getState) => {
@@ -64,5 +70,6 @@ export const performFailureRetry = (failure) => (dispatch, getState) => {
         text: `Failure retried with error: ${error.message}`,
         autoClose: false
       }))
+      dispatch(requestFailureRetryFailed(failure))
     })
 }

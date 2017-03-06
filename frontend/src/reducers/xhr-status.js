@@ -10,6 +10,7 @@ import {
   LOAD_MORE_FAILURES_SEARCH_RESULTS,
   TRIGGER_FAILURES_SEARCH,
   REQUEST_FAILURE_RETRY,
+  REQUEST_FAILURE_RETRY_FAILED,
   REQUEST_EVENT_RETRY,
   RECEIVE_EVENT_RETRY,
   REQUEST_EVENT_RETRY_FAILED,
@@ -71,6 +72,7 @@ export default (state = initialState, action) => {
       })
 
     case RECEIVE_EVENT_RETRY:
+    case REQUEST_FAILURE_RETRY_FAILED:
     case REQUEST_EVENT_RETRY_FAILED:
       return Object.assign({}, state, {
         isRetryingEvent: false

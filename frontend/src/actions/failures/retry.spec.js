@@ -12,6 +12,7 @@ import {
   FAILURE_HIDE_RETRY,
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
+  REQUEST_FAILURE_RETRY_FAILED,
   ADD_FLASH_MESSAGE,
   FAILURE_HIDE_OVERVIEW,
   DELETE_FAILURE
@@ -136,7 +137,7 @@ describe('actions/failures/retry', () => {
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
       })
 
-      it('create an action to add an error flash message', (done) => {
+      it('creates an action to add an error flash message', (done) => {
         store.dispatch(performFailureRetry(failure)).then(() => {
           const actions = store.getActions()
           expect(actions[2]).toEqual({ type: ADD_FLASH_MESSAGE, message: {
@@ -145,6 +146,15 @@ describe('actions/failures/retry', () => {
             text: 'Failure retried with error: some error',
             autoClose: false
           }})
+          done()
+        })
+        .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
+      })
+
+      it('creates an action to clear the loading status', (done) => {
+        store.dispatch(performFailureRetry(failure)).then(() => {
+          const actions = store.getActions()
+          expect(actions[3]).toEqual({ type: REQUEST_FAILURE_RETRY_FAILED, failure })
           done()
         })
         .catch((e) => done.fail(`test failed with promise error: ${e.message}`))
