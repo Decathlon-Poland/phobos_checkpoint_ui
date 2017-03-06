@@ -49,7 +49,7 @@ class OverviewDialog extends Component {
         bodyStyle={{maxWidth: '1024px'}}
         actions={[
           <RaisedButton
-            secondary
+            primary
             label='Retry'
             onClick={() => this.showRetry()}/>
         ]}>
