@@ -31,7 +31,7 @@ class FailureRetryDialog extends Component {
     return (
       <Dialog
         modal={!!this.props.isRetryingEvent}
-        title='Are you sure?'
+        title={this.renderTitle()}
         open={!!this.props.failure.retryVisible}
         bodyStyle={{maxWidth: '300px'}}
         contentStyle={{maxWidth: '300px'}}
@@ -47,6 +47,13 @@ class FailureRetryDialog extends Component {
         </div>
       </Dialog>
     )
+  }
+
+  renderTitle () {
+    if (this.props.isRetryingEvent) {
+      return 'Retrying failure...'
+    }
+    return 'Are you sure?'
   }
 
   hide () {
