@@ -9,12 +9,17 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
-import { navigateTo } from 'actions/navigation'
-import { blueGrey800, cyan500, grey100, grey500 } from 'material-ui/styles/colors'
-
-const DEFAULT_TITLE = 'Phobos Checkpoint'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import {
+  blueGrey800,
+  cyan500,
+  grey100,
+  grey500
+} from 'material-ui/styles/colors'
+import { navigateTo } from 'actions/navigation'
+
+const DEFAULT_TITLE = 'Phobos Checkpoint'
 const muiTheme = getMuiTheme({
   palette: {
     accent1Color: cyan500
@@ -29,12 +34,15 @@ const style = {
     backgroundColor: blueGrey800
   },
   title: {
-    color: '#fff',
     fontFamily: 'Roboto',
     fontWeight: 'lighter'
   },
   envLabel: {
-    marginLeft: 30
+    marginLeft: 20,
+    backgroundColor: grey500
+  },
+  innerTitle: {
+    marginLeft: 10
   },
   menuInner: {
     display: 'flex'
@@ -70,7 +78,7 @@ export class Header extends Component {
         <div className='header'>
           <Link className='header--title' to='/'>
             {logo && <img className='logo' src={logo} />}
-            <span className='title'>{title || DEFAULT_TITLE}</span>
+            <span className='title' style={style.innerTitle}>{title || DEFAULT_TITLE}</span>
             <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
           </Link>
           <Menu value={this.state.currentTab} listStyle={style.menuInner} onChange={(e, v) => this.menuItemChosen(e, v)}>
