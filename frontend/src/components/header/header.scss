@@ -1,4 +1,9 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header--title {
   display: inline-flex;
   align-items: center;
   text-decoration: none;

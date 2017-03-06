@@ -5,20 +5,18 @@ import AppBar from 'material-ui/AppBar'
 import Chip from 'material-ui/Chip'
 import { Link } from 'react-router'
 
-import IconButton from 'material-ui/IconButton'
-import IconMenu from 'material-ui/IconMenu'
+import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
-import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import { navigateTo } from 'actions/navigation'
-import { red500, green200 } from 'material-ui/styles/colors'
+import { red500, green200, grey800 } from 'material-ui/styles/colors'
 
 const DEFAULT_TITLE = 'Phobos Checkpoint'
 
 const style = {
   bar: {
-    backgroundColor: '#302e3a'
+    backgroundColor: grey800
   },
   title: {
     color: '#fff',
@@ -27,6 +25,14 @@ const style = {
   },
   envLabel: {
     marginLeft: 30
+  },
+  menuInner: {
+    display: 'flex'
+  },
+  menuItem: {
+    color: '#fff',
+    fontFamily: 'Roboto',
+    fontWeight: 'lighter'
   }
 }
 
@@ -38,23 +44,6 @@ export class Header extends Component {
         showMenuIconButton={false}
         style={style.bar}
         titleStyle={style.title}
-        iconElementRight={
-          <IconMenu
-            iconButtonElement={<IconButton><MenuIcon /></IconButton>}
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-            <MenuItem
-              primaryText='Events'
-              leftIcon={<EventsIcon color={green200} />}
-              onTouchTap={() => this.props.navigateTo('/events')}
-            />
-            <MenuItem
-              primaryText='Failures'
-              leftIcon={<FailuresIcon color={red500} />}
-              onTouchTap={() => this.props.navigateTo('/failures')}
-            />
-          </IconMenu>
-        }
       />
     )
   }
@@ -62,11 +51,28 @@ export class Header extends Component {
   logo () {
     const { title, logo, env_label } = configs()
     return (
-      <Link className='header' to='/'>
-        {logo && <img className='logo' src={logo} />}
-        <span className='title'>{title || DEFAULT_TITLE}</span>
-        <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
-      </Link>
+      <div className='header'>
+        <Link className='header--title' to='/'>
+          {logo && <img className='logo' src={logo} />}
+          <span className='title'>{title || DEFAULT_TITLE}</span>
+          <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
+        </Link>
+        <Menu className='header--menu' listStyle={style.menuInner}>
+          <MenuItem
+            focusState='focused'
+            style={style.menuItem}
+            primaryText='Events'
+            leftIcon={<EventsIcon color={green200} />}
+            onTouchTap={() => this.props.navigateTo('/events')}
+          />
+          <MenuItem
+            style={style.menuItem}
+            primaryText='Failures'
+            leftIcon={<FailuresIcon color={red500} />}
+            onTouchTap={() => this.props.navigateTo('/failures')}
+          />
+        </Menu>
+      </div>
     )
   }
 }

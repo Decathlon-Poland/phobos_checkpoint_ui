@@ -1,4 +1,3 @@
-
 import API, { EVENTS_SEARCH_LIMIT, parseResponseError } from 'api'
 import { addFlashMessage } from 'actions/flash-messages'
 import { history } from 'routes'
