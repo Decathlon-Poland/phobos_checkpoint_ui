@@ -15,7 +15,8 @@ import {
   blueGrey800,
   cyan500,
   grey100,
-  grey500
+  grey500,
+  yellowA100
 } from 'material-ui/styles/colors'
 import { navigateTo } from 'actions/navigation'
 
@@ -39,7 +40,7 @@ const style = {
   },
   envLabel: {
     marginLeft: 20,
-    backgroundColor: grey500
+    backgroundColor: yellowA100
   },
   innerTitle: {
     marginLeft: 10
@@ -55,11 +56,6 @@ const style = {
 }
 
 export class Header extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { currentTab: 'events' }
-  }
-
   render () {
     return (
       <AppBar
@@ -81,16 +77,18 @@ export class Header extends Component {
             <span className='title' style={style.innerTitle}>{title || DEFAULT_TITLE}</span>
             <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
           </Link>
-          <Menu value={this.state.currentTab} listStyle={style.menuInner} onChange={(e, v) => this.menuItemChosen(e, v)}>
+          <Menu
+            value={this.props.routing.locationBeforeTransitions.pathname}
+            listStyle={style.menuInner}>
             <MenuItem
-              value='events'
+              value='/events'
               style={style.menuItem}
               primaryText='Events'
               leftIcon={<EventsIcon />}
               onTouchTap={() => this.props.navigateTo('/events')}
             />
             <MenuItem
-              value='failures'
+              value='/failures'
               style={style.menuItem}
               primaryText='Failures'
               leftIcon={<FailuresIcon />}
@@ -100,10 +98,6 @@ export class Header extends Component {
         </div>
       </MuiThemeProvider>
     )
-  }
-
-  menuItemChosen (e, v) {
-    this.setState({ currentTab: v })
   }
 }
 
