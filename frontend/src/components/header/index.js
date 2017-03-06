@@ -10,13 +10,23 @@ import MenuItem from 'material-ui/MenuItem'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import { navigateTo } from 'actions/navigation'
-import { red500, green200, blueGrey600 } from 'material-ui/styles/colors'
+import { blueGrey800, cyan500, grey100, grey500 } from 'material-ui/styles/colors'
 
 const DEFAULT_TITLE = 'Phobos Checkpoint'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: cyan500
+  },
+  ripple: {
+    color: grey100
+  }
+})
 
 const style = {
   bar: {
-    backgroundColor: blueGrey600
+    backgroundColor: blueGrey800
   },
   title: {
     color: '#fff',
@@ -30,13 +40,18 @@ const style = {
     display: 'flex'
   },
   menuItem: {
-    color: '#fff',
+    color: grey500,
     fontFamily: 'Roboto',
     fontWeight: 'lighter'
   }
 }
 
 export class Header extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { currentTab: 'events' }
+  }
+
   render () {
     return (
       <AppBar
@@ -51,29 +66,36 @@ export class Header extends Component {
   logo () {
     const { title, logo, env_label } = configs()
     return (
-      <div className='header'>
-        <Link className='header--title' to='/'>
-          {logo && <img className='logo' src={logo} />}
-          <span className='title'>{title || DEFAULT_TITLE}</span>
-          <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
-        </Link>
-        <Menu className='header--menu' listStyle={style.menuInner}>
-          <MenuItem
-            focusState='focused'
-            style={style.menuItem}
-            primaryText='Events'
-            leftIcon={<EventsIcon color={green200} />}
-            onTouchTap={() => this.props.navigateTo('/events')}
-          />
-          <MenuItem
-            style={style.menuItem}
-            primaryText='Failures'
-            leftIcon={<FailuresIcon color={red500} />}
-            onTouchTap={() => this.props.navigateTo('/failures')}
-          />
-        </Menu>
-      </div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div className='header'>
+          <Link className='header--title' to='/'>
+            {logo && <img className='logo' src={logo} />}
+            <span className='title'>{title || DEFAULT_TITLE}</span>
+            <Chip className='env-label' style={style.envLabel}>{env_label}</Chip>
+          </Link>
+          <Menu value={this.state.currentTab} listStyle={style.menuInner} onChange={(e, v) => this.menuItemChosen(e, v)}>
+            <MenuItem
+              value='events'
+              style={style.menuItem}
+              primaryText='Events'
+              leftIcon={<EventsIcon />}
+              onTouchTap={() => this.props.navigateTo('/events')}
+            />
+            <MenuItem
+              value='failures'
+              style={style.menuItem}
+              primaryText='Failures'
+              leftIcon={<FailuresIcon />}
+              onTouchTap={() => this.props.navigateTo('/failures')}
+            />
+          </Menu>
+        </div>
+      </MuiThemeProvider>
     )
+  }
+
+  menuItemChosen (e, v) {
+    this.setState({ currentTab: v })
   }
 }
 

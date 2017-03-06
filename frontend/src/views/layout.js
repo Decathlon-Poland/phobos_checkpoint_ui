@@ -7,12 +7,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Header from 'components/header'
 import FlashMessageList from 'components/flash-message-list'
 
-const theme = getMuiTheme(lightBaseTheme)
+const importedTheme = getMuiTheme(lightBaseTheme)
 
 export default class extends Component {
   render () {
     return (
-      <MuiThemeProvider muiTheme={theme}>
+      <MuiThemeProvider muiTheme={importedTheme}>
         <div className='layout'>
           <Header />
           <FlashMessageList />
