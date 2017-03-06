@@ -1,24 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
 
 import { showFailureOverview } from 'actions/failures/overview'
-import style from 'components/event/style'
+import cardStyle, {
+  formatTime,
+  formattedEventType
+} from 'components/event/card-style'
 
 import { Card, CardHeader, CardTitle } from 'material-ui/Card'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import FailureOverviewDialog from 'components/failure/overview-dialog'
 import FailureRetryDialog from 'components/failure/retry-dialog'
 import { red500 } from 'material-ui/styles/colors'
-
-const TIME_FORMAT = 'h:mm:ss a'
-const EMPTY_TYPE = '<no type>'
-
-export function formatTime (time) {
-  if (!time) return null
-  const timeDate = new Date(time)
-  return moment(timeDate).format(TIME_FORMAT)
-}
 
 export class Failure extends Component {
   static get propTypes () {
@@ -53,18 +46,17 @@ export class Failure extends Component {
     return (
       <Card
         className='failure'
-        style={style.card}
+        style={cardStyle.card}
         onClick={() => this.showOverview()}>
         <CardHeader
           className='failure-header'
           avatar={<FailuresIcon className='failure-icon' color={red500} />}
-          titleStyle={style.cardHeader.title}
-          subtitleStyle={style.cardHeader.subtitle}
+          titleStyle={cardStyle.cardHeader.title}
           title={formatTime(this.props.failure.event_time)}
           subtitle={this.props.failure.topic}/>
         <CardTitle
-          titleStyle={style.cardTitle}
-          title={this.formattedEventType()}/>
+          titleStyle={cardStyle.cardTitle}
+          title={formattedEventType(this.props.failure.event_type)}/>
         <FailureOverviewDialog failure={this.props.failure} />
         <FailureRetryDialog failure={this.props.failure} />
       </Card>
@@ -73,10 +65,6 @@ export class Failure extends Component {
 
   showOverview () {
     this.props.onShowOverview(this.props.failure)
-  }
-
-  formattedEventType () {
-    return this.props.failure.event_type || EMPTY_TYPE
   }
 }
 
