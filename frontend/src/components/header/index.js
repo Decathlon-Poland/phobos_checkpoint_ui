@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import configs from 'configs'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
@@ -17,6 +17,18 @@ import { style, theme } from 'components/header/style'
 const DEFAULT_TITLE = 'Phobos Checkpoint'
 
 export class Header extends Component {
+  static get propTypes () {
+    return {
+      navigateTo: PropTypes.func.isRequired,
+
+      routing: PropTypes.shape({
+        locationBeforeTransitions: PropTypes.shape({
+          pathname: PropTypes.string
+        }).isRequired
+      }).isRequired
+    }
+  }
+
   render () {
     return (
       <AppBar
