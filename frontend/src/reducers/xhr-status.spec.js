@@ -10,6 +10,7 @@ import {
   REQUEST_FAILURES_SEARCH_RESULTS_FAILED,
   LOAD_MORE_FAILURES_SEARCH_RESULTS,
   REQUEST_FAILURE_RETRY,
+  RECEIVE_FAILURE_RETRY,
   REQUEST_FAILURE_RETRY_FAILED,
   REQUEST_EVENT_RETRY,
   RECEIVE_EVENT_RETRY,
@@ -131,6 +132,15 @@ describe('reducers/xhr-status', () => {
     it('disables isRetryingEvent', () => {
       const currentState = { isRetryingEvent: true }
       const action = { type: RECEIVE_EVENT_RETRY }
+      const expectedState = { isRetryingEvent: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for RECEIVE_FAILURE_RETRY', () => {
+    it('disables isRetryingEvent', () => {
+      const currentState = { isRetryingEvent: true }
+      const action = { type: RECEIVE_FAILURE_RETRY }
       const expectedState = { isRetryingEvent: false }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })

@@ -11,7 +11,7 @@ import {
 function patchEvent (state, action, params) {
   return state.map((event) => {
     if (event.id === action.event.id) {
-      return Object.assign({}, event, params)
+      return { ...event, ...params }
     }
     return event
   })
