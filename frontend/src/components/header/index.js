@@ -1,59 +1,20 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import configs from 'configs'
-import AppBar from 'material-ui/AppBar'
-import Chip from 'material-ui/Chip'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
+import Chip from 'material-ui/Chip'
 import Menu from 'material-ui/Menu'
+import AppBar from 'material-ui/AppBar'
 import MenuItem from 'material-ui/MenuItem'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import {
-  blueGrey800,
-  cyan500,
-  grey100,
-  grey500,
-  yellowA100
-} from 'material-ui/styles/colors'
+
 import { navigateTo } from 'actions/navigation'
+import { style, theme } from 'components/header/style'
 
 const DEFAULT_TITLE = 'Phobos Checkpoint'
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: cyan500
-  },
-  ripple: {
-    color: grey100
-  }
-})
-
-const style = {
-  bar: {
-    backgroundColor: blueGrey800
-  },
-  title: {
-    fontFamily: 'Roboto',
-    fontWeight: 'lighter'
-  },
-  envLabel: {
-    marginLeft: 20,
-    backgroundColor: yellowA100
-  },
-  innerTitle: {
-    marginLeft: 10
-  },
-  menuInner: {
-    display: 'flex'
-  },
-  menuItem: {
-    color: grey500,
-    fontFamily: 'Roboto',
-    fontWeight: 'lighter'
-  }
-}
 
 export class Header extends Component {
   render () {
@@ -70,7 +31,7 @@ export class Header extends Component {
   logo () {
     const { title, logo, env_label } = configs()
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider muiTheme={theme}>
         <div className='header'>
           <Link className='header--title' to='/'>
             {logo && <img className='logo' src={logo} />}
