@@ -50,7 +50,7 @@ export default class extends Component {
           <JSONPretty className='json-pretty' json={this.props.metadata} />
         </Attribute>
         <Attribute label='Error Class' value={this.props.error_class} />
-        <Attribute label='Error Message' value={this.props.error_class} />
+        <Attribute label='Error Message' value={this.props.error_message} />
         <Attribute label='Backtrace'>
           <JSONPretty className='json-pretty' json={this.props.error_backtrace} />
         </Attribute>

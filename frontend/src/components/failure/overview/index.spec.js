@@ -64,8 +64,26 @@ describe('<FailureOverview />', () => {
     expect(component.text()).toMatch(props.checksum)
   })
 
+  it('displays error_class', () => {
+    expect(component.text()).toMatch(props.error_class)
+  })
+
+  it('displays error_message', () => {
+    expect(component.text()).toMatch(props.error_message)
+  })
+
+  it('displays error_backtrace', () => {
+    const errorBacktraceFormatted = JSON.stringify(props.error_backtrace, null, '  ')
+    expect(component.text()).toMatch(errorBacktraceFormatted)
+  })
+
   it('displays payload', () => {
     const payloadFormatted = JSON.stringify(props.payload, null, '  ')
     expect(component.text()).toMatch(payloadFormatted)
+  })
+
+  it('displays metadata', () => {
+    const metadataFormatted = JSON.stringify(props.metadata, null, '  ')
+    expect(component.text()).toMatch(metadataFormatted)
   })
 })
