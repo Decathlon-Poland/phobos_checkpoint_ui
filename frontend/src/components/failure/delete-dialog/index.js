@@ -40,9 +40,9 @@ class FailureDeleteDialog extends Component {
         actions={[
           <RaisedButton
             primary
-            label='Retry'
+            label='Delete'
             disabled={this.props.isRetryingEvent}
-            onClick={() => this.performRetry()}/>
+            onClick={() => this.performDelete()}/>
         ]}>
         <div style={{textAlign: 'center'}}>
           <Loading visible={this.props.isRetryingEvent}/>
@@ -53,7 +53,7 @@ class FailureDeleteDialog extends Component {
 
   renderTitle () {
     if (this.props.isRetryingEvent) {
-      return 'Retrying failure...'
+      return 'Deleting failure...'
     }
     return 'Are you sure?'
   }
@@ -62,7 +62,7 @@ class FailureDeleteDialog extends Component {
     this.props.onHideDelete(this.props.failure)
   }
 
-  performRetry () {
+  performDelete () {
     this.props.onPerformDelete(this.props.failure)
   }
 }

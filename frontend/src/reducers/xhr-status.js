@@ -12,6 +12,9 @@ import {
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
   REQUEST_FAILURE_RETRY_FAILED,
+  REQUEST_FAILURE_DELETE,
+  RECEIVE_FAILURE_DELETE,
+  REQUEST_FAILURE_DELETE_FAILED,
   REQUEST_EVENT_RETRY,
   RECEIVE_EVENT_RETRY,
   REQUEST_EVENT_RETRY_FAILED,
@@ -66,14 +69,17 @@ export default (state = initialState, action) => {
         currentEventsOffset: action.offset
       }
 
+    case REQUEST_FAILURE_DELETE:
     case REQUEST_FAILURE_RETRY:
     case REQUEST_EVENT_RETRY:
       return {...state,
         isRetryingEvent: true
       }
 
+    case RECEIVE_FAILURE_DELETE:
     case RECEIVE_EVENT_RETRY:
     case RECEIVE_FAILURE_RETRY:
+    case REQUEST_FAILURE_DELETE_FAILED:
     case REQUEST_FAILURE_RETRY_FAILED:
     case REQUEST_EVENT_RETRY_FAILED:
       return {...state,

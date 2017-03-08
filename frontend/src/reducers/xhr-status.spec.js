@@ -12,6 +12,9 @@ import {
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
   REQUEST_FAILURE_RETRY_FAILED,
+  REQUEST_FAILURE_DELETE,
+  RECEIVE_FAILURE_DELETE,
+  REQUEST_FAILURE_DELETE_FAILED,
   REQUEST_EVENT_RETRY,
   RECEIVE_EVENT_RETRY,
   REQUEST_EVENT_RETRY_FAILED
@@ -128,6 +131,15 @@ describe('reducers/xhr-status', () => {
     })
   })
 
+  describe('for REQUEST_FAILURE_DELETE', () => {
+    it('enables isRetryingEvent', () => {
+      const currentState = { isRetryingEvent: false }
+      const action = { type: REQUEST_FAILURE_DELETE }
+      const expectedState = { isRetryingEvent: true }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
   describe('for RECEIVE_EVENT_RETRY', () => {
     it('disables isRetryingEvent', () => {
       const currentState = { isRetryingEvent: true }
@@ -146,6 +158,15 @@ describe('reducers/xhr-status', () => {
     })
   })
 
+  describe('for RECEIVE_FAILURE_DELETE', () => {
+    it('disables isRetryingEvent', () => {
+      const currentState = { isRetryingEvent: true }
+      const action = { type: RECEIVE_FAILURE_DELETE }
+      const expectedState = { isRetryingEvent: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
   describe('for REQUEST_EVENT_RETRY_FAILED', () => {
     it('disables isRetryingEvent', () => {
       const currentState = { isRetryingEvent: true }
@@ -159,6 +180,15 @@ describe('reducers/xhr-status', () => {
     it('disables isRetryingEvent', () => {
       const currentState = { isRetryingEvent: true }
       const action = { type: REQUEST_FAILURE_RETRY_FAILED }
+      const expectedState = { isRetryingEvent: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for REQUEST_FAILURE_DELETE_FAILED', () => {
+    it('disables isRetryingEvent', () => {
+      const currentState = { isRetryingEvent: true }
+      const action = { type: REQUEST_FAILURE_DELETE_FAILED }
       const expectedState = { isRetryingEvent: false }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
