@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 
 import { hideFailureOverview } from 'actions/failures/overview'
 import { showFailureRetry } from 'actions/failures/retry'
+import { showFailureDelete } from 'actions/failures/delete'
 
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -14,6 +15,8 @@ class FailureOverviewDialog extends Component {
     return {
       onHideOverview: PropTypes.func,
       onShowRetry: PropTypes.func,
+      onShowDelete: PropTypes.func,
+
       failure: PropTypes.shape({
         id: PropTypes.number,
         created_at: PropTypes.string,
@@ -56,7 +59,11 @@ class FailureOverviewDialog extends Component {
           <RaisedButton
             primary
             label='Retry'
-            onClick={() => this.showRetry()}/>
+            onClick={() => this.showRetry()}/>,
+          <RaisedButton
+            secondary
+            label='Delete'
+            onClick={() => this.showDelete()}/>
         ]}>
         <FailureOverview {...this.props.failure} />
       </Dialog>
@@ -69,6 +76,10 @@ class FailureOverviewDialog extends Component {
 
   showRetry () {
     this.props.onShowRetry(this.props.failure)
+  }
+
+  showDelete () {
+    this.props.onShowDelete(this.props.failure)
   }
 
   dialogTitle () {
@@ -85,6 +96,7 @@ class FailureOverviewDialog extends Component {
 export default connect(
   (state, ownProps) => ownProps, {
     onHideOverview: hideFailureOverview,
-    onShowRetry: showFailureRetry
+    onShowRetry: showFailureRetry,
+    onShowDelete: showFailureDelete
   }
 )(FailureOverviewDialog)
