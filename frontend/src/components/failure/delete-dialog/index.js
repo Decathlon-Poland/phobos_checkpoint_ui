@@ -13,8 +13,8 @@ class FailureDeleteDialog extends Component {
     return {
       onHideDelete: PropTypes.func.isRequired,
       onPerformDelete: PropTypes.func.isRequired,
+      isDeletingFailure: PropTypes.bool.isRequired,
 
-      isRetryingEvent: PropTypes.bool,
       failure: PropTypes.shape({
         id: PropTypes.number,
         deleteVisible: PropTypes.bool
@@ -24,6 +24,7 @@ class FailureDeleteDialog extends Component {
 
   static get defaultProps () {
     return {
+      isDeletingFailure: false,
       failure: {}
     }
   }
@@ -31,7 +32,7 @@ class FailureDeleteDialog extends Component {
   render () {
     return (
       <Dialog
-        modal={!!this.props.isRetryingEvent}
+        modal={!!this.props.isDeletingFailure}
         title={this.renderTitle()}
         open={!!this.props.failure.deleteVisible}
         bodyStyle={{maxWidth: '300px'}}
@@ -41,18 +42,18 @@ class FailureDeleteDialog extends Component {
           <RaisedButton
             primary
             label='Delete'
-            disabled={this.props.isRetryingEvent}
+            disabled={this.props.isDeletingFailure}
             onClick={() => this.performDelete()}/>
         ]}>
         <div style={{textAlign: 'center'}}>
-          <Loading visible={this.props.isRetryingEvent}/>
+          <Loading visible={this.props.isDeletingFailure}/>
         </div>
       </Dialog>
     )
   }
 
   renderTitle () {
-    if (this.props.isRetryingEvent) {
+    if (this.props.isDeletingFailure) {
       return 'Deleting failure...'
     }
     return 'Are you sure?'
@@ -69,7 +70,7 @@ class FailureDeleteDialog extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  isRetryingEvent: state.xhrStatus.isRetryingEvent
+  isDeletingFailure: state.xhrStatus.isDeletingFailure
 })
 
 export default connect(mapStateToProps, {

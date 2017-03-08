@@ -6,6 +6,8 @@ describe('reducers', () => {
       xhrStatus: {
         isFetchingEvents: false,
         isRetryingEvent: false,
+        isRetryingFailure: false,
+        isDeletingFailure: false,
         isFetchingEventDetails: false,
         currentEventsOffset: 0,
         lastEventsLoadSize: 0

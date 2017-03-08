@@ -18,6 +18,7 @@ export class Failure extends Component {
   static get propTypes () {
     return {
       onShowOverview: PropTypes.func,
+
       failure: PropTypes.shape({
         id: PropTypes.number,
         created_at: PropTypes.string,

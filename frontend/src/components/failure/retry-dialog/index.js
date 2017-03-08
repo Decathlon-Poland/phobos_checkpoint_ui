@@ -13,7 +13,8 @@ class FailureRetryDialog extends Component {
     return {
       onHideRetry: PropTypes.func.isRequired,
       onPerformRetry: PropTypes.func.isRequired,
-      isRetryingEvent: PropTypes.bool,
+      isRetryingFailure: PropTypes.bool.isRequired,
+
       failure: PropTypes.shape({
         id: PropTypes.number,
         retryVisible: PropTypes.bool
@@ -23,6 +24,7 @@ class FailureRetryDialog extends Component {
 
   static get defaultProps () {
     return {
+      isRetryingFailure: false,
       failure: {}
     }
   }
@@ -30,7 +32,7 @@ class FailureRetryDialog extends Component {
   render () {
     return (
       <Dialog
-        modal={!!this.props.isRetryingEvent}
+        modal={!!this.props.isRetryingFailure}
         title={this.renderTitle()}
         open={!!this.props.failure.retryVisible}
         bodyStyle={{maxWidth: '300px'}}
@@ -40,18 +42,18 @@ class FailureRetryDialog extends Component {
           <RaisedButton
             primary
             label='Retry'
-            disabled={this.props.isRetryingEvent}
+            disabled={this.props.isRetryingFailure}
             onClick={() => this.performRetry()}/>
         ]}>
         <div style={{textAlign: 'center'}}>
-          <Loading visible={this.props.isRetryingEvent}/>
+          <Loading visible={this.props.isRetryingFailure}/>
         </div>
       </Dialog>
     )
   }
 
   renderTitle () {
-    if (this.props.isRetryingEvent) {
+    if (this.props.isRetryingFailure) {
       return 'Retrying failure...'
     }
     return 'Are you sure?'
@@ -68,7 +70,7 @@ class FailureRetryDialog extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  isRetryingEvent: state.xhrStatus.isRetryingEvent
+  isRetryingFailure: state.xhrStatus.isRetryingFailure
 })
 
 export default connect(mapStateToProps, {
