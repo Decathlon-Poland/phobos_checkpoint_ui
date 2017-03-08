@@ -5,6 +5,9 @@ import {
   FAILURE_SHOW_RETRY,
   FAILURE_HIDE_RETRY,
   RECEIVE_FAILURE_RETRY,
+  FAILURE_SHOW_DELETE,
+  FAILURE_HIDE_DELETE,
+  RECEIVE_FAILURE_DELETE,
   DELETE_FAILURE
 } from 'actions'
 
@@ -37,6 +40,15 @@ export default (state = [], action) => {
       return patchFailure(state, action, { retryVisible: false, error: null })
 
     case RECEIVE_FAILURE_RETRY:
+      return patchFailure(state, action, { acknowledged: action.acknowledged, error: null })
+
+    case FAILURE_SHOW_DELETE:
+      return patchFailure(state, action, { deleteVisible: true })
+
+    case FAILURE_HIDE_DELETE:
+      return patchFailure(state, action, { deleteVisible: false, error: null })
+
+    case RECEIVE_FAILURE_DELETE:
       return patchFailure(state, action, { acknowledged: action.acknowledged, error: null })
 
     case DELETE_FAILURE:
