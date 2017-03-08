@@ -3,7 +3,7 @@ import moment from 'moment'
 import JSONPretty from 'react-json-pretty'
 import 'react-json-pretty/src/JSONPretty.monikai.css'
 
-import Attribute from 'components/event-overview/attribute'
+import Attribute from 'components/attribute'
 
 const EVENT_TIME_FORMAT = 'MMMM Do YYYY, h:mm:ss a'
 

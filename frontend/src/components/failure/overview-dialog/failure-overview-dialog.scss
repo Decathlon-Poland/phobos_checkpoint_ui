@@ -1,0 +1,15 @@
+.failure-overview-dialog {
+  .dialog-title {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.87);
+
+    &:active,
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover {
+      color: #666;
+    }
+  }
+}

@@ -6,8 +6,6 @@ import {
   changeSearchInputFilterValue
 } from 'actions/search-input-filter'
 
-import { triggerSearch } from 'actions/events-search'
-
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
@@ -28,11 +26,11 @@ const FILTER_TYPES = [
 export class SearchInput extends Component {
   static get propTypes () {
     return {
-      onSearch: PropTypes.func,
       onChangeFilterType: PropTypes.func,
       onChangeFilterValue: PropTypes.func,
       isFetchingEvents: PropTypes.bool,
 
+      triggerSearch: PropTypes.func.isRequired,
       filterType: PropTypes.string,
       filterValue: PropTypes.string
     }
@@ -80,7 +78,7 @@ export class SearchInput extends Component {
 
   search (e) {
     if (e && e.keyCode === ENTER_KEY || !e) {
-      this.props.onSearch()
+      this.props.triggerSearch()
     }
   }
 
@@ -98,7 +96,6 @@ const mapStateToProps = (state, ownProps) => (
 )
 
 export default connect(mapStateToProps, {
-  onSearch: triggerSearch,
   onChangeFilterType: changeSearchInputFilterType,
   onChangeFilterValue: changeSearchInputFilterValue
 })(SearchInput)

@@ -31,12 +31,10 @@ export const fetchEventDetails = (event) => (dispatch, getState) => {
     .then((response) => dispatch(receiveEventDetails(response.data)))
     .catch((response) => {
       const error = parseResponseError(response)
-      return Promise
-        .resolve()
-        .then(() => dispatch(requestEventDetailsFailed(event, error.message)))
-        .then(() => dispatch(addFlashMessage({
-          type: 'error',
-          text: error.message
-        })))
+      dispatch(requestEventDetailsFailed(event, error.message))
+      dispatch(addFlashMessage({
+        type: 'error',
+        text: error.message
+      }))
     })
 }

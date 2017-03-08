@@ -41,6 +41,17 @@ export default Mappersmith.forge({
         path: '/api/v1/events',
         params: { limit: EVENTS_SEARCH_LIMIT }
       }
+    },
+    Failure: {
+      findById: '/api/v1/failures/{id}',
+      retry: {
+        path: '/api/v1/failures/{id}/retry',
+        method: 'POST'
+      },
+      search: {
+        path: '/api/v1/failures',
+        params: { limit: EVENTS_SEARCH_LIMIT }
+      }
     }
   }
 })

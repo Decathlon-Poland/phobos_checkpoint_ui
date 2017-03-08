@@ -6,10 +6,10 @@ const initialState = { type: DEFAULT_FILTER_TYPE }
 export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_INPUT_CHANGE_FILTER_TYPE:
-      return Object.assign({}, state, { type: action.filterType })
+      return { ...state, type: action.filterType }
 
     case SEARCH_INPUT_CHANGE_FILTER_VALUE:
-      return Object.assign({}, state, { value: action.filterValue })
+      return { ...state, value: action.filterValue }
 
     default:
       return state

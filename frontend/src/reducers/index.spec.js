@@ -13,7 +13,9 @@ describe('reducers', () => {
       flashMessages: [],
       eventsFilters: { type: 'entity_id' },
       eventDetails: {},
+      failureDetails: {},
       events: [],
+      failures: [],
       routing: { locationBeforeTransitions: null }
     })
   })

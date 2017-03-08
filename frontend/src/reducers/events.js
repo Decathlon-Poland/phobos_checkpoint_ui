@@ -1,7 +1,7 @@
 import {
   EVENT_SHOW_OVERVIEW,
   EVENT_HIDE_OVERVIEW,
-  RECEIVE_SEARCH_RESULTS,
+  RECEIVE_EVENTS_SEARCH_RESULTS,
   EVENT_SHOW_RETRY,
   EVENT_HIDE_RETRY,
   RECEIVE_EVENT_RETRY,
@@ -11,7 +11,7 @@ import {
 function patchEvent (state, action, params) {
   return state.map((event) => {
     if (event.id === action.event.id) {
-      return Object.assign({}, event, params)
+      return { ...event, ...params }
     }
     return event
   })
@@ -25,7 +25,7 @@ export default (state = [], action) => {
     case EVENT_HIDE_OVERVIEW:
       return patchEvent(state, action, { overviewVisible: false, error: null })
 
-    case RECEIVE_SEARCH_RESULTS:
+    case RECEIVE_EVENTS_SEARCH_RESULTS:
       return action.offset <= 0
         ? action.events
         : state.concat(action.events)

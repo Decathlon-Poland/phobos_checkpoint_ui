@@ -41,15 +41,13 @@ export const performEventRetry = (event) => (dispatch, getState) => {
   return API.Event
     .retry({id: event.id})
     .then((response) => {
-      return Promise
-        .resolve()
-        .then(() => dispatch(receiveEventRetry(event, response.data)))
-        .then(() => dispatch(hideEventRetry(event)))
-        .then(() => dispatch(addFlashMessage({
-          type: 'success',
-          text: `Event retried with success. Acknowledged: ${response.data.acknowledged}`,
-          autoClose: true
-        })))
+      dispatch(receiveEventRetry(event, response.data))
+      dispatch(hideEventRetry(event))
+      dispatch(addFlashMessage({
+        type: 'success',
+        text: `Event retried with success. Acknowledged: ${response.data.acknowledged}`,
+        autoClose: true
+      }))
     })
     .catch((response) => {
       const error = parseResponseError(response)

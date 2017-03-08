@@ -4,8 +4,10 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 import store from 'store'
 import Layout from 'views/layout'
-import EventsSearch from 'views/events-search'
-import EventDetails from 'views/event-details'
+import EventsSearch from 'views/events/search'
+import EventDetails from 'views/events/details'
+import FailuresSearch from 'views/failures/search'
+import FailureDetails from 'views/failures/details'
 
 export const history = syncHistoryWithStore(browserHistory, store)
 
@@ -15,6 +17,8 @@ export default (
       <IndexRedirect to='/events' />
       <Route path='/events' component={EventsSearch} />
       <Route path='/events/:id' component={EventDetails} />
+      <Route path='/failures' component={FailuresSearch} />
+      <Route path='/failures/:id' component={FailureDetails} />
     </Route>
   </Router>
 )
