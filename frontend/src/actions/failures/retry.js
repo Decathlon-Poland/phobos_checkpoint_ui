@@ -1,5 +1,6 @@
 import API, { parseResponseError } from 'api'
 import { addFlashMessage } from 'actions/flash-messages'
+import { deleteFailure } from 'actions/failures'
 
 import {
   FAILURE_SHOW_RETRY,
@@ -7,8 +8,7 @@ import {
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
   REQUEST_FAILURE_RETRY_FAILED,
-  FAILURE_HIDE_OVERVIEW,
-  DELETE_FAILURE
+  FAILURE_HIDE_OVERVIEW
 } from 'actions'
 
 export const showFailureRetry = (failure) => ({
@@ -34,11 +34,6 @@ const receiveFailureRetry = (failure, data) => ({
 
 const hideFailureOverview = (failure) => ({
   type: FAILURE_HIDE_OVERVIEW,
-  failure
-})
-
-const deleteFailure = (failure) => ({
-  type: DELETE_FAILURE,
   failure
 })
 
