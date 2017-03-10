@@ -5,6 +5,9 @@ import {
   FAILURE_SHOW_RETRY,
   FAILURE_HIDE_RETRY,
   RECEIVE_FAILURE_RETRY,
+  FAILURE_SHOW_DELETE,
+  FAILURE_HIDE_DELETE,
+  RECEIVE_FAILURE_DELETE,
   DELETE_FAILURE
 } from 'actions'
 
@@ -68,9 +71,36 @@ describe('reducers/failures', () => {
   })
 
   describe('for RECEIVE_FAILURE_RETRY', () => {
-    it('sets acknowledged and erase errors for a specific', () => {
+    it('sets acknowledged and erase errors for a specific failure', () => {
       const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
       const action = { type: RECEIVE_FAILURE_RETRY, failure: { id: 2 }, acknowledged: true }
+      const expectedState = [{ id: 1 }, { id: 2, acknowledged: true, error: null }, { id: 3 }]
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for FAILURE_SHOW_DELETE', () => {
+    it('sets deleteVisible for the specific event to true', () => {
+      const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
+      const action = { type: FAILURE_SHOW_DELETE, failure: { id: 2 } }
+      const expectedState = [{ id: 1 }, { id: 2, deleteVisible: true }, { id: 3 }]
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for FAILURE_HIDE_DELETE', () => {
+    it('sets deleteVisible to false and erase errors for a specific', () => {
+      const currentState = [{ id: 1 }, { id: 2, deleteVisible: true }, { id: 3 }]
+      const action = { type: FAILURE_HIDE_DELETE, failure: { id: 2 } }
+      const expectedState = [{ id: 1 }, { id: 2, deleteVisible: false, error: null }, { id: 3 }]
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for RECEIVE_FAILURE_DELETE', () => {
+    it('sets acknowledged and erase errors for a specific failure', () => {
+      const currentState = [{ id: 1 }, { id: 2 }, { id: 3 }]
+      const action = { type: RECEIVE_FAILURE_DELETE, failure: { id: 2 }, acknowledged: true }
       const expectedState = [{ id: 1 }, { id: 2, acknowledged: true, error: null }, { id: 3 }]
       expect(reducer(currentState, action)).toEqual(expectedState)
     })

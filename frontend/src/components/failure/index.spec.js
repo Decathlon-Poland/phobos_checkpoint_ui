@@ -27,7 +27,7 @@ describe('<Failure />', () => {
     jasmineEnzyme()
     store = mockStore({
       xhrStatus: {
-        isRetryingEvent: false
+        isRetryingEvent: false, isRetryingFailure: false, isDeletingFailure: false
       }
     })
 
@@ -35,6 +35,7 @@ describe('<Failure />', () => {
 
     props = {
       onShowOverview: onShowOverview,
+
       failure: {
         id: 1,
         topic: 'phobos.test',

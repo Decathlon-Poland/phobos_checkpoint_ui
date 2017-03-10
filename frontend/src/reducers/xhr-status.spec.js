@@ -12,6 +12,9 @@ import {
   REQUEST_FAILURE_RETRY,
   RECEIVE_FAILURE_RETRY,
   REQUEST_FAILURE_RETRY_FAILED,
+  REQUEST_FAILURE_DELETE,
+  RECEIVE_FAILURE_DELETE,
+  REQUEST_FAILURE_DELETE_FAILED,
   REQUEST_EVENT_RETRY,
   RECEIVE_EVENT_RETRY,
   REQUEST_EVENT_RETRY_FAILED
@@ -120,10 +123,19 @@ describe('reducers/xhr-status', () => {
   })
 
   describe('for REQUEST_FAILURE_RETRY', () => {
-    it('enables isRetryingEvent', () => {
-      const currentState = { isRetryingEvent: false }
+    it('enables isRetryingFailure', () => {
+      const currentState = { isRetryingFailure: false }
       const action = { type: REQUEST_FAILURE_RETRY }
-      const expectedState = { isRetryingEvent: true }
+      const expectedState = { isRetryingFailure: true }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for REQUEST_FAILURE_DELETE', () => {
+    it('enables isDeletingFailure', () => {
+      const currentState = { isDeletingFailure: false }
+      const action = { type: REQUEST_FAILURE_DELETE }
+      const expectedState = { isDeletingFailure: true }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })
@@ -138,10 +150,19 @@ describe('reducers/xhr-status', () => {
   })
 
   describe('for RECEIVE_FAILURE_RETRY', () => {
-    it('disables isRetryingEvent', () => {
-      const currentState = { isRetryingEvent: true }
+    it('disables isRetryingFailure', () => {
+      const currentState = { isRetryingFailure: true }
       const action = { type: RECEIVE_FAILURE_RETRY }
-      const expectedState = { isRetryingEvent: false }
+      const expectedState = { isRetryingFailure: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for RECEIVE_FAILURE_DELETE', () => {
+    it('disables isDeletingFailure', () => {
+      const currentState = { isDeletingFailure: true }
+      const action = { type: RECEIVE_FAILURE_DELETE }
+      const expectedState = { isDeletingFailure: false }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })
@@ -156,10 +177,19 @@ describe('reducers/xhr-status', () => {
   })
 
   describe('for REQUEST_FAILURE_RETRY_FAILED', () => {
-    it('disables isRetryingEvent', () => {
-      const currentState = { isRetryingEvent: true }
+    it('disables isRetryingFailure', () => {
+      const currentState = { isRetryingFailure: true }
       const action = { type: REQUEST_FAILURE_RETRY_FAILED }
-      const expectedState = { isRetryingEvent: false }
+      const expectedState = { isRetryingFailure: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for REQUEST_FAILURE_DELETE_FAILED', () => {
+    it('disables isDeletingFailure', () => {
+      const currentState = { isDeletingFailure: true }
+      const action = { type: REQUEST_FAILURE_DELETE_FAILED }
+      const expectedState = { isDeletingFailure: false }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })

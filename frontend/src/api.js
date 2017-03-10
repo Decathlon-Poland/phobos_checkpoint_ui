@@ -48,6 +48,10 @@ export default Mappersmith.forge({
         path: '/api/v1/failures/{id}/retry',
         method: 'POST'
       },
+      delete: {
+        path: '/api/v1/failures/{id}',
+        method: 'DELETE'
+      },
       search: {
         path: '/api/v1/failures',
         params: { limit: EVENTS_SEARCH_LIMIT }

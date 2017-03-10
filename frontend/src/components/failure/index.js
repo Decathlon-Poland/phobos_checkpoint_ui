@@ -11,12 +11,14 @@ import { Card, CardHeader, CardTitle } from 'material-ui/Card'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import FailureOverviewDialog from 'components/failure/overview-dialog'
 import FailureRetryDialog from 'components/failure/retry-dialog'
+import FailureDeleteDialog from 'components/failure/delete-dialog'
 import { red500 } from 'material-ui/styles/colors'
 
 export class Failure extends Component {
   static get propTypes () {
     return {
       onShowOverview: PropTypes.func,
+
       failure: PropTypes.shape({
         id: PropTypes.number,
         created_at: PropTypes.string,
@@ -59,6 +61,7 @@ export class Failure extends Component {
           title={formattedEventType(this.props.failure.event_type)}/>
         <FailureOverviewDialog failure={this.props.failure} />
         <FailureRetryDialog failure={this.props.failure} />
+        <FailureDeleteDialog failure={this.props.failure} />
       </Card>
     )
   }
