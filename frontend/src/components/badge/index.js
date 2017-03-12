@@ -5,14 +5,19 @@ import CircularProgress from 'material-ui/CircularProgress'
 export default class Badge extends Component {
   static get propTypes () {
     return {
-      text: PropTypes.string.isRequired,
+      classCondition: PropTypes.bool,
+      text: PropTypes.number,
       loading: PropTypes.bool.isRequired
     }
   }
 
   render () {
+    let badgeClass = this.props.classCondition
+      ? 'success'
+      : 'warning'
+
     return (
-      <div className='badge'>
+      <div className={`badge badge--${badgeClass}`}>
         {this.renderContent()}
       </div>
     )

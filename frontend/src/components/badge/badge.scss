@@ -1,5 +1,18 @@
 .badge {
-  font-size: 30px;
-  font-weight: lighter;
+  font-size: 75px;
   font-family: Roboto;
+  border-radius: 75px;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 150px;
+
+  &--success {
+    background: #66BB6A;
+  }
+
+  &--warning {
+    background: #FFA726;
+  }
 }
