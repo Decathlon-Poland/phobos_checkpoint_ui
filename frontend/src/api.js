@@ -43,6 +43,7 @@ export default Mappersmith.forge({
       }
     },
     Failure: {
+      count: '/api/v1/failures/count',
       findById: '/api/v1/failures/{id}',
       retry: {
         path: '/api/v1/failures/{id}/retry',
