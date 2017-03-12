@@ -3,6 +3,7 @@ import jasmineEnzyme from 'jasmine-enzyme'
 import { shallow } from 'enzyme'
 
 import Badge from 'components/badge'
+import CircularProgress from 'material-ui/CircularProgress'
 
 describe('<Badge />', () => {
   let props, wrapper
@@ -10,16 +11,29 @@ describe('<Badge />', () => {
   beforeEach(() => {
     jasmineEnzyme()
     props = {
-      text: '7'
+      text: '7',
+      loading: false
     }
-    wrapper = shallow(<Badge {...props} />)
   })
 
   it('renders <Badge />', () => {
+    wrapper = shallow(<Badge {...props} />)
     expect(wrapper.find('.badge').length).toEqual(1)
   })
 
   it('renders text', () => {
+    wrapper = shallow(<Badge {...props} />)
     expect(wrapper.find('.badge').text()).toEqual('7')
+  })
+
+  describe('when loading', () => {
+    beforeEach(() => {
+      props = { ...props, loading: true }
+    })
+
+    it('renders loading', () => {
+      wrapper = shallow(<Badge {...props} />)
+      expect(wrapper.find('.badge').text()).toEqual('<CircularProgress />')
+    })
   })
 })
