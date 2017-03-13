@@ -6,7 +6,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_FAILURE_COUNT:
       return {...state,
-        failureCount: action.data
+        failureCount: action.data.count
       }
 
     default:

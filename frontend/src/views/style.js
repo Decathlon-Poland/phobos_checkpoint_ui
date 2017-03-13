@@ -6,38 +6,38 @@ import {
 
 export const style = {
   view: {
-    'max-width': '1020px',
-    'min-height': '100%',
-    'background-color': grey200,
-    'margin': '0 auto'
+    maxWidth: '1020px',
+    minHeigh: '100%',
+    backgroundColor: grey200,
+    margin: '0 auto'
   },
   title: {
-    'padding': '20px 20px',
-    'color': grey50,
-    'background-color': blueGrey300,
-    'font-size': '20px',
-    'font-weight': 'lighter',
-    'font-family': 'Roboto',
-    'margin-bottom': '20px'
+    padding: '20px 20px',
+    color: grey50,
+    backgroundColor: blueGrey300,
+    fontSize: '20px',
+    fontWeight: 'lighter',
+    fontFamily: 'Roboto',
+    marginBottom: '20px'
   },
   body: {
     display: 'flex',
     padding: '0 20px',
-    'justify-content': 'center'
+    justifyContent: 'center'
   },
   row: {
     display: 'flex',
-    'align-items': 'flex-start'
+    alignItems: 'flex-start'
   },
   heading: {
-    'font-size': '24px',
-    'font-weight': 'lighter',
-    'font-family': 'Roboto'
+    fontSize: '24px',
+    fontWeight: 'lighter',
+    fontFamily: 'Roboto'
   },
   altHeading: {
-    'font-size': '24px',
-    'font-weight': 'lighter',
-    'font-family': 'Roboto',
-    'align-self': 'flex-end'
+    fontSize: '24px',
+    fontWeight: 'lighter',
+    fontFamily: 'Roboto',
+    alignSelf: 'flex-end'
   }
 }
