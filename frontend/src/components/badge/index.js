@@ -1,12 +1,25 @@
 import React, { Component, PropTypes } from 'react'
 
 import RefreshIndicator from 'material-ui/RefreshIndicator'
+import {
+  green400,
+  orange400,
+  brown800
+} from 'material-ui/styles/colors'
 
-const style = {
+const styles = {
   spinner: {
     margin: '50px',
     display: 'inline-block',
     position: 'relative'
+  },
+  warning: {
+    color: brown800,
+    backgroundColor: orange400
+  },
+  success: {
+    color: brown800,
+    backgroundColor: green400
   }
 }
 
@@ -20,12 +33,9 @@ export default class Badge extends Component {
   }
 
   render () {
-    let badgeClass = this.props.classCondition
-      ? 'success'
-      : 'warning'
-
     return (
-      <div className={`badge badge--${badgeClass}`}>
+      <div className='badge'
+        style={this.props.classCondition ? styles.success : styles.warning}>
         {this.renderContent()}
       </div>
     )
@@ -40,7 +50,7 @@ export default class Badge extends Component {
             left={0}
             top={0}
             status='loading'
-            style={style.spinner} />
+            style={styles.spinner} />
         </div>
       )
     }
