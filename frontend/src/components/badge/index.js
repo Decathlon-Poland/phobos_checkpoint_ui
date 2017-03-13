@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import Paper from 'material-ui/Paper'
 
 import RefreshIndicator from 'material-ui/RefreshIndicator'
 import {
@@ -34,10 +35,13 @@ export default class Badge extends Component {
 
   render () {
     return (
-      <div className='badge'
-        style={this.props.classCondition ? styles.success : styles.warning}>
+      <Paper
+        circle
+        zDepth={4}
+        style={this.props.classCondition ? styles.success : styles.warning}
+        className='badge'>
         {this.renderContent()}
-      </div>
+      </Paper>
     )
   }
 
