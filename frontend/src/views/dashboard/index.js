@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Badge from 'components/badge'
 import { fetchFailureCount } from 'actions/dashboard/failure-count'
+import { style } from 'views/style'
 
 export class Dashboard extends Component {
   static get propTypes () {
@@ -22,13 +23,26 @@ export class Dashboard extends Component {
 
   render () {
     return (
-      <div className='dashboard'>
-        {
-          <Badge
-            classCondition={this.props.dashboard.failureCount === 0}
-            text={this.props.dashboard.failureCount}
-            loading={this.props.xhrStatus.isFetchingFailureCount} />
-        }
+      <div className='dashboard' style={style.view}>
+        <div style={style.title}>
+          Dashboard
+        </div>
+        <div style={style.body}>
+          <div style={style.row}>
+            <div style={style.heading}>
+              There are
+            </div>
+            {
+              <Badge
+                classCondition={this.props.dashboard.failureCount === 0}
+                text={this.props.dashboard.failureCount}
+                loading={this.props.xhrStatus.isFetchingFailureCount} />
+            }
+            <div style={style.altHeading}>
+              failures
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

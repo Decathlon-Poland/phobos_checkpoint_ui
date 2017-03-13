@@ -10,6 +10,7 @@ import CircularProgress from 'material-ui/CircularProgress'
 import { fetchSearchResults, loadMoreSearchResults, triggerSearch } from 'actions/failures/search'
 import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
 import { showEventOverview } from 'actions/event-overview'
+import { style } from 'views/style'
 
 export class FailuresSearch extends Component {
   static get propTypes () {
@@ -76,7 +77,7 @@ export class FailuresSearch extends Component {
     const { type, value } = this.props.eventsFilters
 
     return (
-      <div className='failures-search'>
+      <div className='failures-search' style={style.view}>
         <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
           <FailuresList failures={failures} />
