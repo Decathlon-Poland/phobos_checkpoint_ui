@@ -1,11 +1,19 @@
 import React from 'react'
 import jasmineEnzyme from 'jasmine-enzyme'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import Badge from 'components/badge'
 
+const mountComponent = (props) => mount(
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
+    <Badge {...props} />
+  </MuiThemeProvider>
+)
+
 describe('<Badge />', () => {
-  let props, wrapper
+  let props, component
 
   beforeEach(() => {
     jasmineEnzyme()
@@ -16,13 +24,14 @@ describe('<Badge />', () => {
   })
 
   it('renders <Badge />', () => {
-    wrapper = shallow(<Badge {...props} />)
-    expect(wrapper.find('.badge').length).toEqual(1)
+    component = mountComponent(props)
+    expect(component.find('.badge').length).toEqual(1)
   })
 
-  it('renders text', () => {
-    wrapper = shallow(<Badge {...props} />)
-    expect(wrapper.find('.badge').text()).toEqual('7')
+  it('renders text without spinner', () => {
+    component = mountComponent(props)
+    expect(component.find('.badge').text()).toEqual('7')
+    expect(component.find('.page-loader').length).toEqual(0)
   })
 
   describe('when loading', () => {
@@ -30,9 +39,10 @@ describe('<Badge />', () => {
       props = { ...props, loading: true }
     })
 
-    it('renders spinner', () => {
-      wrapper = shallow(<Badge {...props} />)
-      expect(wrapper.find('.badge').text()).toEqual('<CircularProgress />')
+    it('renders spinner without text', () => {
+      component = mountComponent(props)
+      expect(component.find('.badge').text()).toEqual('')
+      expect(component.find('.page-loader').length).toEqual(1)
     })
   })
 })
