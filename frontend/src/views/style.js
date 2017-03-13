@@ -15,7 +15,7 @@ export const style = {
     'padding': '20px 20px',
     'color': blueGrey50,
     'background-color': blueGrey400,
-    'font-size': '30px',
+    'font-size': '20px',
     'font-weight': 'lighter',
     'font-family': 'Roboto',
     'margin-bottom': '20px'

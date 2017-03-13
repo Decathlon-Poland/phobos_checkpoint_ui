@@ -78,6 +78,9 @@ export class FailuresSearch extends Component {
 
     return (
       <div className='failures-search' style={style.view}>
+        <div style={style.title}>
+          Failure search
+        </div>
         <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
           <FailuresList failures={failures} />

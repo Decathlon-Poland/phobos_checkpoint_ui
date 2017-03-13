@@ -70,6 +70,9 @@ export class EventsSearch extends Component {
 
     return (
       <div className='events-search' style={style.view}>
+        <div style={style.title}>
+          Event search
+        </div>
         <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
           <EventsList events={events} />
