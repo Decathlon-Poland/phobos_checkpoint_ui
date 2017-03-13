@@ -1,7 +1,7 @@
 import {
   grey200,
-  blueGrey50,
-  blueGrey400
+  grey50,
+  blueGrey300
 } from 'material-ui/styles/colors'
 
 export const style = {
@@ -13,8 +13,8 @@ export const style = {
   },
   title: {
     'padding': '20px 20px',
-    'color': blueGrey50,
-    'background-color': blueGrey400,
+    'color': grey50,
+    'background-color': blueGrey300,
     'font-size': '20px',
     'font-weight': 'lighter',
     'font-family': 'Roboto',
