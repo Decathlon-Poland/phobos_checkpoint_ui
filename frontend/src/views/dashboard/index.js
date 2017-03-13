@@ -18,8 +18,15 @@ export class Dashboard extends Component {
   }
 
   componentDidMount () {
-    !this.props.failureCount &&
+    this.props.fetchFailureCount()
+
+    this.intervalId = setInterval(() => {
       this.props.fetchFailureCount()
+    }, 10000)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.intervalId)
   }
 
   render () {
@@ -37,7 +44,7 @@ export class Dashboard extends Component {
               <Badge
                 classCondition={this.props.dashboard.failureCount === 0}
                 text={this.props.dashboard.failureCount}
-                loading={this.props.xhrStatus.isFetchingFailureCount} />
+                loading={this.isLoadingFirstPage()} />
             }
             <div style={style.altHeading}>
               failures
@@ -47,7 +54,11 @@ export class Dashboard extends Component {
       </Paper>
     )
   }
-}
+
+  isLoadingFirstPage () {
+    return !this.props.dashboard.failureCount && this.props.xhrStatus.isFetchingFailureCount
+  }
+ }
 
 export default connect(
   (state) => state, {
