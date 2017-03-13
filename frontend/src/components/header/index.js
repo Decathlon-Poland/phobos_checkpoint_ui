@@ -7,6 +7,7 @@ import Chip from 'material-ui/Chip'
 import Menu from 'material-ui/Menu'
 import AppBar from 'material-ui/AppBar'
 import MenuItem from 'material-ui/MenuItem'
+import DashboardIcon from 'material-ui/svg-icons/action/dashboard'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -54,6 +55,13 @@ export class Header extends Component {
             disableAutoFocus
             value={this.props.routing.locationBeforeTransitions.pathname}
             listStyle={style.menuInner}>
+            <MenuItem
+              value='/dashboard'
+              style={style.menuItem}
+              primaryText='Dashboard'
+              leftIcon={<DashboardIcon />}
+              onTouchTap={() => this.props.navigateTo('/dashboard')}
+            />
             <MenuItem
               value='/events'
               style={style.menuItem}

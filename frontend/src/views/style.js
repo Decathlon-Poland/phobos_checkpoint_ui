@@ -30,10 +30,12 @@ export const style = {
     'align-items': 'flex-start'
   },
   heading: {
+    'font-size': '24px',
     'font-weight': 'lighter',
     'font-family': 'Roboto'
   },
   altHeading: {
+    'font-size': '24px',
     'font-weight': 'lighter',
     'font-family': 'Roboto',
     'align-self': 'flex-end'
