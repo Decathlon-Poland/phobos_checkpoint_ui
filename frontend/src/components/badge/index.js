@@ -1,6 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 
-import CircularProgress from 'material-ui/CircularProgress'
+import RefreshIndicator from 'material-ui/RefreshIndicator'
+
+const style = {
+  spinner: {
+    margin: '50px',
+    display: 'inline-block',
+    position: 'relative'
+  }
+}
 
 export default class Badge extends Component {
   static get propTypes () {
@@ -27,11 +35,20 @@ export default class Badge extends Component {
     if (this.props.loading) {
       return (
         <div className='page-loader'>
-          <CircularProgress />
+          <RefreshIndicator
+            size={50}
+            left={0}
+            top={0}
+            status='loading'
+            style={style.spinner} />
         </div>
       )
     }
 
-    return this.props.text
+    return (
+      <div className='badge--text'>
+        {this.props.text}
+      </div>
+    )
   }
 }
