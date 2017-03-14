@@ -3,11 +3,14 @@ import reducer from 'reducers'
 describe('reducers', () => {
   it('without actions returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
+      dashboard: {},
       xhrStatus: {
         isFetchingEvents: false,
         isRetryingEvent: false,
         isRetryingFailure: false,
         isDeletingFailure: false,
+        isFetchingFailureCount: false,
+        fetchFailureCountFailed: false,
         isFetchingEventDetails: false,
         currentEventsOffset: 0,
         lastEventsLoadSize: 0

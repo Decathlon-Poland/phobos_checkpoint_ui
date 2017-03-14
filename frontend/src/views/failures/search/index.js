@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import Paper from 'material-ui/Paper'
 import LoadMore from 'components/load-more'
 import EmptyFailure from 'components/failure/empty'
 import FailuresList from 'components/failure/list'
@@ -10,6 +11,7 @@ import CircularProgress from 'material-ui/CircularProgress'
 import { fetchSearchResults, loadMoreSearchResults, triggerSearch } from 'actions/failures/search'
 import { changeSearchInputFilterType, changeSearchInputFilterValue } from 'actions/search-input-filter'
 import { showEventOverview } from 'actions/event-overview'
+import { style } from 'views/style'
 
 export class FailuresSearch extends Component {
   static get propTypes () {
@@ -76,7 +78,10 @@ export class FailuresSearch extends Component {
     const { type, value } = this.props.eventsFilters
 
     return (
-      <div className='failures-search'>
+      <Paper zDepth={3} className='failures-search' style={style.view}>
+        <div style={style.title}>
+          Failure search
+        </div>
         <SearchInput triggerSearch={this.props.triggerSearch} filterType={type} filterValue={value}/>
         <div>
           <FailuresList failures={failures} />
@@ -91,7 +96,7 @@ export class FailuresSearch extends Component {
               <CircularProgress />
             </div>
         }
-      </div>
+      </Paper>
     )
   }
 

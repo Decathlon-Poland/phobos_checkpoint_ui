@@ -17,7 +17,10 @@ import {
   REQUEST_FAILURE_DELETE_FAILED,
   REQUEST_EVENT_RETRY,
   RECEIVE_EVENT_RETRY,
-  REQUEST_EVENT_RETRY_FAILED
+  REQUEST_EVENT_RETRY_FAILED,
+  REQUEST_FAILURE_COUNT,
+  RECEIVE_FAILURE_COUNT,
+  REQUEST_FAILURE_COUNT_FAILED
 } from 'actions'
 
 import reducer from 'reducers/xhr-status'
@@ -190,6 +193,33 @@ describe('reducers/xhr-status', () => {
       const currentState = { isDeletingFailure: true }
       const action = { type: REQUEST_FAILURE_DELETE_FAILED }
       const expectedState = { isDeletingFailure: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for REQUEST_FAILURE_COUNT', () => {
+    it('enables isFetchingFailureCount', () => {
+      const currentState = { isFetchingFailureCount: false }
+      const action = { type: REQUEST_FAILURE_COUNT }
+      const expectedState = { isFetchingFailureCount: true }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for RECEIVE_FAILURE_COUNT', () => {
+    it('disables isFetchingFailureCount', () => {
+      const currentState = { isFetchingFailureCount: true, fetchFailureCountFailed: true }
+      const action = { type: RECEIVE_FAILURE_COUNT }
+      const expectedState = { isFetchingFailureCount: false, fetchFailureCountFailed: false }
+      expect(reducer(currentState, action)).toEqual(expectedState)
+    })
+  })
+
+  describe('for REQUEST_FAILURE_COUNT_FAILED', () => {
+    it('disables isFetchingFailureCount', () => {
+      const currentState = { isFetchingFailureCount: true, fetchFailureCountFailed: false }
+      const action = { type: REQUEST_FAILURE_COUNT_FAILED }
+      const expectedState = { isFetchingFailureCount: false, fetchFailureCountFailed: true }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })

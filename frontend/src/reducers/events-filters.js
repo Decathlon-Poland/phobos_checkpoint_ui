@@ -1,4 +1,7 @@
-import { SEARCH_INPUT_CHANGE_FILTER_TYPE, SEARCH_INPUT_CHANGE_FILTER_VALUE } from 'actions'
+import {
+  SEARCH_INPUT_CHANGE_FILTER_TYPE,
+  SEARCH_INPUT_CHANGE_FILTER_VALUE
+} from 'actions'
 
 export const DEFAULT_FILTER_TYPE = 'entity_id'
 const initialState = { type: DEFAULT_FILTER_TYPE }
