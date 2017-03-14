@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.0 (2017-03-14)
+
+- [feature] Add dashboard displaying the current number of failures
+
 ## 1.1.0 (2017-03-08)
 
 - [feature] Add possibility to delete failures from the UI
