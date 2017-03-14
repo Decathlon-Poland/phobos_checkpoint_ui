@@ -2,15 +2,25 @@ import React, { Component, PropTypes } from 'react'
 import Paper from 'material-ui/Paper'
 
 import RefreshIndicator from 'material-ui/RefreshIndicator'
+import SyncFailureIcon from 'material-ui/svg-icons/notification/sync-problem'
 import {
   green400,
   orange400,
+  indigo700,
   brown800
 } from 'material-ui/styles/colors'
 
 const styles = {
   spinner: {
     margin: '50px',
+    display: 'inline-block',
+    position: 'relative'
+  },
+  icon: {
+    margin: '50px',
+    width: '50px',
+    height: '50px',
+    color: indigo700,
     display: 'inline-block',
     position: 'relative'
   },
@@ -29,6 +39,7 @@ export default class Badge extends Component {
     return {
       classCondition: PropTypes.bool,
       text: PropTypes.number,
+      failed: PropTypes.bool,
       loading: PropTypes.bool.isRequired
     }
   }
@@ -56,6 +67,12 @@ export default class Badge extends Component {
             status='loading'
             style={styles.spinner} />
         </div>
+      )
+    }
+
+    if (this.props.failed) {
+      return (
+        <SyncFailureIcon className='sync-failed' style={styles.icon} />
       )
     }
 

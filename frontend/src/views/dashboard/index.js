@@ -44,6 +44,7 @@ export class Dashboard extends Component {
               <Badge
                 classCondition={this.props.dashboard.failureCount === 0}
                 text={this.props.dashboard.failureCount}
+                failed={this.props.xhrStatus.fetchFailureCountFailed}
                 loading={this.isLoadingFirstPage()} />
             }
             <div style={style.altHeading}>

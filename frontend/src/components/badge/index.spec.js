@@ -18,7 +18,9 @@ describe('<Badge />', () => {
   beforeEach(() => {
     jasmineEnzyme()
     props = {
+      classCondition: false,
       text: 7,
+      failed: false,
       loading: false
     }
   })
@@ -32,6 +34,7 @@ describe('<Badge />', () => {
     component = mountComponent(props)
     expect(component.find('.badge').text()).toEqual('7')
     expect(component.find('.page-loader').length).toEqual(0)
+    expect(component.find('.sync-failed').length).toEqual(0)
   })
 
   describe('when loading', () => {
@@ -43,6 +46,19 @@ describe('<Badge />', () => {
       component = mountComponent(props)
       expect(component.find('.badge').text()).toEqual('')
       expect(component.find('.page-loader').length).toEqual(1)
+      expect(component.find('.sync-failed').length).toEqual(0)
+    })
+  })
+
+  describe('when failed', () => {
+    beforeEach(() => {
+      props = { ...props, failed: true }
+    })
+
+    it('renders sync failure icon without text', () => {
+      component = mountComponent(props)
+      expect(component.find('.badge').text()).toEqual('')
+      expect(component.find('.sync-failed').length).toEqual(1)
     })
   })
 })
