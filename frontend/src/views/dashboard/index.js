@@ -56,7 +56,7 @@ export class Dashboard extends Component {
   }
 
   isLoadingFirstPage () {
-    return !this.props.dashboard.failureCount && this.props.xhrStatus.isFetchingFailureCount
+    return this.props.dashboard.failureCount === null && this.props.xhrStatus.isFetchingFailureCount
   }
  }
 

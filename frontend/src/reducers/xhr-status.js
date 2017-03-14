@@ -32,6 +32,7 @@ const initialState = {
   isRetryingFailure: false,
   isDeletingFailure: false,
   isFetchingEventDetails: false,
+  fetchFailureCountFailed: false,
   currentEventsOffset: 0,
   lastEventsLoadSize: 0
 }
@@ -124,9 +125,15 @@ export default (state = initialState, action) => {
       }
 
     case RECEIVE_FAILURE_COUNT:
+      return {...state,
+        isFetchingFailureCount: false,
+        fetchFailureCountFailed: false
+      }
+
     case REQUEST_FAILURE_COUNT_FAILED:
       return {...state,
-        isFetchingFailureCount: false
+        isFetchingFailureCount: false,
+        fetchFailureCountFailed: true
       }
 
     default:

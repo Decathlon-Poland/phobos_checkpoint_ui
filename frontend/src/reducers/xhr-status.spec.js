@@ -208,18 +208,18 @@ describe('reducers/xhr-status', () => {
 
   describe('for RECEIVE_FAILURE_COUNT', () => {
     it('disables isFetchingFailureCount', () => {
-      const currentState = { isFetchingFailureCount: true }
+      const currentState = { isFetchingFailureCount: true, fetchFailureCountFailed: true }
       const action = { type: RECEIVE_FAILURE_COUNT }
-      const expectedState = { isFetchingFailureCount: false }
+      const expectedState = { isFetchingFailureCount: false, fetchFailureCountFailed: false }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })
 
   describe('for REQUEST_FAILURE_COUNT_FAILED', () => {
     it('disables isFetchingFailureCount', () => {
-      const currentState = { isFetchingFailureCount: true }
+      const currentState = { isFetchingFailureCount: true, fetchFailureCountFailed: false }
       const action = { type: REQUEST_FAILURE_COUNT_FAILED }
-      const expectedState = { isFetchingFailureCount: false }
+      const expectedState = { isFetchingFailureCount: false, fetchFailureCountFailed: true }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })

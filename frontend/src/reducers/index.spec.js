@@ -10,6 +10,7 @@ describe('reducers', () => {
         isRetryingFailure: false,
         isDeletingFailure: false,
         isFetchingFailureCount: false,
+        fetchFailureCountFailed: false,
         isFetchingEventDetails: false,
         currentEventsOffset: 0,
         lastEventsLoadSize: 0
