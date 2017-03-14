@@ -6,6 +6,7 @@ import {
   changeSearchInputFilterValue
 } from 'actions/search-input-filter'
 
+import Paper from 'material-ui/Paper'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import TextField from 'material-ui/TextField'
@@ -38,7 +39,7 @@ export class SearchInput extends Component {
 
   render () {
     return (
-      <div className='search-input'>
+      <Paper className='search-input'>
         <SelectField
           style={{width: '140px'}}
           value={this.props.filterType || DEFAULT_FILTER_TYPE}
@@ -64,7 +65,7 @@ export class SearchInput extends Component {
           onClick={() => this.search()}
           style={{height: '50px', marginLeft: '20px'}}
           icon={this.getButtonIcon()} />
-      </div>
+      </Paper>
     )
   }
 

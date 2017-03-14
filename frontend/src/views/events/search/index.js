@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import Paper from 'material-ui/Paper'
 import LoadMore from 'components/load-more'
 import EmptyEvent from 'components/empty-event'
 import EventsList from 'components/events-list'
@@ -69,7 +70,7 @@ export class EventsSearch extends Component {
     const { type, value } = this.props.eventsFilters
 
     return (
-      <div className='events-search' style={style.view}>
+      <Paper zDepth={3} className='events-search' style={style.view}>
         <div style={style.title}>
           Event search
         </div>
@@ -87,7 +88,7 @@ export class EventsSearch extends Component {
               <CircularProgress />
             </div>
         }
-      </div>
+      </Paper>
     )
   }
 
