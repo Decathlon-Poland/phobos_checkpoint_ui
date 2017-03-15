@@ -34,7 +34,7 @@ export default class MonitorCard extends Component {
           backgroundColor: PropTypes.string,
           color: PropTypes.string
         })
-      }),
+      }).isRequired,
       hasFailed: PropTypes.bool,
       isLoading: PropTypes.bool.isRequired
     }
@@ -44,17 +44,7 @@ export default class MonitorCard extends Component {
     return (
       <Paper zDepth={4} className='monitor-card'>
         <div className='content' style={this.props.cardStyle.primary}>
-          <div className='content--icon'>
-            {this.props.icon}
-          </div>
-          <div className='monitor'>
-            <div className='monitor--value'>
-              {this.renderContent()}
-            </div>
-            <div className='monitor--label'>
-              Failures
-            </div>
-          </div>
+          {this.renderContent()}
         </div>
         <div className='bar' style={this.props.cardStyle.secondary}>
           <div className='bar--text'>
@@ -86,10 +76,20 @@ export default class MonitorCard extends Component {
       )
     }
 
-    return (
-      <div className='monitor-card--text'>
-        {this.props.text}
+    return [
+      <div className='content--icon'>
+        {this.props.icon}
+      </div>,
+      <div className='monitor'>
+        <div className='monitor--value'>
+          <div className='monitor-card--text'>
+            {this.props.text}
+          </div>
+        </div>
+        <div className='monitor--label'>
+          Failures
+        </div>
       </div>
-    )
+    ]
   }
 }
