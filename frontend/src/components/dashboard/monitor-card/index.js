@@ -24,7 +24,7 @@ export default class MonitorCard extends Component {
   static get propTypes () {
     return {
       icon: PropTypes.element,
-      monitorValue: PropTypes.number,
+      monitorValue: PropTypes.string,
       cardLabel: PropTypes.string,
       cardStyle: PropTypes.shape({
         primary: PropTypes.shape({
@@ -73,20 +73,20 @@ export default class MonitorCard extends Component {
 
     if (this.props.hasFailed) {
       return [
-        <div className='content--icon'>
+        <div key='monitor--icon' className='monitor--icon'>
           <SyncFailureIcon className='sync-failed' style={this.props.cardStyle.primary} />
         </div>,
-        <div className='monitor--value'>
+        <div key='monitor--value' className='monitor--value'>
           OFFLINE
         </div>
       ]
     }
 
     return [
-      <div className='content--icon'>
+      <div key='monitor--icon' className='monitor--icon'>
         {this.props.icon}
       </div>,
-      <div className='monitor'>
+      <div key='monitor' className='monitor'>
         <div className='monitor--value'>
           <div className='monitor-card--text'>
             {this.props.monitorValue}

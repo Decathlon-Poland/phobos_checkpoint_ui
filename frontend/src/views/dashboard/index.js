@@ -7,22 +7,8 @@ import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
 
 import { fetchFailureCount } from 'actions/dashboard/failure-count'
 import { style } from 'views/style'
-import {
-  cyan500,
-  cyan50,
-  cyan700
-} from 'material-ui/styles/colors'
+import { failureCardStyle } from 'components/dashboard/monitor-card/failure-style'
 
-const failureCardStyle = {
-  primary: {
-    backgroundColor: cyan500,
-    color: cyan50
-  },
-  secondary: {
-    backgroundColor: cyan700,
-    color: cyan50
-  }
-}
 export class Dashboard extends Component {
   static get propTypes () {
     return {

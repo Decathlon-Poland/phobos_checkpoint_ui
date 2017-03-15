@@ -12,9 +12,6 @@
     justify-content: space-between;
     padding: 20px;
 
-    &--icon {
-      zoom: 4;
-    }
   }
 
   .bar {
@@ -37,6 +34,10 @@
     &--label {
       font-size: 25px;
       text-transform: capitalize;
+    }
+
+    &--icon {
+      zoom: 4;
     }
   }
 }
