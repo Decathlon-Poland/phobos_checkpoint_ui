@@ -24,7 +24,8 @@ export default class MonitorCard extends Component {
   static get propTypes () {
     return {
       icon: PropTypes.element,
-      text: PropTypes.number,
+      monitorValue: PropTypes.number,
+      cardLabel: PropTypes.string,
       cardStyle: PropTypes.shape({
         primary: PropTypes.shape({
           backgroundColor: PropTypes.string,
@@ -48,7 +49,7 @@ export default class MonitorCard extends Component {
         </div>
         <div className='bar' style={this.props.cardStyle.secondary}>
           <div className='bar--text'>
-            View failures
+            {this.props.cardLabel}
           </div>
           <LinkIcon className='bar--link' style={this.props.cardStyle.secondary} />
         </div>
@@ -71,9 +72,14 @@ export default class MonitorCard extends Component {
     }
 
     if (this.props.hasFailed) {
-      return (
-        <SyncFailureIcon className='sync-failed' style={this.props.cardStyle.secondary} />
-      )
+      return [
+        <div className='content--icon'>
+          <SyncFailureIcon className='sync-failed' style={this.props.cardStyle.primary} />
+        </div>,
+        <div className='monitor--value'>
+          OFFLINE
+        </div>
+      ]
     }
 
     return [
@@ -83,11 +89,11 @@ export default class MonitorCard extends Component {
       <div className='monitor'>
         <div className='monitor--value'>
           <div className='monitor-card--text'>
-            {this.props.text}
+            {this.props.monitorValue}
           </div>
         </div>
         <div className='monitor--label'>
-          Failures
+          {this.props.monitorLabel}
         </div>
       </div>
     ]

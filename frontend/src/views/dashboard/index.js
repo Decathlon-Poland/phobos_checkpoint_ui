@@ -58,9 +58,11 @@ export class Dashboard extends Component {
               <MonitorCard
                 icon={<FailuresIcon style={failureCardStyle.primary} />}
                 cardStyle={failureCardStyle}
-                text={this.props.dashboard.failureCount}
+                cardLabel='View Failures'
+                monitorLabel='Failures'
+                monitorValue={this.props.dashboard.failureCount}
                 hasFailed={this.props.xhrStatus.fetchFailureCountFailed}
-                isLoading={this.props.xhrStatus.isFetchingFailureCount} />
+                isLoading={this.isLoadingFirstPage()} />
             }
           </div>
         </div>
