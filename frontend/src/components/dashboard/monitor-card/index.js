@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Paper from 'material-ui/Paper'
 
+import { Link } from 'react-router'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
 import SyncFailureIcon from 'material-ui/svg-icons/notification/sync-problem'
 import LinkIcon from 'material-ui/svg-icons/navigation/arrow-forward'
@@ -26,6 +27,7 @@ export default class MonitorCard extends Component {
       icon: PropTypes.element,
       monitorValue: PropTypes.string,
       cardLabel: PropTypes.string,
+      linkPath: PropTypes.string,
       cardStyle: PropTypes.shape({
         primary: PropTypes.shape({
           backgroundColor: PropTypes.string,
@@ -47,12 +49,18 @@ export default class MonitorCard extends Component {
         <div className='content' style={this.props.cardStyle.primary}>
           {this.renderContent()}
         </div>
-        <div className='bar' style={this.props.cardStyle.secondary}>
+        <Link
+          className='bar'
+          to={this.props.linkPath}
+          style={{
+            ...this.props.cardStyle.secondary,
+            textDecoration: 'none'
+          }}>
           <div className='bar--text'>
             {this.props.cardLabel}
           </div>
           <LinkIcon className='bar--link' style={this.props.cardStyle.secondary} />
-        </div>
+        </Link>
       </Paper>
     )
   }

@@ -45,6 +45,7 @@ export class Dashboard extends Component {
                 icon={<FailuresIcon style={failureCardStyle.primary} />}
                 cardStyle={failureCardStyle}
                 cardLabel='View Failures'
+                linkPath='/failures'
                 monitorLabel='Failures'
                 monitorValue={this.props.dashboard.failureCount}
                 hasFailed={this.props.xhrStatus.fetchFailureCountFailed}
