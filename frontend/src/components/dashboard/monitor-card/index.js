@@ -4,14 +4,6 @@ import Paper from 'material-ui/Paper'
 import RefreshIndicator from 'material-ui/RefreshIndicator'
 import SyncFailureIcon from 'material-ui/svg-icons/notification/sync-problem'
 import LinkIcon from 'material-ui/svg-icons/navigation/arrow-forward'
-import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
-
-import {
-  indigo700,
-  cyan500,
-  cyan50,
-  cyan700
-} from 'material-ui/styles/colors'
 
 const styles = {
   spinner: {
@@ -23,34 +15,38 @@ const styles = {
     margin: '50px',
     width: '50px',
     height: '50px',
-    color: indigo700,
     display: 'inline-block',
     position: 'relative'
-  },
-  content: {
-    backgroundColor: cyan500,
-    color: cyan50
-  },
-  bar: {
-    backgroundColor: cyan700,
-    color: cyan50
   }
 }
 
-export default class Badge extends Component {
+export default class MonitorCard extends Component {
   static get propTypes () {
     return {
+      icon: PropTypes.element,
       text: PropTypes.number,
-      failed: PropTypes.bool,
-      loading: PropTypes.bool.isRequired
+      cardStyle: PropTypes.shape({
+        primary: PropTypes.shape({
+          backgroundColor: PropTypes.string,
+          color: PropTypes.string
+        }),
+        secondary: PropTypes.shape({
+          backgroundColor: PropTypes.string,
+          color: PropTypes.string
+        })
+      }),
+      hasFailed: PropTypes.bool,
+      isLoading: PropTypes.bool.isRequired
     }
   }
 
   render () {
     return (
-      <Paper zDepth={4} className='badge'>
-        <div className='content' style={styles.content}>
-          <FailuresIcon className='content--icon' style={styles.content} />
+      <Paper zDepth={4} className='monitor-card'>
+        <div className='content' style={this.props.cardStyle.primary}>
+          <div className='content--icon'>
+            {this.props.icon}
+          </div>
           <div className='monitor'>
             <div className='monitor--value'>
               {this.renderContent()}
@@ -60,18 +56,18 @@ export default class Badge extends Component {
             </div>
           </div>
         </div>
-        <div className='bar' style={styles.bar}>
+        <div className='bar' style={this.props.cardStyle.secondary}>
           <div className='bar--text'>
             View failures
           </div>
-          <LinkIcon className='bar--link' style={styles.bar} />
+          <LinkIcon className='bar--link' style={this.props.cardStyle.secondary} />
         </div>
       </Paper>
     )
   }
 
   renderContent () {
-    if (this.props.loading) {
+    if (this.props.isLoading) {
       return (
         <div className='page-loader'>
           <RefreshIndicator
@@ -84,14 +80,14 @@ export default class Badge extends Component {
       )
     }
 
-    if (this.props.failed) {
+    if (this.props.hasFailed) {
       return (
-        <SyncFailureIcon className='sync-failed' style={styles.icon} />
+        <SyncFailureIcon className='sync-failed' style={this.props.cardStyle.secondary} />
       )
     }
 
     return (
-      <div className='badge--text'>
+      <div className='monitor-card--text'>
         {this.props.text}
       </div>
     )

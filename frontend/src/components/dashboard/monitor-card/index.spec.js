@@ -4,15 +4,15 @@ import { mount } from 'enzyme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import Badge from 'components/badge'
+import MonitorCard from 'components/dashboard/monitor-card'
 
 const mountComponent = (props) => mount(
   <MuiThemeProvider muiTheme={getMuiTheme()}>
-    <Badge {...props} />
+    <MonitorCard {...props} />
   </MuiThemeProvider>
 )
 
-describe('<Badge />', () => {
+describe('<MonitorCard />', () => {
   let props, component
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('<Badge />', () => {
     }
   })
 
-  it('renders <Badge />', () => {
+  it('renders <MonitorCard />', () => {
     component = mountComponent(props)
     expect(component.find('.badge').length).toEqual(1)
   })

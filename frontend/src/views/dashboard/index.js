@@ -1,11 +1,28 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import Badge from 'components/badge'
+import MonitorCard from 'components/dashboard/monitor-card'
 import Paper from 'material-ui/Paper'
+import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
+
 import { fetchFailureCount } from 'actions/dashboard/failure-count'
 import { style } from 'views/style'
+import {
+  cyan500,
+  cyan50,
+  cyan700
+} from 'material-ui/styles/colors'
 
+const failureCardStyle = {
+  primary: {
+    backgroundColor: cyan500,
+    color: cyan50
+  },
+  secondary: {
+    backgroundColor: cyan700,
+    color: cyan50
+  }
+}
 export class Dashboard extends Component {
   static get propTypes () {
     return {
@@ -38,11 +55,12 @@ export class Dashboard extends Component {
         <div style={style.body}>
           <div style={style.row}>
             {
-              <Badge
-                classCondition={this.props.dashboard.failureCount === 0}
+              <MonitorCard
+                icon={<FailuresIcon style={failureCardStyle.primary} />}
+                cardStyle={failureCardStyle}
                 text={this.props.dashboard.failureCount}
-                failed={this.props.xhrStatus.fetchFailureCountFailed}
-                loading={this.isLoadingFirstPage()} />
+                hasFailed={this.props.xhrStatus.fetchFailureCountFailed}
+                isLoading={this.props.xhrStatus.isFetchingFailureCount} />
             }
           </div>
         </div>
