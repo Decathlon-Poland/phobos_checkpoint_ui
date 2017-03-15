@@ -7,7 +7,7 @@ import {
 export const style = {
   view: {
     maxWidth: '1020px',
-    minHeigh: '100%',
+    minHeight: '100%',
     backgroundColor: grey200,
     margin: '0 auto'
   },
@@ -27,6 +27,7 @@ export const style = {
   },
   row: {
     display: 'flex',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    flexWrap: 'wrap'
   }
 }
