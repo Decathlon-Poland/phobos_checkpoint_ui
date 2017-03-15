@@ -22,7 +22,6 @@ export class Dashboard extends Component {
 
   componentDidMount () {
     this.props.fetchFailureCount()
-
     this.intervalId = setInterval(() => {
       this.props.fetchFailureCount()
     }, 10000)
@@ -33,6 +32,8 @@ export class Dashboard extends Component {
   }
 
   render () {
+    const failureCount = this.props.dashboard.failureCount || ''
+
     return (
       <Paper zDepth={3} className='dashboard' style={style.view}>
         <div style={style.title}>
@@ -47,9 +48,9 @@ export class Dashboard extends Component {
                 cardLabel='View Failures'
                 linkPath='/failures'
                 monitorLabel='Failures'
-                monitorValue={this.props.dashboard.failureCount}
+                monitorValue={`${failureCount}`}
                 hasFailed={this.props.xhrStatus.fetchFailureCountFailed}
-                isLoading={this.isLoadingFirstPage()} />
+                isLoading={this.isLoading()} />
             }
           </div>
         </div>
@@ -57,8 +58,8 @@ export class Dashboard extends Component {
     )
   }
 
-  isLoadingFirstPage () {
-    return this.props.dashboard.failureCount === null && this.props.xhrStatus.isFetchingFailureCount
+  isLoading () {
+    return this.props.dashboard.failureCount === undefined
   }
  }
 

@@ -49,18 +49,7 @@ export default class MonitorCard extends Component {
         <div className='content' style={this.props.cardStyle.primary}>
           {this.renderContent()}
         </div>
-        <Link
-          className='bar'
-          to={this.props.linkPath}
-          style={{
-            ...this.props.cardStyle.secondary,
-            textDecoration: 'none'
-          }}>
-          <div className='bar--text'>
-            {this.props.cardLabel}
-          </div>
-          <LinkIcon className='bar--link' style={this.props.cardStyle.secondary} />
-        </Link>
+        {this.renderBar()}
       </Paper>
     )
   }
@@ -84,7 +73,7 @@ export default class MonitorCard extends Component {
         <div key='monitor--icon' className='monitor--icon'>
           <SyncFailureIcon className='sync-failed' style={this.props.cardStyle.primary} />
         </div>,
-        <div key='monitor--value' className='monitor--value'>
+        <div key='monitor--value' className='monitor--value--failed'>
           OFFLINE
         </div>
       ]
@@ -105,5 +94,22 @@ export default class MonitorCard extends Component {
         </div>
       </div>
     ]
+  }
+
+  renderBar () {
+    return (
+      <Link
+        className='bar'
+        to={this.props.linkPath}
+        style={{
+          ...this.props.cardStyle.secondary,
+          textDecoration: 'none'
+        }}>
+        <div className='bar--text'>
+          {this.props.cardLabel}
+        </div>
+        <LinkIcon className='bar--link' style={this.props.cardStyle.secondary} />
+      </Link>
+    )
   }
 }

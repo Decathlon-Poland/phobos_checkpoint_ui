@@ -75,7 +75,7 @@ describe('<MonitorCard />', () => {
 
     it('renders sync failure icon with text OFFLINE', () => {
       component = mountComponent(props)
-      expect(component.find('.monitor--value').text()).toEqual('OFFLINE')
+      expect(component.find('.monitor--value--failed').text()).toEqual('OFFLINE')
       expect(component.find('.page-loader').length).toEqual(0)
       expect(component.find('.sync-failed').length).toEqual(1)
     })
