@@ -3,11 +3,14 @@ import Paper from 'material-ui/Paper'
 
 import RefreshIndicator from 'material-ui/RefreshIndicator'
 import SyncFailureIcon from 'material-ui/svg-icons/notification/sync-problem'
+import LinkIcon from 'material-ui/svg-icons/navigation/arrow-forward'
+import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
+
 import {
-  green400,
-  orange400,
   indigo700,
-  brown800
+  cyan500,
+  cyan50,
+  cyan700
 } from 'material-ui/styles/colors'
 
 const styles = {
@@ -24,20 +27,19 @@ const styles = {
     display: 'inline-block',
     position: 'relative'
   },
-  warning: {
-    color: brown800,
-    backgroundColor: orange400
+  content: {
+    backgroundColor: cyan500,
+    color: cyan50
   },
-  success: {
-    color: brown800,
-    backgroundColor: green400
+  bar: {
+    backgroundColor: cyan700,
+    color: cyan50
   }
 }
 
 export default class Badge extends Component {
   static get propTypes () {
     return {
-      classCondition: PropTypes.bool,
       text: PropTypes.number,
       failed: PropTypes.bool,
       loading: PropTypes.bool.isRequired
@@ -46,12 +48,24 @@ export default class Badge extends Component {
 
   render () {
     return (
-      <Paper
-        circle
-        zDepth={4}
-        style={this.props.classCondition ? styles.success : styles.warning}
-        className='badge'>
-        {this.renderContent()}
+      <Paper zDepth={4} className='badge'>
+        <div className='content' style={styles.content}>
+          <FailuresIcon className='content--icon' style={styles.content} />
+          <div className='monitor'>
+            <div className='monitor--value'>
+              {this.renderContent()}
+            </div>
+            <div className='monitor--label'>
+              Failures
+            </div>
+          </div>
+        </div>
+        <div className='bar' style={styles.bar}>
+          <div className='bar--text'>
+            View failures
+          </div>
+          <LinkIcon className='bar--link' style={styles.bar} />
+        </div>
       </Paper>
     )
   }

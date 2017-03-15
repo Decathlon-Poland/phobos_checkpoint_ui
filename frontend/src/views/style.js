@@ -28,16 +28,5 @@ export const style = {
   row: {
     display: 'flex',
     alignItems: 'flex-start'
-  },
-  heading: {
-    fontSize: '24px',
-    fontWeight: 'lighter',
-    fontFamily: 'Roboto'
-  },
-  altHeading: {
-    fontSize: '24px',
-    fontWeight: 'lighter',
-    fontFamily: 'Roboto',
-    alignSelf: 'flex-end'
   }
 }

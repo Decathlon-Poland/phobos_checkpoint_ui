@@ -37,9 +37,6 @@ export class Dashboard extends Component {
         </div>
         <div style={style.body}>
           <div style={style.row}>
-            <div style={style.heading}>
-              There are
-            </div>
             {
               <Badge
                 classCondition={this.props.dashboard.failureCount === 0}
@@ -47,9 +44,6 @@ export class Dashboard extends Component {
                 failed={this.props.xhrStatus.fetchFailureCountFailed}
                 loading={this.isLoadingFirstPage()} />
             }
-            <div style={style.altHeading}>
-              failures
-            </div>
           </div>
         </div>
       </Paper>
