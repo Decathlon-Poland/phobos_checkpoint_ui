@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import Badge from 'components/badge'
+import MonitorCard from 'components/dashboard/monitor-card'
 import Paper from 'material-ui/Paper'
+import FailuresIcon from 'material-ui/svg-icons/communication/call-missed'
+
 import { fetchFailureCount } from 'actions/dashboard/failure-count'
 import { style } from 'views/style'
+import { failureCardStyle } from 'components/dashboard/monitor-card/failure-style'
 
 export class Dashboard extends Component {
   static get propTypes () {
@@ -19,7 +22,6 @@ export class Dashboard extends Component {
 
   componentDidMount () {
     this.props.fetchFailureCount()
-
     this.intervalId = setInterval(() => {
       this.props.fetchFailureCount()
     }, 10000)
@@ -30,6 +32,8 @@ export class Dashboard extends Component {
   }
 
   render () {
+    const failureCount = this.props.dashboard.failureCount || ''
+
     return (
       <Paper zDepth={3} className='dashboard' style={style.view}>
         <div style={style.title}>
@@ -37,27 +41,25 @@ export class Dashboard extends Component {
         </div>
         <div style={style.body}>
           <div style={style.row}>
-            <div style={style.heading}>
-              There are
-            </div>
             {
-              <Badge
-                classCondition={this.props.dashboard.failureCount === 0}
-                text={this.props.dashboard.failureCount}
-                failed={this.props.xhrStatus.fetchFailureCountFailed}
-                loading={this.isLoadingFirstPage()} />
+              <MonitorCard
+                icon={<FailuresIcon style={failureCardStyle.primary} />}
+                cardStyle={failureCardStyle}
+                cardLabel='View Failures'
+                linkPath='/failures'
+                monitorLabel='Failures'
+                monitorValue={`${failureCount}`}
+                hasFailed={this.props.xhrStatus.fetchFailureCountFailed}
+                isLoading={this.isLoading()} />
             }
-            <div style={style.altHeading}>
-              failures
-            </div>
           </div>
         </div>
       </Paper>
     )
   }
 
-  isLoadingFirstPage () {
-    return this.props.dashboard.failureCount === null && this.props.xhrStatus.isFetchingFailureCount
+  isLoading () {
+    return this.props.dashboard.failureCount === undefined
   }
  }
 

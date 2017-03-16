@@ -1,0 +1,48 @@
+.monitor-card {
+  font-family: Roboto;
+  width: 300px;
+  margin: 10px;
+
+  &--text {
+    font-size: 75px;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+    &--text {
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+  }
+
+  .monitor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    &--label {
+      font-size: 25px;
+      text-transform: capitalize;
+    }
+
+    &--icon {
+      zoom: 4;
+    }
+
+    &--value--failed {
+      font-size: 35px;
+    }
+  }
+}
