@@ -32,7 +32,7 @@ export class Dashboard extends Component {
   }
 
   render () {
-    const failureCount = this.props.dashboard.failureCount || ''
+    const failureCount = `${this.props.dashboard.failureCount}`
 
     return (
       <Paper zDepth={3} className='dashboard' style={style.view}>

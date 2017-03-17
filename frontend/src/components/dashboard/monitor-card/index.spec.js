@@ -80,4 +80,17 @@ describe('<MonitorCard />', () => {
       expect(component.find('.sync-failed').length).toEqual(1)
     })
   })
+
+  describe('with 0 failures', () => {
+    beforeEach(() => {
+      props = { ...props, monitorValue: '0' }
+    })
+
+    it('renders text without spinner', () => {
+      component = mountComponent(props)
+      expect(component.find('.monitor--value').text()).toEqual('0')
+      expect(component.find('.page-loader').length).toEqual(0)
+      expect(component.find('.sync-failed').length).toEqual(0)
+    })
+  })
 })
