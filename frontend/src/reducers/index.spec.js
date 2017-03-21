@@ -6,7 +6,6 @@ describe('reducers', () => {
       dashboard: {},
       xhrStatus: {
         isFetchingEvents: false,
-        isRetryingEvent: false,
         isRetryingFailure: false,
         isDeletingFailure: false,
         isFetchingFailureCount: false,

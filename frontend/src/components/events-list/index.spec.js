@@ -26,9 +26,7 @@ describe('<EventsList />', () => {
     jasmineEnzyme()
 
     store = mockStore({
-      xhrStatus: {
-        isRetryingEvent: false
-      }
+      xhrStatus: {}
     })
 
     event = {

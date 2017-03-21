@@ -3,17 +3,14 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { hideEventOverview } from 'actions/event-overview'
-import { showEventRetry } from 'actions/event-retry'
 
 import Dialog from 'material-ui/Dialog'
-import RaisedButton from 'material-ui/RaisedButton'
 import EventOverview from 'components/event-overview'
 
 class OverviewDialog extends Component {
   static get propTypes () {
     return {
       onHideOverview: PropTypes.func,
-      onShowRetry: PropTypes.func,
       event: PropTypes.shape({
         id: PropTypes.number,
         group_id: PropTypes.string,
@@ -47,12 +44,7 @@ class OverviewDialog extends Component {
         onRequestClose={() => this.hideOverview()}
         contentStyle={{maxWidth: '1024px'}}
         bodyStyle={{maxWidth: '1024px'}}
-        actions={[
-          <RaisedButton
-            primary
-            label='Retry'
-            onClick={() => this.showRetry()}/>
-        ]}>
+        actions={[]}>
         <EventOverview {...this.props.event} />
       </Dialog>
     )
@@ -60,10 +52,6 @@ class OverviewDialog extends Component {
 
   hideOverview () {
     this.props.onHideOverview(this.props.event)
-  }
-
-  showRetry () {
-    this.props.onShowRetry(this.props.event)
   }
 
   dialogTitle () {
@@ -79,7 +67,6 @@ class OverviewDialog extends Component {
 
 export default connect(
   (state, ownProps) => ownProps, {
-    onHideOverview: hideEventOverview,
-    onShowRetry: showEventRetry
+    onHideOverview: hideEventOverview
   }
 )(OverviewDialog)
