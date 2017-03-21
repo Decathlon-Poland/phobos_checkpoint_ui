@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.4.0 (2017-03-21)
+
+- [enhancement] Remove possibility for the frontend to perform an Event Retry.
+
 ## 1.3.2 (2017-03-17)
 
 - [enhancement] Change slightly how copy_assets task work so it doesn't wipe the public folder entirely
