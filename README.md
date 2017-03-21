@@ -65,7 +65,7 @@ The front-end is written with `React` and `Redux`, ensure that you have `nodejs`
 ```sh
 cd frontend
 npm install
-npm test:unit
+npm run test:unit #or npm run test:unit:watch to continuosly run the tests
 ```
 
 Run `rake spec` to run the ruby tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
