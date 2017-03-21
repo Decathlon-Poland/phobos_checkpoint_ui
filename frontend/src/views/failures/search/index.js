@@ -101,7 +101,7 @@ export class FailuresSearch extends Component {
   }
 
   isFetchingFirstPage () {
-    this.props.xhrStatus.isFetchingEvents &&
+    return this.props.xhrStatus.isFetchingEvents &&
       this.props.failures.length === 0
   }
 }
