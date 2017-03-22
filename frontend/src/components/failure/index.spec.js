@@ -27,7 +27,7 @@ describe('<Failure />', () => {
     jasmineEnzyme()
     store = mockStore({
       xhrStatus: {
-        isRetryingEvent: false, isRetryingFailure: false, isDeletingFailure: false
+        isRetryingFailure: false, isDeletingFailure: false
       }
     })
 

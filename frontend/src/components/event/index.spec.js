@@ -26,9 +26,7 @@ describe('<Event />', () => {
   beforeEach(() => {
     jasmineEnzyme()
     store = mockStore({
-      xhrStatus: {
-        isRetryingEvent: false
-      }
+      xhrStatus: {}
     })
 
     onShowOverview = jasmine.createSpy('onShowOverview')

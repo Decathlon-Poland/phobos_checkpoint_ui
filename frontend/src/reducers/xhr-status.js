@@ -15,9 +15,6 @@ import {
   REQUEST_FAILURE_DELETE,
   RECEIVE_FAILURE_DELETE,
   REQUEST_FAILURE_DELETE_FAILED,
-  REQUEST_EVENT_RETRY,
-  RECEIVE_EVENT_RETRY,
-  REQUEST_EVENT_RETRY_FAILED,
   REQUEST_EVENT_DETAILS,
   RECEIVE_EVENT_DETAILS,
   REQUEST_FAILURE_COUNT,
@@ -28,7 +25,6 @@ import {
 const initialState = {
   isFetchingEvents: false,
   isFetchingFailureCount: false,
-  isRetryingEvent: false,
   isRetryingFailure: false,
   isDeletingFailure: false,
   isFetchingEventDetails: false,
@@ -76,11 +72,6 @@ export default (state = initialState, action) => {
         currentEventsOffset: action.offset
       }
 
-    case REQUEST_EVENT_RETRY:
-      return {...state,
-        isRetryingEvent: true
-      }
-
     case REQUEST_FAILURE_RETRY:
       return {...state,
         isRetryingFailure: true
@@ -89,12 +80,6 @@ export default (state = initialState, action) => {
     case REQUEST_FAILURE_DELETE:
       return {...state,
         isDeletingFailure: true
-      }
-
-    case RECEIVE_EVENT_RETRY:
-    case REQUEST_EVENT_RETRY_FAILED:
-      return {...state,
-        isRetryingEvent: false
       }
 
     case RECEIVE_FAILURE_RETRY:

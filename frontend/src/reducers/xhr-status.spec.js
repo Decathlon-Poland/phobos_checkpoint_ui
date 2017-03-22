@@ -15,9 +15,6 @@ import {
   REQUEST_FAILURE_DELETE,
   RECEIVE_FAILURE_DELETE,
   REQUEST_FAILURE_DELETE_FAILED,
-  REQUEST_EVENT_RETRY,
-  RECEIVE_EVENT_RETRY,
-  REQUEST_EVENT_RETRY_FAILED,
   REQUEST_FAILURE_COUNT,
   RECEIVE_FAILURE_COUNT,
   REQUEST_FAILURE_COUNT_FAILED
@@ -116,15 +113,6 @@ describe('reducers/xhr-status', () => {
     })
   })
 
-  describe('for REQUEST_EVENT_RETRY', () => {
-    it('enables isRetryingEvent', () => {
-      const currentState = { isRetryingEvent: false }
-      const action = { type: REQUEST_EVENT_RETRY }
-      const expectedState = { isRetryingEvent: true }
-      expect(reducer(currentState, action)).toEqual(expectedState)
-    })
-  })
-
   describe('for REQUEST_FAILURE_RETRY', () => {
     it('enables isRetryingFailure', () => {
       const currentState = { isRetryingFailure: false }
@@ -143,15 +131,6 @@ describe('reducers/xhr-status', () => {
     })
   })
 
-  describe('for RECEIVE_EVENT_RETRY', () => {
-    it('disables isRetryingEvent', () => {
-      const currentState = { isRetryingEvent: true }
-      const action = { type: RECEIVE_EVENT_RETRY }
-      const expectedState = { isRetryingEvent: false }
-      expect(reducer(currentState, action)).toEqual(expectedState)
-    })
-  })
-
   describe('for RECEIVE_FAILURE_RETRY', () => {
     it('disables isRetryingFailure', () => {
       const currentState = { isRetryingFailure: true }
@@ -166,15 +145,6 @@ describe('reducers/xhr-status', () => {
       const currentState = { isDeletingFailure: true }
       const action = { type: RECEIVE_FAILURE_DELETE }
       const expectedState = { isDeletingFailure: false }
-      expect(reducer(currentState, action)).toEqual(expectedState)
-    })
-  })
-
-  describe('for REQUEST_EVENT_RETRY_FAILED', () => {
-    it('disables isRetryingEvent', () => {
-      const currentState = { isRetryingEvent: true }
-      const action = { type: REQUEST_EVENT_RETRY_FAILED }
-      const expectedState = { isRetryingEvent: false }
       expect(reducer(currentState, action)).toEqual(expectedState)
     })
   })

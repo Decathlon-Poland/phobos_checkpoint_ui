@@ -4,7 +4,6 @@ import { history } from 'routes'
 
 import { fetchEventDetails } from 'actions/event-details'
 import EventOverviewDialog from 'components/event-overview-dialog'
-import EventRetryDialog from 'components/event-retry-dialog'
 
 class EventDetails extends Component {
   static get propTypes () {
@@ -32,7 +31,6 @@ class EventDetails extends Component {
     return (
       <div className='event-details'>
         <EventOverviewDialog event={event} />
-        <EventRetryDialog event={event} />
       </div>
     )
   }

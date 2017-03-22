@@ -33,10 +33,6 @@ export default Mappersmith.forge({
     },
     Event: {
       findById: '/api/v1/events/{id}',
-      retry: {
-        path: '/api/v1/events/{id}/retry',
-        method: 'POST'
-      },
       search: {
         path: '/api/v1/events',
         params: { limit: EVENTS_SEARCH_LIMIT }

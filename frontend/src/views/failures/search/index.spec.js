@@ -29,9 +29,7 @@ describe('view <FailuresSearch />', () => {
   beforeEach(() => {
     jasmineEnzyme()
     store = mockStore({
-      xhrStatus: {
-        isRetryingEvent: false
-      }
+      xhrStatus: {}
     })
 
     props = {

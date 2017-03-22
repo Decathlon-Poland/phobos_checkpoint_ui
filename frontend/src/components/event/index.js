@@ -10,7 +10,6 @@ import cardStyle, {
 import {Card, CardHeader, CardTitle} from 'material-ui/Card'
 import EventsIcon from 'material-ui/svg-icons/communication/call-received'
 import EventOverviewDialog from 'components/event-overview-dialog'
-import EventRetryDialog from 'components/event-retry-dialog'
 import { green200 } from 'material-ui/styles/colors'
 
 export class Event extends Component {
@@ -53,7 +52,6 @@ export class Event extends Component {
           titleStyle={cardStyle.cardTitle}
           title={formattedEventType(this.props.event.event_type)}/>
         <EventOverviewDialog event={this.props.event} />
-        <EventRetryDialog event={this.props.event} />
       </Card>
     )
   }
