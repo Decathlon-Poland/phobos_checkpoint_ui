@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.4.1 (2017-03-23)
+
+- [bugfix] Update dependency on phobos_db_checkpoint to support newer api (events without retry)
+
 ## 1.4.0 (2017-03-21)
 
 - [enhancement] Remove possibility for the frontend to perform an Event Retry.

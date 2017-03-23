@@ -50,5 +50,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rake'
   spec.add_dependency 'sinatra'
-  spec.add_dependency 'phobos_db_checkpoint', '~> 2.4'
+  spec.add_dependency 'phobos_db_checkpoint', '~> 3.0'
 end
