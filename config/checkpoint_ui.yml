@@ -1,0 +1,7 @@
+session_secret: '45e5f4a082e9af6d165645d45a0f121a31a4757667b29c6d5f473a8ccf481085743f839e376f1b866319d1e346e6d629ab69394221f342771495e43963a133e0'
+saml:
+  issuer: the_issuer
+  idp_cert_fingerprint: the_idp_cert_fingerprint
+  assertion_consumer_service_url: the_assertion_consumer_service_url
+  idp_sso_target_url: the_idp_sso_target_url
+  idp_logout_url: the_idp_logout_url
