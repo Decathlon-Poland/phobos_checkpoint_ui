@@ -5,11 +5,21 @@ module PhobosCheckpointUI
     end
 
     set :logging, nil
+    set :show_exceptions, false
     set :public_folder, -> { File.join(Dir.pwd, 'public') }
 
     get '/configs' do
       content_type :json
       self.class.configs.to_json
+    end
+
+    get '/api/*' do
+      env['PATH_INFO'] = env['PATH_INFO'].sub(/^\/api/, '')
+      status, headers, body = app.call(env)
+      @response.status = status
+      @response.body = body
+      @response.headers.merge! headers
+      nil
     end
 
     get '/*' do
