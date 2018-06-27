@@ -9,7 +9,9 @@ RSpec.describe 'Session requests' do
   end
 
   def app
-    PhobosCheckpointUI::StaticApp.new(TestPhobosDbCheckpointDatabaseMiddlewareApp)
+    PhobosCheckpointUI::StaticApp.new(
+      TestPhobosDbCheckpointDatabaseMiddlewareApp
+    )
   end
 
   before do
@@ -88,7 +90,11 @@ RSpec.describe 'Session requests' do
 
     it 'signs in the user' do
       post '/auth/saml/callback'
-      expect(session[:user]).to eq(oauth_payload)
+      expect(session[:user]).to eq(
+        {
+          user: { username: 'checkpoint_ui_user' }
+        }
+      )
     end
   end
 

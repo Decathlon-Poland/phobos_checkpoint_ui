@@ -3,6 +3,7 @@ require 'rack'
 require 'sinatra'
 require 'phobos_db_checkpoint'
 require 'phobos_db_checkpoint/events_api'
+require 'phobos_checkpoint_ui/saml_handler'
 require 'phobos_checkpoint_ui/version'
 
 module PhobosCheckpointUI

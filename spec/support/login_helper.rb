@@ -1,16 +1,9 @@
 # frozen_string_literal: true
 
 module LoginHelper
-  def login(user=omniauth_data)
-    env 'rack.session', { user: user }
-  end
-
-  def omniauth_data
-    {
-      username: 'john.authorized',
-      first_name: 'john',
-      family_name: 'authorized',
-      email: 'john.authorized@example.com'
+  def login(saml_handler = PhobosCheckpointUI::SamlHandler, data = oauth_payload)
+    env 'rack.session', {
+      user: saml_handler.new(data).user
     }
   end
 end

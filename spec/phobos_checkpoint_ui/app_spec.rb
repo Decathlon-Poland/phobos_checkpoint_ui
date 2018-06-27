@@ -8,7 +8,11 @@ RSpec.describe PhobosCheckpointUI::App do
   end
 
   def app
-    PhobosCheckpointUI::App.new(TestAPIApp, configs)
+    PhobosCheckpointUI::App.new(
+      TestAPIApp,
+      nil,
+      configs
+    )
   end
 
   before do
@@ -30,7 +34,7 @@ RSpec.describe PhobosCheckpointUI::App do
 
   it 'configures StaticApp' do
     PhobosCheckpointUI::StaticApp.configs = nil
-    PhobosCheckpointUI::App.new(TestAPIApp, configs)
+    PhobosCheckpointUI::App.new(TestAPIApp, nil, configs)
     expect(PhobosCheckpointUI::StaticApp.configs).to eql configs
   end
 
@@ -49,6 +53,17 @@ RSpec.describe PhobosCheckpointUI::App do
       get '/ping'
       expect(last_response.status).to eql 200
       expect(last_response.body).to eql('PONG')
+    end
+  end
+
+  describe 'GET /api/session' do
+    it 'returns the session' do
+      get '/api/session'
+      expect(JSON(last_response.body).deep_symbolize_keys).to eq(
+        {
+          user: { username: 'checkpoint_ui_user' }
+        }
+      )
     end
   end
 

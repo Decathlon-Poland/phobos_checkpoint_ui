@@ -14,6 +14,7 @@ module SamlHelper
           'givenName' => ['Bob'],
           'cn' => ['bob.hope'],
           'sn' => ['Hope'],
+          'memberOf' => ['CN=foo,OU=Tango,DC=tele,DC=hq'],
           'fingerprint' => 'D2:67:4F:DA:29:B9:F6:78:FF:59:EB:9F:C3:AA:AD:C5:CA:5C:CC:7D'
         }
       }

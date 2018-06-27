@@ -4,6 +4,14 @@ module PhobosCheckpointUI
       attr_accessor :configs
     end
 
+    def initialize(app = nil, saml_handler = SamlHandler)
+      super()
+      @app = app
+      @saml_handler = saml_handler
+      @template_cache = Tilt::Cache.new
+      yield self if block_given?
+    end
+
     SESSION_KEY = '_phobos_checkpoint_ui'
     NO_AUTH = %w(
       /ping
@@ -49,13 +57,20 @@ module PhobosCheckpointUI
 
     post '/auth/saml/callback' do
       origin         = cookies.delete(:origin)
-      session[:user] = omniauth_data
+      @handler       = @saml_handler.new(omniauth_data)
+      session[:user] = { user: @handler.user }
       redirect to(origin || '/')
     end
 
     get '/logout' do
       session[:user] = nil
       redirect to(PhobosCheckpointUI.config.dig(:saml, :idp_logout_url))
+    end
+
+    get '/api/session' do
+      content_type :json
+
+      { user: session[:user] }.to_json
     end
 
     get '/api/*' do
