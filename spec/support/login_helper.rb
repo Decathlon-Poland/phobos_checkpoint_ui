@@ -2,9 +2,8 @@
 
 module LoginHelper
   def login(saml_handler = PhobosCheckpointUI::SamlHandler, data = oauth_payload)
-    env 'rack.session', {
-      user: saml_handler.new(data).user
-    }
+    user = saml_handler.new(data).user
+    env 'rack.session', { user: user.to_json }
   end
 end
 

@@ -71,6 +71,56 @@ RSpec.describe 'Session requests' do
     end
   end
 
+  describe 'authorization' do
+    context 'when not authorized' do
+      before do
+        allow(PhobosCheckpointUI::SamlHandler)
+          .to receive(:authorized?)
+          .and_return(false)
+        login
+      end
+
+      {
+        '/ping' => :get,
+        '/auth/saml' => :get,
+        '/auth/failure' => :get,
+        '/auth/saml/callback' => :post,
+      }.each do |no_auth_path, http_method|
+        context "#{http_method} #{no_auth_path}" do
+          it 'does not require authorization' do
+            public_send(http_method, no_auth_path)
+
+            expect(last_response.status).to_not eql(403)
+          end
+        end
+      end
+
+      context 'for routes requiring authorization' do
+        it 'returns forbidden' do
+          get '/api/session'
+
+          expect(last_response.status).to eql(403)
+          expect(last_response.body).to eql({ error: 'Forbidden' }.to_json)
+        end
+      end
+    end
+
+    context 'when authorized' do
+      before do
+        allow(PhobosCheckpointUI::SamlHandler)
+          .to receive(:authorized?)
+          .and_return(true)
+        login
+      end
+
+      it 'sets REMOTE_USER with username' do
+        get '/api/session'
+        expect(last_response.status).to eql(200)
+        expect(last_request.env['REMOTE_USER']).to eql 'checkpoint_ui_user'
+      end
+    end
+  end
+
   describe 'GET /auth/saml' do
     it 'redirects to SSO' do
       get '/auth/saml'
@@ -91,9 +141,7 @@ RSpec.describe 'Session requests' do
     it 'signs in the user' do
       post '/auth/saml/callback'
       expect(session[:user]).to eq(
-        {
-          user: { username: 'checkpoint_ui_user' }
-        }
+        { username: 'checkpoint_ui_user' }.to_json
       )
     end
   end

@@ -12,10 +12,16 @@ RSpec.describe PhobosCheckpointUI::App do
       @omniauth_data = data
     end
 
-    def authorized?
+    def self.authorized?(user_json)
+      user = JSON(user_json)
+
       ['foo'].any? do |group|
-        user.member_of?(group)
+        user.dig('member_of').include?(group)
       end
+    end
+
+    def self.username(user_json)
+      JSON(user_json).dig('username')
     end
 
     def user
@@ -57,22 +63,41 @@ RSpec.describe PhobosCheckpointUI::App do
   end
 
   before do
+    def session
+      last_request.env['rack.session']
+    end
+
     login(CustomSamlHandler)
+  end
+
+  let(:user_json) do
+    {
+      "username"=>"bob.hope",
+      "first_name"=>"Bob",
+      "family_name"=>"Hope",
+      "email"=>"bob.hope@example.com",
+      "member_of"=>["foo"]
+    }
+  end
+
+  describe 'POST /auth/saml/callback' do
+    it 'signs in the user' do
+      post '/auth/saml/callback'
+
+      expect(session[:user]).to eq(
+        user_json.to_json
+      )
+    end
   end
 
   describe 'GET /api/session' do
     it 'returns the session' do
       get '/api/session'
-      expect(JSON(last_response.body)).to eq(
+
+      expect(last_response.body).to eq(
         {
-          "user" => {
-            "username"=>"bob.hope",
-            "first_name"=>"Bob",
-            "family_name"=>"Hope",
-            "email"=>"bob.hope@example.com",
-            "member_of"=>["foo"]
-          }
-        }
+          "user" => user_json
+        }.to_json
       )
     end
   end

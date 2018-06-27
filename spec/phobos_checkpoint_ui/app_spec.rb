@@ -10,7 +10,7 @@ RSpec.describe PhobosCheckpointUI::App do
   def app
     PhobosCheckpointUI::App.new(
       TestAPIApp,
-      nil,
+      PhobosCheckpointUI::SamlHandler,
       configs
     )
   end

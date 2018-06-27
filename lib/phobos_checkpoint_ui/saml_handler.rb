@@ -3,8 +3,12 @@ module PhobosCheckpointUI
     def initialize(data)
     end
 
-    def authorized?
+    def self.authorized?(user_json)
       true
+    end
+
+    def self.username(user_json)
+      JSON(user_json).dig('username')
     end
 
     def user

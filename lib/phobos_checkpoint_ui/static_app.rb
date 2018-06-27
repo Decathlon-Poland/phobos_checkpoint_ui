@@ -44,9 +44,15 @@ module PhobosCheckpointUI
       cache_control :no_cache
 
       if PhobosCheckpointUI.config.dig(:saml).present?
-        return if no_auth_path? || signed_in?
-        return reply_unauthorized if api_request?
-        return reply_redirect_to_login
+        return if no_auth_path?
+
+        if api_request?
+          return reply_unauthorized if !signed_in?
+          return reply_forbidden unless @saml_handler.authorized?(session[:user])
+        end
+
+        return reply_redirect_to_login if !signed_in?
+        request.env['REMOTE_USER'] = @saml_handler.username(session[:user])
       end
     end
 
@@ -57,8 +63,7 @@ module PhobosCheckpointUI
 
     post '/auth/saml/callback' do
       origin         = cookies.delete(:origin)
-      @handler       = @saml_handler.new(omniauth_data)
-      session[:user] = { user: @handler.user }
+      session[:user] = @saml_handler.new(omniauth_data).user.to_json
       redirect to(origin || '/')
     end
 
@@ -70,7 +75,7 @@ module PhobosCheckpointUI
     get '/api/session' do
       content_type :json
 
-      { user: session[:user] }.to_json
+      { user: JSON(session[:user]) }.to_json
     end
 
     get '/api/*' do
@@ -99,6 +104,11 @@ module PhobosCheckpointUI
     def reply_unauthorized
       content_type :json
       halt 401, { error: 'Unauthorized' }.to_json
+    end
+
+    def reply_forbidden
+      content_type :json
+      halt 403, { error: 'Forbidden' }.to_json
     end
 
     def reply_redirect_to_login
