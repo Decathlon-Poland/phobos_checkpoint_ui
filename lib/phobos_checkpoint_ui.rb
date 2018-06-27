@@ -27,5 +27,6 @@ module PhobosCheckpointUI
     end
   end
 end
+
 require 'phobos_checkpoint_ui/static_app'
 require 'phobos_checkpoint_ui/app'

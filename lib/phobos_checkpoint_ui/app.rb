@@ -1,6 +1,6 @@
 module PhobosCheckpointUI
   module App
-    def self.new(api_app, saml_handler = PhobosCheckpointUI::SamlHandler, configs = {})
+    def self.new(api_app, configs = {}, saml_handler = PhobosCheckpointUI::SamlHandler)
       StaticApp.configs = configs
       Rack::URLMap.new(
         '/' => StaticApp.new(api_app, saml_handler),

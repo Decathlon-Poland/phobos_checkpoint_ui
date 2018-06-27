@@ -58,6 +58,7 @@ RSpec.describe PhobosCheckpointUI::App do
   def app
     PhobosCheckpointUI::App.new(
       TestAPIApp,
+      {},
       CustomSamlHandler
     )
   end
