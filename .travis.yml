@@ -10,7 +10,7 @@ services:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=09c6fe3d9f5f4673b7172b7ff0bd9721b5969da49c6c46e976fb89cf83f2a0dd
+    - CC_TEST_REPORTER_ID=26a517d263807d03ee1a05ef17d6dd73ca65131216f113e85171ba1bf5622114
 
 before_install:
   - env
