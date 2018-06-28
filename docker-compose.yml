@@ -1,0 +1,15 @@
+version: '2'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: rspec
+    network_mode: host
+    volumes:
+      - ./coverage:/opt/phobos_checkpoint_ui/coverage
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    command: npm run test:unit

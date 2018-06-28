@@ -1,0 +1,16 @@
+FROM ruby:2.4.1-alpine
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh build-base
+
+RUN gem install bundler -v 1.16.0
+
+WORKDIR /opt/phobos_checkpoint_ui
+
+ADD Gemfile Gemfile
+ADD phobos_checkpoint_ui.gemspec phobos_checkpoint_ui.gemspec
+ADD lib/phobos_checkpoint_ui/version.rb lib/phobos_checkpoint_ui/version.rb
+
+RUN bundle install
+
+ADD . .
