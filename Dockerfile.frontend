@@ -1,5 +1,7 @@
-FROM node:7
+FROM node:6
 
 WORKDIR /opt/phobos_checkpoint_ui
 
 ADD frontend/ .
+
+RUN npm install
