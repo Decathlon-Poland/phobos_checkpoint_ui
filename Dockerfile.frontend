@@ -1,0 +1,5 @@
+FROM node:7
+
+WORKDIR /opt/phobos_checkpoint_ui
+
+ADD frontend/ .

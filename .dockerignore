@@ -1,0 +1,12 @@
+.idea
+.DS_Store
+.dockerignore
+.gitignore
+.travis.yml
+Gemfile.lock
+Dockerfile
+log/
+coverage/
+spec/examples.txt
+pkg/
+frontend/node_modules
