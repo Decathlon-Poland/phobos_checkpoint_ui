@@ -60,7 +60,7 @@ run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI, {
 
 ### SAML
 
-If configured, Checkpoint UI will support authenication and authorization with IDP (SAML).
+If configured, Checkpoint UI will support authentication and authorisation with IDP (SAML).
 
 #### Configuration
 
@@ -76,7 +76,7 @@ saml_config:
 
 If `saml_config` is not provided the Events API will be open for anyone to access.
 
-PhobosCheckpointUI ships with a default SamlHandler that does not handle authorization, being authenicated is enough. It also sets the same default username for all users. If you want to tweak this, you can customize it (see below)
+PhobosCheckpointUI ships with a default SamlHandler that does not handle authorization, being authenticated is enough. It also sets the same default username for all users. If you want to tweak this, you can customize it (see below)
 
 #### Customizing the SAML handler
 
