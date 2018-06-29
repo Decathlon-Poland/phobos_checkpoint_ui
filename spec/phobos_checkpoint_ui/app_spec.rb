@@ -9,9 +9,9 @@ RSpec.describe PhobosCheckpointUI::App do
 
   def app
     PhobosCheckpointUI::App.new(
-      TestAPIApp,
-      configs,
-      PhobosCheckpointUI::SamlHandler
+      api_app: TestAPIApp,
+      config: configs,
+      saml_handler: PhobosCheckpointUI::SamlHandler
     )
   end
 
@@ -34,7 +34,7 @@ RSpec.describe PhobosCheckpointUI::App do
 
   it 'configures StaticApp' do
     PhobosCheckpointUI::StaticApp.configs = nil
-    PhobosCheckpointUI::App.new(TestAPIApp, configs)
+    PhobosCheckpointUI::App.new(api_app: TestAPIApp, config: configs)
     expect(PhobosCheckpointUI::StaticApp.configs).to eql configs
   end
 

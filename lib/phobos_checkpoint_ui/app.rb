@@ -1,8 +1,8 @@
 module PhobosCheckpointUI
   module App
-    def self.new(api_app:, configs: {}, saml_handler: PhobosCheckpointUI::SamlHandler, logger_middleware: Rack::NullLogger)
-      StaticApp.use(logger_middleware, app_name: 'checkpoint_ui')
-      StaticApp.configs = configs
+    def self.new(api_app:, config: {}, saml_handler: PhobosCheckpointUI::SamlHandler, logger_middleware: Rack::NullLogger)
+      StaticApp.use(logger_middleware)
+      StaticApp.configs = config
       Rack::URLMap.new(
         '/' => StaticApp.new(api_app, saml_handler),
         '/ping' => Proc.new { |env| ['200', { 'Content-Type' => 'text/plain' }, ['PONG']] }

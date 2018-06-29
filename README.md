@@ -39,10 +39,10 @@ require 'phobos_checkpoint_ui'
 # ...
 
 # run PhobosDBCheckpoint::EventsAPI
-run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI)
+run PhobosCheckpointUI::App.new(api_app: PhobosDBCheckpoint::EventsAPI)
 ```
 
-It is possible to configure some aspects of the app, `App.new` accepts a hash with options to be delivered to the front-end. The fron-end is prepared to receive the following options:
+It is possible to configure some aspects of the app, `App.new` accepts a hash with options to be delivered to the front-end. The front-end is prepared to receive the following options:
 
 - `logo` - Path of image to be used as a logo (can be something inside `/public`)
 - `title` - App title
@@ -51,11 +51,13 @@ It is possible to configure some aspects of the app, `App.new` accepts a hash wi
 Example:
 
 ```ruby
-run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI, {
-  logo: '/assets/logo.png',
-  title: 'Checkpoint',
-  env_label: 'production'
-})
+run PhobosCheckpointUI::App.new(
+  api_app: PhobosDBCheckpoint::EventsAPI,
+  configs: {
+    logo: '/assets/logo.png',
+    title: 'Checkpoint',
+    env_label: 'production'
+  })
 ```
 
 ### SAML
@@ -87,14 +89,32 @@ Example:
 ```ruby
 class MySamlHandler < PhobosCheckpointUI::SamlHandler
   def self.authorized?(user_json)
-    ['foo'].any? do |group|
-      JSON(user_json).dig('member_of').include?(group)
-    end
+    # my custom check
   end
 end
 
-run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI, {}, MySamlHandler)
+run PhobosCheckpointUI::App.new(
+  api_app: PhobosDBCheckpoint::EventsAPI,
+  saml_handler: MySamlHandler
+)
 ```
+
+If `saml_handler` is not specified, `PhobosCheckpointUI::SamlHandler` will be used instead which returns some default values without looking at IDP payload.
+
+### Logging
+
+Logging middleware can be injected via the `logging_middleware` option.
+
+Example:
+
+```ruby
+run PhobosCheckpointUI::App.new(
+  api_app: PhobosDBCheckpoint::EventsAPI,
+  logger_middleware: MyLoggerMiddleware
+)
+```
+
+The logger middleware will inject itself as rack middleware. If not specified, `Rack::NullLogger` will be used.
 
 ## Development
 
