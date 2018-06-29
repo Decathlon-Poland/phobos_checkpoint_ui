@@ -42,14 +42,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.12'
-  spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'rspec_junit_formatter', '0.2.2'
   spec.add_development_dependency 'simplecov'
 
-  spec.add_dependency 'rake'
+  spec.add_dependency 'rake', '~> 10.0'
   spec.add_dependency 'sinatra'
   spec.add_dependency 'phobos_db_checkpoint', '~> 3.0'
   spec.add_dependency 'omniauth'
