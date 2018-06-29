@@ -12,6 +12,10 @@ module PhobosCheckpointUI
       @config || {}
     end
 
+    def use_saml?
+      self.config.dig(:saml).present?
+    end
+
     def configure(path='config/checkpoint_ui.yml')
       @config = read_config(path)
     end

@@ -27,7 +27,7 @@ module PhobosCheckpointUI
     configure do
       PhobosCheckpointUI.configure
 
-      if PhobosCheckpointUI.config.dig(:saml).present?
+      if PhobosCheckpointUI.use_saml?
         require 'omniauth'
         require 'omniauth-saml'
         require 'sinatra/cookies'
@@ -43,7 +43,7 @@ module PhobosCheckpointUI
     before do
       cache_control :no_cache
 
-      if PhobosCheckpointUI.config.dig(:saml).present?
+      if PhobosCheckpointUI.use_saml?
         return if no_auth_path?
 
         if api_request?
@@ -61,7 +61,8 @@ module PhobosCheckpointUI
       self.class.configs.to_json
     end
 
-    post '/auth/saml/callback' do
+   if PhobosCheckpointUI.use_saml?
+     post '/auth/saml/callback' do
       origin         = cookies.delete(:origin)
       session[:user] = @saml_handler.new(omniauth_data).user.to_json
       redirect to(origin || '/')
@@ -77,6 +78,7 @@ module PhobosCheckpointUI
 
       { user: JSON(session[:user]) }.to_json
     end
+  end
 
     get '/api/*' do
       env['PATH_INFO'] = env['PATH_INFO'].sub(/^\/api/, '')
