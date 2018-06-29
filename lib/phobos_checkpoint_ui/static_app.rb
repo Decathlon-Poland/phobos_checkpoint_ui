@@ -20,7 +20,7 @@ module PhobosCheckpointUI
       /auth/saml/callback
     ).freeze
 
-    set :logging, nil
+    set :logging, true
     set :show_exceptions, false
     set :public_folder, -> { File.join(Dir.pwd, 'public') }
 
