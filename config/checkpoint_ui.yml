@@ -1,4 +1,4 @@
-session_secret: '45e5f4a082e9af6d165645d45a0f121a31a4757667b29c6d5f473a8ccf481085743f839e376f1b866319d1e346e6d629ab69394221f342771495e43963a133e0'
+session_secret: the_secret
 saml:
   issuer: the_issuer
   idp_cert_fingerprint: the_idp_cert_fingerprint
