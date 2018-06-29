@@ -44,6 +44,8 @@ module PhobosCheckpointUI
       cache_control :no_cache
 
       if PhobosCheckpointUI.use_saml?
+        request.env['REMOTE_USER'] = @saml_handler.username(session[:user])
+
         return if no_auth_path?
 
         if api_request?
@@ -52,7 +54,6 @@ module PhobosCheckpointUI
         end
 
         return reply_redirect_to_login if !signed_in?
-        request.env['REMOTE_USER'] = @saml_handler.username(session[:user])
       end
     end
 
@@ -61,24 +62,24 @@ module PhobosCheckpointUI
       self.class.configs.to_json
     end
 
-   if PhobosCheckpointUI.use_saml?
-     post '/auth/saml/callback' do
-      origin         = cookies.delete(:origin)
-      session[:user] = @saml_handler.new(omniauth_data).user.to_json
-      redirect to(origin || '/')
-    end
+    if PhobosCheckpointUI.use_saml?
+      post '/auth/saml/callback' do
+        origin         = cookies.delete(:origin)
+        session[:user] = @saml_handler.new(omniauth_data).user.to_json
+        redirect to(origin || '/')
+      end
 
-    get '/logout' do
-      session[:user] = nil
-      redirect to(PhobosCheckpointUI.config.dig(:saml, :idp_logout_url))
-    end
+      get '/logout' do
+        session[:user] = nil
+        redirect to(PhobosCheckpointUI.config.dig(:saml, :idp_logout_url))
+      end
 
-    get '/api/session' do
-      content_type :json
+      get '/api/session' do
+        content_type :json
 
-      { user: JSON(session[:user]) }.to_json
+        { user: JSON(session[:user]) }.to_json
+      end
     end
-  end
 
     get '/api/*' do
       env['PATH_INFO'] = env['PATH_INFO'].sub(/^\/api/, '')
