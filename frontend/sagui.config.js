@@ -4,9 +4,10 @@
  */
 const { join } = require('path')
 const env = process.env.NODE_ENV
-const output = (env === 'production')
-  ? { publicPath: '/assets/', path: join(__dirname, '../assets') }
-  : { publicPath: '/' }
+const output =
+  env === 'production'
+    ? { publicPath: '/assets/', path: join(__dirname, '../assets') }
+    : { publicPath: '/' }
 
 module.exports = {
   pages: ['index'],
@@ -35,16 +36,20 @@ module.exports = {
 
   develop: {
     proxy: {
+      '/auth/*': {
+        target: 'http://localhost:3000',
+        secure: false
+      },
       '/api/v1/*': {
-        target: 'http://localhost:9292',
+        target: 'http://localhost:3000',
         secure: false
       },
       '/configs': {
-        target: 'http://localhost:9292',
+        target: 'http://localhost:3000',
         secure: false
       },
       '/assets/*': {
-        target: 'http://localhost:9292',
+        target: 'http://localhost:3000',
         secure: false
       }
     }

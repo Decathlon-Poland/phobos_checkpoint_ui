@@ -1,0 +1,7 @@
+session_secret: the_secret
+saml:
+  issuer: the_issuer
+  idp_cert_fingerprint: the_idp_cert_fingerprint
+  assertion_consumer_service_url: the_assertion_consumer_service_url
+  idp_sso_target_url: the_idp_sso_target_url
+  idp_logout_url: the_idp_logout_url

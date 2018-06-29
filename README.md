@@ -25,11 +25,11 @@ Or install it yourself as:
 
 ## Usage
 
-1) Add `require 'phobos_checkpoint_ui/tasks'` to your __Rakefile__
+1.  Add `require 'phobos_checkpoint_ui/tasks'` to your **Rakefile**
 
-2) Run `rake phobos_checkpoint_ui:copy_assets`, this will copy the precompile assets to `./public`
+2.  Run `rake phobos_checkpoint_ui:copy_assets`, this will copy the precompile assets to `./public`
 
-3) Create/update `config.ru` and add:
+3.  Create/update `config.ru` and add:
 
 ```ruby
 require 'phobos_checkpoint_ui'
@@ -39,24 +39,82 @@ require 'phobos_checkpoint_ui'
 # ...
 
 # run PhobosDBCheckpoint::EventsAPI
-run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI)
+run PhobosCheckpointUI::App.new(api_app: PhobosDBCheckpoint::EventsAPI)
 ```
 
-It is possible to configure some aspects of the app, `App.new` accepts a hash with options to be delivered to the front-end. The fron-end is prepared to receive the following options:
+It is possible to configure some aspects of the app, `App.new` accepts a hash with options to be delivered to the front-end. The front-end is prepared to receive the following options:
 
-* `logo` - Path of image to be used as a logo (can be something inside `/public`)
-* `title` - App title
-* `env_label` - Special label display the environment
+- `logo` - Path of image to be used as a logo (can be something inside `/public`)
+- `title` - App title
+- `env_label` - Special label display the environment
 
 Example:
 
 ```ruby
-run PhobosCheckpointUI::App.new(PhobosDBCheckpoint::EventsAPI, {
-  logo: '/assets/logo.png',
-  title: 'Checkpoint',
-  env_label: 'production'
-})
+run PhobosCheckpointUI::App.new(
+  api_app: PhobosDBCheckpoint::EventsAPI,
+  configs: {
+    logo: '/assets/logo.png',
+    title: 'Checkpoint',
+    env_label: 'production'
+  })
 ```
+
+### SAML
+
+If configured, Checkpoint UI will support authentication and authorisation with IDP (SAML).
+
+#### Configuration
+
+```yml
+session_secret: the_session_secret
+saml_config:
+  issuer: the_issuer
+  idp_cert_fingerprint: the_idp_cert_fingerprint
+  assertion_consumer_service_url: the_assertion_consumer_service_url
+  idp_sso_target_url: the_idp_sso_target_url
+  idp_logout_url: the_idp_logout_url
+```
+
+If `saml_config` is not provided the Events API will be open for anyone to access.
+
+PhobosCheckpointUI ships with a default SamlHandler that does not handle authorization, being authenticated is enough. It also sets the same default username for all users. If you want to tweak this, you can customize it (see below)
+
+#### Customizing the SAML handler
+
+If authenticating with IDP is not enough, and you want more control over authorization, you can customize this with your own SamlHandler.
+
+Example:
+
+```ruby
+class MySamlHandler < PhobosCheckpointUI::SamlHandler
+  def self.authorized?(user_json)
+    # my custom check
+  end
+end
+
+run PhobosCheckpointUI::App.new(
+  api_app: PhobosDBCheckpoint::EventsAPI,
+  saml_handler: MySamlHandler
+)
+```
+
+If `saml_handler` is not specified, `PhobosCheckpointUI::SamlHandler` will be used instead which returns some default values without looking at IDP payload.
+
+### Logging
+
+Logging middleware can be injected via the `logging_middleware` option.
+
+Example:
+
+```ruby
+run PhobosCheckpointUI::App.new(
+  api_app: PhobosDBCheckpoint::EventsAPI,
+  logger_middleware: MyLoggerMiddleware
+)
+```
+
+The logger middleware will inject itself as rack middleware. If not specified, `Rack::NullLogger` will be used (no logging).
 
 ## Development
 

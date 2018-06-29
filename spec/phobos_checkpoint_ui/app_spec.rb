@@ -8,13 +8,18 @@ RSpec.describe PhobosCheckpointUI::App do
   end
 
   def app
-    PhobosCheckpointUI::App.new(TestAPIApp, configs)
+    PhobosCheckpointUI::App.new(
+      api_app: TestAPIApp,
+      config: configs,
+      saml_handler: PhobosCheckpointUI::SamlHandler
+    )
   end
 
   before do
     Rake.application['phobos_checkpoint_ui:copy_assets'].reenable
     Rake.application['phobos_checkpoint_ui:copy_assets'].invoke
     expect(Dir.exists?('public')).to eql true
+    login
   end
 
   after do
@@ -29,7 +34,7 @@ RSpec.describe PhobosCheckpointUI::App do
 
   it 'configures StaticApp' do
     PhobosCheckpointUI::StaticApp.configs = nil
-    PhobosCheckpointUI::App.new(TestAPIApp, configs)
+    PhobosCheckpointUI::App.new(api_app: TestAPIApp, config: configs)
     expect(PhobosCheckpointUI::StaticApp.configs).to eql configs
   end
 
@@ -48,6 +53,17 @@ RSpec.describe PhobosCheckpointUI::App do
       get '/ping'
       expect(last_response.status).to eql 200
       expect(last_response.body).to eql('PONG')
+    end
+  end
+
+  describe 'GET /api/session' do
+    it 'returns the session' do
+      get '/api/session'
+      expect(JSON(last_response.body).deep_symbolize_keys).to eq(
+        {
+          user: { username: 'checkpoint_ui_user' }
+        }
+      )
     end
   end
 

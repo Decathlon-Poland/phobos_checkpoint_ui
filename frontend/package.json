@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "build": "sagui build",
-    "develop": "sagui develop --port 3000",
+    "develop": "sagui develop --port 3001",
     "dist": "cross-env NODE_ENV=production sagui build --optimize",
     "start": "npm run develop",
     "test:coverage": "npm run test:unit -- --coverage",
@@ -27,7 +27,7 @@
     "karma-babel-preprocessor": "6.0.1",
     "mappersmith": "0.13.3",
     "material-ui": "0.15.4",
-    "moment": "2.15.1",
+    "moment": "2.22.2",
     "react": "15.3.2",
     "react-addons-test-utils": "15.3.2",
     "react-dom": "15.3.2",
