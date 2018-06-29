@@ -114,7 +114,7 @@ run PhobosCheckpointUI::App.new(
 )
 ```
 
-The logger middleware will inject itself as rack middleware. If not specified, `Rack::NullLogger` will be used.
+The logger middleware will inject itself as rack middleware. If not specified, `Rack::NullLogger` will be used (no logging).
 
 ## Development
 
