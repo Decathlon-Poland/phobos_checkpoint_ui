@@ -21,6 +21,8 @@ module PhobosCheckpointUI
     end
 
     def read_config(path)
+      return {} unless File.exists? path
+      
       YAML.load(
         ERB.new(
           File.read(
