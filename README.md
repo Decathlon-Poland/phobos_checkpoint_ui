@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/klarna/phobos_checkpoint_ui.svg?style=shield)](https://circleci.com/gh/klarna/phobos_checkpoint_ui)
+[![Build Status](https://travis-ci.com/phobos/phobos_checkpoint_ui.svg?branch=master)](https://travis-ci.com/phobos/phobos_checkpoint_ui)
 
 # Phobos Checkpoint UI
 
