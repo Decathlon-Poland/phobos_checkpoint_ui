@@ -12,7 +12,7 @@ RSpec.describe PhobosCheckpointUI::StaticApp do
 
     Rake.application['phobos_checkpoint_ui:copy_assets'].reenable
     Rake.application['phobos_checkpoint_ui:copy_assets'].invoke
-    expect(Dir.exists?('public')).to eql true
+    expect(Dir.exist?('public')).to eql true
 
     login
   end

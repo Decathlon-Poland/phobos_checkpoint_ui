@@ -10,7 +10,7 @@ RSpec.describe PhobosCheckpointUI::Tasks do
     before do
       Rake.application['phobos_checkpoint_ui:copy_assets'].reenable
       Rake.application['phobos_checkpoint_ui:copy_assets'].invoke
-      expect(Dir.exists?('public')).to eql true
+      expect(Dir.exist?('public')).to eql true
     end
 
     after do
@@ -21,7 +21,7 @@ RSpec.describe PhobosCheckpointUI::Tasks do
     let(:assets_dir) { File.expand_path(File.join(File.dirname(__FILE__), '../../assets')) }
 
     it 'copies assets/index.html to public/index.html' do
-      expect(File.exists?(File.join(public_dir, 'index.html'))).to eql true
+      expect(File.exist?(File.join(public_dir, 'index.html'))).to eql true
     end
 
     it 'copies assets/*.{js,css,map} to public/assets/*.{js,css,map}' do
@@ -31,7 +31,7 @@ RSpec.describe PhobosCheckpointUI::Tasks do
 
       assets.each do |asset|
         asset_path = File.join(public_dir, "assets/#{asset}")
-        expect(File.exists?(asset_path)).to eql(true), "#{asset_path} doesn't exist"
+        expect(File.exist?(asset_path)).to eql(true), "#{asset_path} doesn't exist"
       end
     end
   end
